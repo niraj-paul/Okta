@@ -1,0 +1,2103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+   
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="robots" content="noindex,nofollow" />
+      {{!-- <meta http-equiv="Content-Security-Policy" content="default-src" /> --}}
+      <!-- Styles generated from theme -->
+      <link href="{{themedStylesUrl}}" rel="stylesheet" type="text/css">
+      <!-- Favicon from theme -->
+      <link rel="shortcut icon" href="{{faviconUrl}}" type="image/x-icon"/>
+      <title>{{pageTitle}}</title>
+      {{{SignInWidgetResources}}}
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      <!-- Shure Styles -->  
+      <link rel="stylesheet" type="text/css" href="https://content-files.shure.com/Okta_Pages/shure-styles3.css">
+      <link
+          rel="preload"
+          href="https://use.typekit.net/kge7zav.css"
+          as="style"
+          // @ts-ignore
+          onLoad="this.onload=null;this.rel='stylesheet'"
+        />
+        <noscript>
+          <link rel="stylesheet" href="https://use.typekit.net/kge7zav.css" />
+        </noscript>
+      <style>
+         #okta-sign-in .o-form select{
+         width: 100% !important;
+         margin-top: 12px !important;
+         }
+         #okta-sign-in .auth-content {
+         padding-top: 20px;
+         }
+         #okta-login-container .beacon-container {
+         display: none;
+         }
+         #shure-unified-registration #okta-login-container #okta-sign-in .o-form .input-fix {
+         border-bottom: 1.25px solid #181818;
+         }
+         #shure-unified-registration #okta-login-container #okta-sign-in .o-form .input-fix input {
+         color: #181818;
+         padding-left: 4px;
+         }
+         #shure-unified-registration #okta-login-container #okta-sign-in .o-form select {
+         color: #181818;
+         border-bottom: 1.25px solid #181818;
+         }
+         #okta-sign-in .o-form .input-fix {
+         height: 34px;
+         }
+         #okta-sign-in .siw-main-view .custom-checkbox {
+         width: 100%;
+         }
+         #shure-unified-registration #okta-login-container #okta-sign-in .o-form label {padding-top: 4px;}
+         strong {font-weight: bold !important;}
+         #okta-sign-in [data-se="o-form-fieldset-userProfile.IgniteTnC"] {
+            margin-top: 10px;
+         }
+         #shure-unified-registration {
+            font-family: din-2014, Arial, sans-serif !important;
+         }
+         #shure-unified-registration #okta-login-container #okta-sign-in .o-form label {
+            font-family: din-2014, Arial, sans-serif !important;
+         }
+         .shure-cloud-terms-conditions-modal {
+            width: 100%;
+            height: 609px;
+            z-index: 10000;
+            position: fixed;
+            background: white;
+            margin: 0 auto;
+            left: 50%;
+            margin-left: -493px;
+            margin-top: 100px;
+            max-width: 986px;
+            display: none;
+            padding: 20px;
+            color: #000000DE;
+         }
+         .cancel-modal,
+         .agree-modal {
+            background: none;
+            border: none;
+         }
+         .shure-cloud-terms-conditions-modal__header {
+            font-size: 25px;
+            letter-spacing: 0.4px;
+            font-weight: 400;
+         }
+         .shure-cloud-terms-conditions-modal__content {
+            height: 475px;
+            overflow: auto;
+         }
+         .shure-cloud-terms-conditions-modal__buttons {
+            display: flex;
+            justify-content: right;
+            margin-top: 20px;       
+         }
+         .shure-cloud-terms-conditions-modal__buttons button {
+            margin-right: 20px;
+            color: #0061a0;
+            font-weight: bold;
+            cursor: pointer;
+         }
+         .agree-modal:disabled {
+            color: #8c8c8e;
+         }
+         #okta-sign-in.auth-container .o-form-explain.okta-form-input-error {padding-top: 12px; font-size: 14px}
+         
+
+         #shure-unified-registration #okta-login-container #okta-sign-in .auth-org-logo {max-height: 60px;}
+         #okta-login-container {margin: 16px;}
+
+         #okta-sign-in.auth-container.main-container,
+         #okta-sign-in.auth-container h2 {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 19px;
+            letter-spacing: 0.5%;
+         }
+         .okta-form-label {
+            font-size: 10px !important;
+            line-height: 12px !important;
+            letter-spacing: 0.8%;
+         }
+         #shure-unified-registration #okta-login-container #okta-sign-in .o-form .input-fix input {
+            font-size: 13px !important;
+            line-height: 22px !important;
+         }
+         #shure-unified-registration #okta-login-container #okta-sign-in .o-form label {
+            padding-top: 5px;
+            color: rgba(64, 64, 65, 1);
+
+         }
+         #okta-sign-in.auth-container .okta-form-input-field {
+            background-color: rgba(255, 255, 255, 1);
+         }
+         #shure-unified-registration #okta-login-container a:not([data-se="button"]) {
+            text-decoration: none;
+            border-bottom: 2px solid rgba(0, 97, 160, 1);
+            padding-bottom: 0px;
+            line-height: 14px;
+            margin-bottom: 10px;
+         }
+
+         #shure-unified-registration #okta-login-container a:not([data-se="button"]):hover {
+            background-color: rgba(0, 97, 160, 1);
+            color: rgba(255, 255, 255, 1);
+            padding: 2px;
+         }
+
+         #shure-unified-registration #okta-login-container #okta-sign-in .o-form-head {
+            margin-bottom: 45px;
+         }
+
+         .o-form-input-name-rememberMe label {
+            color: rgba(0, 0, 0, 1);
+         }
+
+         #shure-unified-registration #okta-login-container #okta-sign-in.auth-container input[type=submit] {
+            text-transform: none;
+            font-weight: 600;
+            height: 35px;
+            border-radius: 16px;
+            font-size: 14px;
+         }
+
+         @media and screen(max-width: 768px) {
+            #okta-sign-in {
+               width: 610px;
+            }
+         }
+
+         .radio-label {
+            padding-bottom: 5px !important;
+         }
+
+         [data-se="o-form-fieldset-userProfile.sf_servicePartner"] .okta-form-label.o-form-label {
+            font-weight: normal !important;
+            font-family: din-2014, Arial, sans-serif !important;
+            font-size: 13px !important;
+            color: rgba(64, 64, 65, 1) !important;
+            margin-bottom: 8px !important;
+         }
+
+         [data-se="o-form-fieldset-userProfile.salesforcePartnerNum"],
+         [data-se="o-form-fieldset-userProfile.sf_Language"],
+         [data-se="o-form-fieldset-userProfile.sfserv_region"],
+         [data-se="o-form-fieldset-userProfile.salesforcePartnerNum"] span.o-form-explain {
+            display: none !important;
+         }
+
+         [data-se="o-form-fieldset-userProfile.shurecloudTnC_China"] {
+            display: none !important;
+         }
+
+         #okta-sign-in .siw-main-view .custom-checkbox,
+         #shure-unified-registration #okta-login-container #okta-sign-in .o-form label {
+            height: auto !important;
+         }
+
+         #shure-unified-registration #okta-login-container #okta-sign-in .o-form label[data-se-for-name="userProfile.shurecloudTnC_China"],
+         #shure-unified-registration #okta-login-container #okta-sign-in .o-form label[data-se-for-name="userProfile.IgniteTnC"] {
+            height: 100px !important;
+            margin-bottom: 5px;
+         }
+
+         #shure-unified-registration #okta-login-container #okta-sign-in .o-form label[data-se-for-name="userProfile.shurecloudTnC_China"] {
+            margin-bottom: 50px
+         }
+         
+         div[data-se="o-form-fieldset-userProfile.lmsDataPrivacy"] .o-form-explain,
+         div[data-se="o-form-fieldset-userProfile.title"] .o-form-explain,
+         .shadowDomRootAnnounce {
+            display: none;
+         }
+
+         .show { display: block !important; }
+         .hide { display: none !important; }
+      </style>
+   </head>
+   <body id="shure-unified-registration">
+      <div class="login-bg-image tb--background" style="background-image: {{bgImageUrl}}">
+         <img width="110" class="shure-logo__header" alt="shure logo" src="https://content-files.shure.com/Logos/shure_logo_black.png" />
+         <div class="shure-green-line"></div>
+      </div>
+      <br /><br /><br />
+      <div id="okta-login-container">
+      </div>
+      <!--
+         "OktaUtil" defines a global OktaUtil object
+         that contains methods used to complete the Okta login flow.
+         -->
+      {{{OktaUtil}}}
+      <script type="text/javascript">
+        var dataprivacyel;
+         // "config" object contains default widget configuration
+         // with any custom overrides defined in your admin settings.
+         const config = OktaUtil.getSignInWidgetConfig();
+         const queryString = window.location.search;
+         const urlParams = new URLSearchParams(queryString);
+        /*if (urlParams.get('mode') != null && urlParams.get('mode') == "register") {
+            config.flow = 'signup';
+         }*/
+
+      
+         config.logo = 'https://content-files.shure.com/Logos/shure_logo_black.png';
+         config.features.registration = true;
+         config.features.rememberMe = true;
+         const helpLinksMap = {
+            "en": "https://p.shure.com/myshureid-faqs",
+            "de": "https://p.shure.com/de-DE/myshureid-faqs",
+            "es": "https://p.shure.com/es-LATAM/myshureid-faqs",
+            "fr": "https://p.shure.com/fr-FR/myshureid-faqs",
+            "it": "https://p.shure.com/it-IT/myshureid-faqs",
+            "ja": "https://p.shure.com/ja-JP/myshureid-faqs",
+            "nl-NL": "https://p.shure.com/nl-NL/myshureid-faqs",
+            "pl": "https://p.shure.com/pl-PL/myshureid-faqs",
+            "pt-BR": "https://p.shure.com/pt-BR/myshureid-faqs",
+            "zh-CN": "https://p.shure.com/zh-CN/myshureid-faqs",
+            "tw-CN": "https://p.shure.com/zh-CN/myshureid-faqs",
+            "zh-TW": "https://p.shure.com/zh-CN/myshureid-faqs",
+         };
+         config.helpLinks.help = helpLinksMap[config.language] || "https://p.shure.com/myshureid-faqs";
+         config.i18n= {
+           "en": {
+              "var.yes": "Yes",
+              "var.no": "No",
+               "var.city": "Town/City",
+               "var.state": "State/County/Region",
+              "var.zipCode": "Postal Code/Zip Code (if applicable)",
+              "var.language": "Language",
+              "var.country": "Country/Region",
+              "var.lmsDataPrivacy": "Data Privacy Terms (see Homepage)",
+              "var.lmsPartnerKey": "Shure Partner Key (for Shure Partners only)",
+              "var.createAccount": "Create a My Shure ID",
+              "var.companyType": "I am a(n)",
+              "var.marketingOptIn": "Receive Shure emails about new products, company news, events and more",
+              "var.firstName": "First Name",
+              "var.lastName": "Last Name",
+              "var.email": "Email",
+              "var.sfservLanguage": "Language Preference for Email",
+              "var.timezone": "Timezone",
+              "var.phone": "Phone",
+              "var.shureDealer": "Are you a Shure Dealer or Partner?",
+              "var.accountNumber": "Account Number",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+              "var.policyText": "<div style='margin-top:4px !important; margin-bottom: 10px !important; font-size: 10px;'>By checking this box, you agree to receive email communications from Shure, including new products, company updates, event invitations, promotions and/or to be contacted to arrange market research. Your personal data will be processed by Shure Incorporated based in the USA and its affiliates (“Shure”) to tailor these communications. We always ensure adequate protection when transferring data. You can unsubscribe at any time via the link in each communication. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit our <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>Privacy Policy</strong></a> and <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>Cookie Policy</strong></a>.</div>",
+              "var.cloudTerms": "<div style='margin-bottom: 10px !important;line-height:18px;'>Your access to and use of the Services is subject to the Cloud Terms of Use, which may be updated from time to time. By checking this box, you agree that you have read and accept the latest <a href=\"https://www.shure.com/en-US/legal/cloud-application-terms\" target=\"_blank\"><strong>Cloud Terms of Use</strong></a>.</div>",
+              "var.personalData": "<div style='margin-top: 10px; font-size: 10px; text-align: left;'>Your personal data will be processed by Shure Incorporated in the USA and its affiliates (“Shure”). Shure always ensures adequate protection when transferring data. To learn more about Shure’s privacy practices and your rights, please visit our <a href = \"https://www.shure.com/en-US/legal/privacy\" target=\"_blank\"><strong>Privacy Policy</strong></a> and <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>Cookie Policy</strong></a>.</div>",
+              "var.chinaConsent": "I accept that my personal data will be transferred outside of China in accordance with Shure Privacy Policy and that Shure Incorporated in the United States and other entities of the Shure global group will process my personal data in accordance with Shure <a href='https://www.shure.com/zh-CN/legal/privacy' target='_blank'><strong>Privacy Policy</strong></a>."
+            },
+           "es":{
+                 "var.city": "Pueblo/Ciudad",
+                 "var.state": "Estado/Condado/Región",
+              "var.zipCode": "Código postal/Código postal (si corresponde)",
+              "var.language": "Idioma",
+              "var.country": "País/Región",
+              "var.lmsDataPrivacy": "Términos de privacidad de datos (ver página de inicio)",
+              "var.lmsPartnerKey": "Clave de socio de Shure (solo para socios de Shure)",
+              "var.createAccount": "Enviar",
+              "var.companyType": "Soy un (un)",
+              "var.marketingOptIn": "Recibir correos electrónicos de Shure sobre nuevos productos, noticias, eventos y más",
+              "var.firstName": "Nombre",
+              "var.lastName": "Apellido",
+              "var.email": "Correo Electrónico",
+              "var.sfservLanguage": "Preferencia de idioma para correo electrónico",
+              "var.timezone": "Zona horaria",
+              "var.phone": "Teléfono",
+              "var.shureDealer": "Es usted distribuidor o socio de Shure?",
+              "var.accountNumber": "Número de cuenta",
+              "var.displayName": "Nombre de pantalla",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+              "var.policyText": "<div style='margin-top:4px !important; margin-bottom: 10px !important; font-size: 10px;'>Al marcar esta casilla, usted acepta recibir comunicaciones por correo electrónico de Shure, incluidos nuevos productos, actualizaciones de la empresa, invitaciones a eventos, promociones y/o que se lo contacte para organizar estudios de mercado. Sus datos personales serán procesados por Shure Incorporated, con sede en Estados Unidos, y sus filiales (“Shure”) con el fin de adaptar dichas comunicaciones. Siempre nos aseguramos de brindar un nivel adecuado de protección al transferir los datos. Puede cancelar su suscripción en cualquier momento utilizando el enlace que aparece en cada comunicación. Para obtener más información sobre nuestras prácticas de privacidad y sobre sus derechos, incluidos los derechos de acceso, rectificación, eliminación y revocación del consentimiento, visite nuestra <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>Política de privacidad</strong></a> y nuestra <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>Política sobre cookies</strong></a>.</div>",
+              "var.personalData": "<div style='margin-top: 10px; font-size: 10px; text-align: left;'>Sus datos personales serán procesados por Shure Incorporated en Estados Unidos y sus filiales (“Shure”). Shure siempre se asegura de brindar un nivel adecuado de protección al transferir los datos. Para obtener más información sobre las prácticas de privacidad de Shure y sus derechos, visite nuestra <a href = \"https://www.shure.com/en-US/legal/privacy\" target=\"_blank\"><strong>Política de privacidad</strong></a> y nuestra <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>Política de cookies</strong></a>.</div>",
+              "var.cloudTerms": "<div style='margin-bottom: 10px !important;line-height:18px;'>Su acceso y uso de los servicios está sujeto a los Términos de uso de la nube, que pueden actualizarse de vez en cuando. Al marcar esta casilla, usted acepta que ha leído y acepta los <a href=\"https://www.shure.com/en-US/meta/legal/cloud-application-terms\" target=\"_blank\"><strong>Términos de uso de la nube </strong></a> más recientes.</div>",
+               "var.chinaConsent": "Acepto que mis datos personales se transfieran fuera de China de acuerdo con la Política de privacidad de Shure, y que Shure Incorporated en los Estados Unidos y otras entidades del grupo global Shure procesarán mis datos personales de acuerdo con la <a href='https://www.shure.com/en-US/legal/privacy' target='_blank'><strong>política de privacidad de Shure</strong></a>.",
+
+          },
+           "de":{
+                 "var.city": "Stadt/Stadt",
+                 "var.state": "Staat/Kreis/Region",
+              "var.zipCode": "Postleitzahl/PLZ (falls zutreffend)",
+              "var.language": "Sprache",
+              "var.country": "Land/Region",
+              "var.lmsDataPrivacy": "Datenschutzerklärung (siehe Homepage)",
+              "var.lmsPartnerKey": "Shure-Partnerschlüssel (nur für Shure-Partner)",
+              "var.createAccount": "Absenden",
+              "var.companyType": "Ich bin ein (ein)",
+              "var.marketingOptIn": "Erhalte E-Mails von Shure über neue Produkte, Firmen-Updates, Veranstaltungen und mehr ",
+              "var.firstName": "Vorname",
+              "var.lastName": "Nachname",
+              "var.email": "E-Mail",
+              "var.sfservLanguage": "Spracheinstellung für E-Mail",
+              "var.timezone": "Zeitzone",
+              "var.phone": "Telefon",
+              "var.shureDealer": "Sind Sie bereits Shure Händler oder Partner?",
+              "var.accountNumber": "Kundennummer",
+              "var.displayName": "Name anzeigen",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+              "var.policyText": "<div style='margin-top:4px !important; margin-bottom: 10px !important; font-size: 10px;'>Indem du dieses Kästchen ankreuzt, erklärst du dich damit einverstanden, E-Mail-Nachrichten von Shure zu erhalten, einschließlich neuer Produkte, Firmen-Updates, Veranstaltungseinladungen, Marktforschung und Werbeaktionen. Deine personenbezogenen Daten werden von Shure Incorporated mit Sitz in den USA und seinen verbundenen Unternehmen verarbeitet, um diese Mitteilungen individuell zu gestalten. Wir gewährleisten stets einen angemessenen Schutz bei der Übertragung von Daten. Du kannst den Newsletter jederzeit über den Abmelde-Link in jeder Mitteilung abbestellen. Mehr über unsere Datenschutzpraktiken und deine Rechte, einschließlich deines Rechts auf Zugriff zu, Berichtigung, Löschung und Widerruf deiner Zustimmung, erfährst du in unserer <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>Datenschutzrichtlinie</strong></a> und unserer <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>Cookie-Richtlinie</strong></a>.</div>",
+              "var.cloudTerms": "<div style='margin-bottom: 10px !important;line-height:18px;'>Dein Zugriff auf die Services und deren Nutzung unterliegt den Cloud-Nutzungsbedingungen, die von Zeit zu Zeit aktualisiert werden können. Wenn du dieses Kästchen ankreuzt, erklärst du, dass du die aktuellen <a href=\"https://www.shure.com/en-US/meta/legal/cloud-application-terms\" target=\"_blank\"><strong>Cloud-Nutzungsbedingungen</strong></a> gelesen hast und akzeptierst.</div>",
+              "var.personalData": "<div style='margin-top: 10px; font-size: 10px; text-align: left;'>Deine personenbezogenen Daten werden von Shure Incorporated mit Sitz in den USA und seinen verbundenen Unternehmen verarbeitet. Shure gewährleistet stets einen angemessenen Schutz bei der Übertragung von Daten. Mehr über die Datenschutzpraktiken von Shure und deine Rechte erfährst du in unserer <a href = \"https://www.shure.com/en-US/legal/privacy\" target=\"_blank\"><strong>Datenschutzrichtlinie</strong></a> und unserer <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>Cookie-Richtlinie</strong></a>.</div>",
+               "var.chinaConsent": "Ich erkläre mich damit einverstanden, dass meine persönlichen Daten in Übereinstimmung mit der Shure Datenschutzrichtlinie außerhalb Chinas übertragen werden und dass Shure Incorporated in den USA und andere Unternehmen der globalen Shure Group meine persönlichen Daten in Übereinstimmung mit der Shure <a href='https://www.shure.com/en-US/legal/privacy' target='_blank'><strong>Datenschutzrichtlinie verarbeiten</strong></a>."
+
+          },
+           "fr":{
+                 "var.city": "Ville/Ville",
+                 "var.state": "Etat/Comté/Région",
+              "var.zipCode": "Code postal/code postal (le cas échéant)",
+              "var.language": "Langue",
+              "var.country": "Pays/Région",
+              "var.lmsDataPrivacy": "Conditions de confidentialité des données (voir page d'accueil)",
+              "var.lmsPartnerKey": "Clé de partenaire Shure (pour les partenaires Shure uniquement)",
+              "var.createAccount": "Submit",
+              "var.companyType": "Je suis un(e)",
+              "var.marketingOptIn": "Recevez des e-mails sécurisés sur les nouveaux produits, les actualités de l'entreprise, les événements et plus encore",
+
+              "var.firstName": "Prénom",
+              "var.lastName": "Nom",
+              "var.email": "Courriel",
+              "var.sfservLanguage": "Préférence linguistique pour le courrier électronique",
+              "var.timezone": "fuseau horaire",
+              "var.phone": "N° de téléphone",
+              "var.shureDealer": "Etes-vous déjà revendeur ou partenaire Shure?",
+              "var.accountNumber": "Numéro de compte",
+              "var.displayName": "Afficher le nom",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+              "var.policyText": "<div style='margin-top:4px !important; margin-bottom: 10px !important; font-size: 10px;'>En cochant cette case, vous acceptez de recevoir des communications par e-mail de Shure, s’agissant notamment de nouveaux produits, d’informations sur la société, d’invitations à des événements, de promotions, et/ou d’être contacté pour organiser des études de marché. Vos données personnelles seront traitées par Shure Incorporated, société basée aux États-Unis, et ses sociétés affiliées (\"Shure\") afin de personnaliser ces communications. Nous assurons toujours une protection adéquate des données lors de leur transfert. Vous pouvez vous désabonner à tout moment en cliquant sur le lien figurant dans chaque communication. Pour en savoir plus sur nos pratiques de confidentialité et vos droits, notamment votre droit de consulter, rectifier, supprimer des données et de retirer votre consentement, veuillez consulter notre <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>politique de confidentialité</strong></a> et notre <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>politique en matière de cookies</strong></a>.</div>",
+              "var.cloudTerms": "<div style='margin-bottom: 10px !important;line-height:18px;'>Votre accès aux services et leur utilisation sont soumis aux conditions d’utilisation du cloud, lesquelles peuvent être mises à jour de temps à autre. En cochant cette case, vous reconnaissez avoir lu et accepté les dernières <a href=\"https://www.shure.com/en-US/meta/legal/cloud-application-terms\" target=\"_blank\"><strong>conditions d’utilisation du cloud</strong></a>.</div>",
+              "var.personalData": "<div style='margin-top: 10px; font-size: 10px; text-align: left;'>Vos données personnelles seront traitées par Shure Incorporated, société basée aux États-Unis, et ses sociétés affiliées. Shure assure toujours une protection adéquate des données lors de leur transfert. Pour en savoir plus sur nos pratiques de confidentialité et vos droits, veuillez consulter notre <a href = \"https://www.shure.com/en-US/legal/privacy\" target=\"_blank\"><strong>politique de confidentialité</strong></a> et notre <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>politique en matière de cookies.</strong></a>.</div>",
+               "var.chinaConsent": "J’accepte que mes données personnelles soient transférées en dehors de Chine conformément à la politique de confidentialité de Shure et que Shure Incorporated aux États-Unis et d’autres entités du groupe mondial Shure traitent mes données personnelles conformément à la <a href='https://www.shure.com.cn/zh-CN/legal/privacy' target='_blank'><strong>Politique de confidentialité de Shure</strong></a>."
+
+          },
+           "el":{
+                 "var.city": "Πόλη/Πόλη",
+                 "var.state": "Πολιτεία/Κομητεία/Περιοχή",
+              "var.zipCode": "Ταχυδρομικός κώδικας/Ταχυδρομικός κώδικας (εάν υπάρχει)",
+              "var.language": "Γλώσσα",
+              "var.country": "Χώρα/περιοχή",
+              "var.lmsDataPrivacy": "Όροι απορρήτου δεδομένων (δείτε την αρχική σελίδα)",
+              "var.lmsPartnerKey": "Shure Partner Key (μόνο για Shure Partners)",
+              "var.createAccount": "Submit",
+              "var.companyType": "Είμαι ένας (ένας)",
+              "var.marketingOptIn": "Λάβετε ασφαλή email σχετικά με νέα προϊόντα, εταιρικά νέα, εκδηλώσεις και πολλά άλλα",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "it":{
+                 "var.city": "Città/Città",
+                 "var.state": "Stato/Contea/Regione",
+              "var.zipCode": "Codice postale/CAP (se applicabile)",
+              "var.language": "Lingua",
+              "var.country": "Paese/Regione",
+              "var.lmsDataPrivacy": "Termini sulla privacy dei dati (vedi Homepage)",
+              "var.lmsPartnerKey": "Chiave partner Shure (solo per partner Shure)",
+              "var.createAccount": "Invia",
+              "var.companyType": "Io sono un (un)",
+              "var.marketingOptIn": "Ricevi email sicure su nuovi prodotti, notizie aziendali, eventi e altro",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+              "var.firstName": "Nome",
+              "var.lastName": "Cognome",
+              "var.displayName": "Display Name",
+          },
+           "ru":{
+                 "var.city": "Город / Город",
+                 "var.state": "Штат/округ/регион",
+              "var.zipCode": "Почтовый индекс/индекс (если применимо)",
+              "var.language": "Язык",
+              "var.country": "Страна/область",
+              "var.lmsDataPrivacy": "Условия конфиденциальности данных (см. Домашнюю страницу)",
+              "var.lmsPartnerKey": "Ключ партнера Shure (только для партнеров Shure)",
+              "var.createAccount": "Отправить",
+              "var.companyType": "Я",
+              "var.marketingOptIn": "Получать электронные письма о новых продуктах, новостях компании, событиях и многом другом",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "fi":{
+                 "var.city": "Kaupunki kaupunki",
+                 "var.state": "Osavaltio/maakunta/alue",
+              "var.zipCode": "Postinumero/postinumero (jos käytössä)",
+              "var.language": "Kieli",
+              "var.country": "Maa/Alue",
+              "var.lmsDataPrivacy": "Tietojen tietosuojaehdot (katso kotisivu)",
+              "var.lmsPartnerKey": "Shure Partner Key (vain Shure Partners)",
+              "var.createAccount": "Luo Shure-tili",
+              "var.companyType": "Olen a(an)",
+              "var.marketingOptIn": "Vastaanota suojattua sähköpostia uusista tuotteista, yritysuutisista, tapahtumista ja muusta",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "uk":{
+                 "var.city": "Місто/місто",
+                 "var.state": "Штат/округ/регіон",
+              "var.zipCode": "Поштовий індекс (якщо є)",
+              "var.language": "Мова",
+              "var.country": "Країна/область",
+              "var.lmsDataPrivacy": "Умови конфіденційності даних (див. домашню сторінку)",
+              "var.lmsPartnerKey": "Ключ партнера Shure (лише для партнерів Shure)",
+              "var.createAccount": "Submit",
+              "var.companyType": "Я є(є)",
+              "var.marketingOptIn": "Отримувати безпечну електронну пошту про нові продукти, новини компанії, події тощо",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "cs":{
+                 "var.city": "Město/město",
+                 "var.state": "Stát/kraj/region",
+              "var.zipCode": "PSČ/PSČ (pokud existuje)",
+              "var.language": "Jazyk",
+              "var.country": "Země/oblast",
+              "var.lmsDataPrivacy": "Podmínky ochrany osobních údajů (viz domovská stránka)",
+              "var.lmsPartnerKey": "Shure Partner Key (pouze pro Shure Partners)",
+              "var.createAccount": "Vytvořit účet Shure",
+              "var.companyType": "Jsem (an)",
+              "var.marketingOptIn": "Dostávejte zabezpečené e-maily o nových produktech, zprávách o společnosti, událostech a dalších",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "tr":{
+                 "var.city": "Kasaba/Şehir",
+                 "var.state": "Eyalet/İlçe/Bölge",
+              "var.zipCode": "Posta Kodu/Posta Kodu (varsa)",
+              "var.language": "Dilim",
+              "var.country": "Ülke/bölge",
+              "var.lmsDataPrivacy": "Veri Gizliliği Koşulları (bkz. Ana Sayfa)",
+              "var.lmsPartnerKey": "Shure İş Ortağı Anahtarı (yalnızca Shure İş Ortakları için)",
+              "var.createAccount": "Submit",
+              "var.companyType": "Ben bir(an)ım",
+              "var.marketingOptIn": "Yeni ürünler, şirket haberleri, etkinlikler ve daha fazlası hakkında Güvenli e-posta alın",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "zh-CN":{
+                 "var.city": "城镇/城市",
+                 "var.state": "州/县/地区",
+              "var.zipCode": "邮政编码/邮政编码（如果适用）",
+              "var.language": "语言",
+              "var.country": "国家/地區",
+              "var.lmsDataPrivacy": "数据隐私条款（见主页）",
+              "var.lmsPartnerKey": "舒尔合作伙伴密钥（仅限舒尔合作伙伴）",
+              "var.createAccount": "提交",
+              "var.companyType": "我是一个（一个）",
+              "var.marketingOptIn": "接收有关新产品、公司新闻、活动等的安全电子邮件",
+              "var.firstName": "名字",
+              "var.lastName": "姓氏",
+              "var.email": "電郵",
+              "var.sfservLanguage": "電子郵件的語言偏好",
+              "var.timezone": "時區",
+              "var.phone": "電話",
+              "var.shureDealer": "您是現有的舒爾經銷商或合作夥伴?",
+              "var.accountNumber": "帳戶號碼",
+              "var.displayName": "显示名称",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+              "var.policyText": "<div style='margin-top:4px !important; margin-bottom: 10px !important; font-size: 10px;'>选中此框即表示，您同意接收来自 Shure 的电子邮件通讯信息，包括新产品、公司新闻、活动邀请、促销和/或 Shure 与您联系以安排市场调查。位于美国的 Shure 公司及其关联公司（“Shure”）将处理您的个人数据，以便为您提供合适的通讯信息。在传输数据时，我们始终确保提供充分的保护。您可以随时通过每次通讯中的链接退订。要了解有关我们的隐私实践和您的权利（包括您访问、更正、删除个人数据及撤回同意的权利）的更多信息，请访问我们的 <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>隐私政策</strong></a> 和 <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>Cookie </strong></a></div>",
+              "var.cloudTerms": "<div style='margin-bottom: 10px !important;line-height:18px;'>您对服务的访问和使用须遵守云使用条款，这些条款可能会随时更新。选中此框即表示，您确认您已阅读并接受最新云 <a href=\"https://www.shure.com/en-US/meta/legal/cloud-application-terms\" target=\"_blank\"><strong>云使用条款。</strong></a></div>",
+              "var.personalData": "<div style='margin-top: 10px; font-size: 10px; text-align: left;'>位于美国的 Shure 公司及其关联公司（“Shure”）将处理您的个人数据。在传输数据时，Shure 始终确保提供充分的保护。要了解有关 Shure 隐私实践和您的权利的更多信息， 请访问我们的 <a href=\"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>隐私政策</strong></a> 和 <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>Cookie 政策</strong></a>。</div>",
+               "var.chinaConsent": "我同意根据 Shure 隐私政策将我的个人数据传输至中国境外，并同意美国 Shure Incorporated 和 Shure 全球集团的其他实体根据 Shure <a href='https://www.shure.com.cn/zh-CN/legal/privacy' target='_blank'><strong>隐私政策处理我的个人数据</strong></a>."
+
+
+          },
+           "zh-TW":{
+                 "var.city": "城鎮/城市",
+                 "var.state": "州/縣/地區",
+              "var.zipCode": "郵政編碼/郵政編碼（如果適用）",
+              "var.language": "語言",
+              "var.country": "國家/地區",
+              "var.lmsDataPrivacy": "數據隱私條款（見主頁）",
+              "var.lmsPartnerKey": "舒爾合作夥伴密鑰（僅限舒爾合作夥伴）",
+              "var.createAccount": "提交",
+              "var.companyType": "我是一個（一個）",
+              "var.marketingOptIn": "接收有關新產品、公司新聞、活動等的安全電子郵件",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "nl-NL":{
+                 "var.city": "Stad/Stad",
+                 "var.state": "Staat/provincie/regio",
+              "var.zipCode": "Postcode/Postcode (indien van toepassing)",
+              "var.language": "Taal",
+              "var.country": "Land/regio",
+              "var.lmsDataPrivacy": "Dataprivacyvoorwaarden (zie homepage)",
+              "var.lmsPartnerKey": "Shure Partner Key (alleen voor Shure Partners)",
+              "var.createAccount": "Verzenden",
+              "var.companyType": "Ik ben een (een)",
+              "var.marketingOptIn": "Ontvang beveiligde e-mail over nieuwe producten, bedrijfsnieuws, evenementen en meer",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+              "var.firstName": "Voornaam",
+              "var.lastName": "Achternaam",
+              "var.email": "E-mail",
+              "var.sfservLanguage": "Taal",
+              "var.timezone": "Tijdzone",
+              "var.phone": "Telefoon",
+              "var.shureDealer": "Bent u een bestaande Shure-dealer of -partner?",
+              "var.accountNumber": "Klantnummer",
+              "var.displayName": "Display Name",
+          },
+           "ja":{
+                 "var.city": "町/市",
+                 "var.state": "州/郡/地域",
+              "var.zipCode": "郵便番号/郵便番号（該当する場合)",
+              "var.language": "言語",
+              "var.country": "国/地域",
+              "var.lmsDataPrivacy": "データプライバシー規約（ホームページを参照）",
+              "var.lmsPartnerKey": "Shureパートナーキー（Shureパートナーのみ）",
+              "var.createAccount": "送信",
+              "var.companyType": "私は（an）です",
+              "var.marketingOptIn": "新製品、会社のニュース、イベントなどに関する安全なメールを受信する",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+              "var.firstName": "名前",
+              "var.lastName": "姓",
+              "var.email": "電子メイル",
+              "var.sfservLanguage": "メールの言語設定",
+              "var.timezone": "タイムゾーン",
+              "var.phone": "電話番号 ＊現在サポート窓口はメール対応のみとなります。",
+              "var.shureDealer": "正規販売代理店の方ですか？",
+              "var.accountNumber": "アカウント番号",
+              "var.displayName": "表示名",
+              "var.policyText": "<div style='margin-top:4px !important; margin-bottom: 10px !important; font-size: 10px;'>このチェックボックスをオンにすると、新製品、会社の最新情報、イベントへの招待、プロモーション、および市場調査の手配に関する連絡など、ShureからのEメールによるご案内を受け取ることに同意したことになります。お客様からお預かりする個人情報は、お客様へ最適な情報をお届けする目的で、米国に拠点を置くShure Incorporatedおよび各地域の支社（「Shure」）によって処理されます。アプリケーション間でデータ転送を行う際は当社にて常に適切な保護、処理を行います。お客様はEメールニュース上のリンクからいつでも購読停止することが可能です。ご登録情報へのアクセス、修正、削除、撤回の権利など、当社の個人情報管理やお客様の権利の詳細については、 <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>プライバシーポリシー</strong></a>および<a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>クッキーポリシー</strong></a>をご覧ください。</div>",
+              "var.cloudTerms": "<div style='margin-bottom: 10px !important;line-height:18px;'>お客様による本サービスへのアクセスおよび本サービスのご利用には「クラウド利用規約」が適用され、これは随時更新される可能性があります。このチェックボックスをオンにすると、お客様は最新の <a href=\"https://www.shure.com/en-US/meta/legal/cloud-application-terms\" target=\"_blank\"><strong>「クラウド利用規約」</strong></a>を読み、承諾したことに同意したものとします。</div>",
+              "var.personalData": "<div style='margin-top: 10px; font-size: 10px; text-align: left;'>お客様からお預かりする個人情報は、米国のShure Incorporatedおよび各地域の支社（「Shure」）によって処理されます。アプリケーション間でデータ転送を行う際は当社にて常に適切な保護、処理を行います。Shureの個人情報管理やお客様の権利の詳細については、<a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>当社のプライバシーポリシー</strong></a>と<a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>クッキーポリシーを</strong></a>をご覧ください。</div>",
+               "var.chinaConsent": "私は、自分の個人データがShureのプライバシーポリシーに従って中国国外に転送されること、また米国のShure IncorporatedおよびShureグローバルグループの他の法人がShureのプライバシーポリシー <a href='https://www.shure.com/en-US/legal/privacy' target='_blank'><strong>に従って自分の個人データを処理することに同意します</strong></a>."
+
+          },
+           "vi":{
+                 "var.city": "Thị trấn / Thành phố",
+                 "var.state": "Tiểu bang / Quận / Khu vực",
+              "var.zipCode": "Mã bưu điện / Mã Zip (nếu có)",
+              "var.language": "Ngôn ngữ",
+              "var.country": "Quốc gia/vùng",
+              "var.lmsDataPrivacy": "Điều khoản Bảo mật Dữ liệu (xem Trang chủ)",
+              "var.lmsPartnerKey": "Khóa đối tác Shure (chỉ dành cho Đối tác Shure)",
+              "var.createAccount": "Tạo tài khoản Shure",
+              "var.companyType": "Tôi là (an)",
+              "var.marketingOptIn": "Nhận email an toàn về các sản phẩm mới, tin tức công ty, sự kiện và hơn thế nữa",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "hu":{
+                 "var.city": "város/város",
+                 "var.state": "állam/megye/régió",
+              "var.zipCode": "Irányítószám/Irányítószám (ha van)",
+              "var.language": "Nyelv",
+              "var.country": "Ország/régió",
+              "var.lmsDataPrivacy": "Adatvédelmi feltételek (lásd a kezdőlapot)",
+              "var.lmsPartnerKey": "Shure Partner Key (csak Shure Partnereknek)",
+              "var.createAccount": "Submit",
+              "var.companyType": "én vagyok",
+              "var.marketingOptIn": "Biztonságos e-mailt kaphat az új termékekről, céges hírekről, eseményekről és egyebekről",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "sv":{
+              "var.city": "Stad/Stad",
+              "var.state": "Stat/län/region",
+              "var.zipCode": "Postnummer/Postnummer (om tillämpligt)",
+              "var.language": "Språk",
+              "var.country": "Land/region",
+              "var.lmsDataPrivacy": "Villkor för datasekretess (se hemsidan)",
+              "var.lmsPartnerKey": "Shure Partner Key (endast för Shure Partners)",
+              "var.createAccount": "Submit",
+              "var.companyType": "Jag är en (an)",
+              "var.marketingOptIn": "Ta emot säker e-post om nya produkter, företagsnyheter, evenemang och mer",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "nb":{
+              "var.city": "By/by",
+               "var.state": "Stat/fylke/region",
+              "var.zipCode": "Postnummer/postnummer (hvis aktuelt)",
+              "var.language": "Språk",
+              "var.country": "Land/region",
+              "var.lmsDataPrivacy": "Vilkår for personvern (se hjemmesiden)",
+              "var.lmsPartnerKey": "Shure-partnernøkkel (kun for Shure-partnere)",
+              "var.createAccount": "Submit",
+              "var.companyType": "Jeg er en (en)",
+              "var.marketingOptIn": "Motta sikker e-post om nye produkter, bedriftsnyheter, arrangementer og mer",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "da":{
+                 "var.city": "By/By",
+                 "var.state": "Stat/Amt/Region",
+              "var.zipCode": "Postnummer/postnummer (hvis relevant)",
+              "var.language": "Sprog",
+              "var.country": "Land/region",
+              "var.lmsDataPrivacy": "Betingelser for databeskyttelse (se hjemmesiden)",
+              "var.lmsPartnerKey": "Shure-partnernøgle (kun for Shure-partnere)",
+              "var.createAccount": "Submit",
+              "var.companyType": "Jeg er en (en)",
+              "var.marketingOptIn": "Modtag sikker e-mail om nye produkter, virksomhedsnyheder, begivenheder og mere",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "pl":{
+              "var.city": "Miasto",
+              "var.state": "Stan/hrabstwo/region",
+              "var.zipCode": "Kod pocztowy/kod pocztowy (jeśli dotyczy)",
+              "var.language": "Język",
+              "var.country": "Kraj/region",
+              "var.lmsDataPrivacy": "Warunki ochrony danych (patrz Strona główna)",
+              "var.lmsPartnerKey": "Klucz Partnera Shure (tylko dla Partnerów Shure)",
+              "var.createAccount": "Wyślij",
+              "var.companyType": "Jestem(a)",
+              "var.marketingOptIn": "Otrzymuj bezpieczne wiadomości e-mail o nowych produktach, wiadomościach firmowych, wydarzeniach i nie tylko",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "ko":{
+              "var.city": "타운/시티",
+              "var.state": "주/군/지역",
+              "var.zipCode": "우편번호/우편번호(해당되는 경우)",
+              "var.language": "언어",
+              "var.country": "국가/부위",
+              "var.lmsDataPrivacy": "데이터 개인 정보 보호 약관(홈페이지 참조)",
+              "var.lmsPartnerKey": "Shure 파트너 키(Shure 파트너 전용)",
+              "var.createAccount": "제출",
+              "var.companyType": "나는(안)",
+              "var.marketingOptIn": "새로운 제품, 회사 소식, 이벤트 등에 대한 Shure 이메일 수신",
+              "var.displayName": "표시 이름",
+              "var.agreeTerms": "<div>본인은 ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>이용 약관</a>을 읽고 이에 동의합니다.</div>",
+              "var.policyText": "<div style='margin-top:4px !important; margin-bottom: 10px !important; font-size: 10px;'>이 상자에 체크 표시하면 신제품, 회사 소식, 이벤트 초대, 프로모션 및/또는 시장 조사를 위한 연락을 받는 것을 포함하여 Shure로부터 이메일을 받는 것에 동의하게 됩니다. 귀하의 개인 정보는 이러한 통신을 제공하기 위해 미국 소재 Shure Incorporated(“Shure”) 및 그 계열사에서 처리됩니다. Shure는 데이터 전송에 대한 적절한 보호를 보장합니다. 각각의 통신에 포함된 링크를 통해 언제든지 구독을 취소하실 수 있습니다. 동의에 대한 접속, 수정, 삭제 및 철회할 수 있는 귀하의 권리를 포함하여 당사의 개인 정보 보호에 대해 더 자세히 알아보려면 <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>개인 정보 보호 정책</strong></a> 및 <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>쿠키 정책</strong></a>을 방문하십시오.</div>",
+              "var.cloudTerms": "<div style='margin-bottom: 10px !important;line-height:18px;'>귀하의 서비스 접속 및 사용은 클라우드 이용 약관의 적용을 받으며, 해당 약관은 수시로 업데이트될 수 있습니다. 이 확인란을 선택하면 최신 <a href=\"https://www.shure.com/en-US/meta/legal/cloud-application-terms\" target=\"_blank\"><strong>클라우드 이용 약관</strong></a>을 읽었으며 이에 동의하는 것입니다.</div>",
+              "var.personalData": "<div style='margin-top: 10px; font-size: 10px; text-align: left;'>귀하의 개인 데이터는 USA의 Shure Incorporated 및 그 계열사(\"Shure\")에서 처리합니다. Shure는 데이터 전송에 대한 적절한 보호를 보장합니다. Shure의 개인 정보 보호 관행 및 귀하의 권리에 대한 자세한 내용은 <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>개인 정보 보호 정책</strong></a> 및 <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>쿠키 정책</strong></a>을 참조하십시오.</div>",
+               "var.chinaConsent": "본인은 본인의 개인 데이터가 Shure 개인정보 보호정책에 따라 중국 외부로 전송되고 미국에 있는 Shure Incorporated와 Shure 글로벌 그룹의 다른 법인이 본인의 개인 데이터를 Shure <a href='https://www.shure.com/en-US/legal/privacy' target='_blank'><strong>개인정보 보호정책에 따라 처리하는 것에 동의합니다</strong></a>."
+
+          },
+           "id":{
+                 "var.city": "Kota/Kota",
+                 "var.state": "Negara Bagian/Kabupaten/Wilayah",
+              "var.zipCode": "Kode Pos/Kode Pos (jika ada)",
+              "var.language": "Bahasa",
+              "var.country": "Negara/wilayah",
+              "var.lmsDataPrivacy": "Ketentuan Privasi Data (lihat Beranda)",
+              "var.lmsPartnerKey": "Kunci Mitra Shure (hanya untuk Mitra Shure)",
+              "var.createAccount": "Submit",
+              "var.companyType": "Saya adalah (seorang)",
+              "var.marketingOptIn": "Terima email Aman tentang produk baru, berita perusahaan, acara, dan lainnya",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          },
+           "th":{
+                 "var.city": "เมือง/เมือง",
+                 "var.state": "รัฐ/เขต/ภูมิภาค",
+              "var.zipCode": "รหัสไปรษณีย์/รหัสไปรษณีย์ (ถ้ามี)",
+              "var.language": "ภาษา",
+              "var.country": "ประเทศ/บริเวณ",
+              "var.lmsDataPrivacy": "ข้อกำหนดความเป็นส่วนตัวของข้อมูล (ดูหน้าแรก)",
+              "var.lmsPartnerKey": "คีย์พาร์ทเนอร์ของ Shure (สำหรับพาร์ทเนอร์ของ Shure เท่านั้น)",
+              "var.createAccount": "Submit",
+              "var.companyType": "ฉันเป็น (อัน)",
+              "var.marketingOptIn": "รับอีเมลที่ปลอดภัยเกี่ยวกับผลิตภัณฑ์ใหม่ ข่าวสารของบริษัท กิจกรรม และอื่นๆ",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+              
+          },
+           "pt-BR":{
+                 "var.city": "Cidade Cidade",
+                 "var.state": "Estado/Condado/Região",
+              "var.zipCode": "Código Postal/CEP (se aplicável)",
+              "var.language": "Linguagem",
+              "var.country": "País/região",
+              "var.lmsDataPrivacy": "Termos de privacidade de dados (consulte a página inicial)",
+              "var.lmsPartnerKey": "Chave de Parceiro Shure (somente para Parceiros Shure)",
+              "var.createAccount": "Enviar",
+              "var.companyType": "Eu sou um(a)",
+              "var.marketingOptIn": "Receba e-mail seguro sobre novos produtos, novidades da empresa, eventos e muito mais",
+              "var.firstName": "Nome",
+              "var.lastName": "Sobrenome",
+              "var.displayName": "Nome de exibição",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+              "var.policyText": "<div style='margin-top:4px !important; margin-bottom: 10px !important; font-size: 10px;'>Ao selecionar essa caixa, você concorda em receber comunicações por e-mail da Shure, incluindo novos produtos, atualizações da empresa, convites para eventos, promoções e/ou ser contatado para organizar uma pesquisa de mercado. Seus dados pessoais serão processados pela Shure Incorporated, com sede nos Estados Unidos, e por suas afiliadas (“Shure”) para personalizar esses comunicados. Garantimos a proteção adequada quando transferimos dados. Você pode cancelar a inscrição a qualquer momento por meio do link disponível em cada comunicação. Para saber mais sobre nossas práticas de privacidade e seus direitos, inclusive sobre o seu direito de acessar, retificar, excluir e retirar seu consentimento, acesse nossa <a href=\"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>Política de Privacidade</strong></a> e <a href=\"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>Política de Cookies</strong></a>.</div>",
+              "var.cloudTerms": "<div style='margin-bottom: 10px !important;line-height:18px;'>Seu acesso e uso dos Serviços estão sujeitos aos Termos de uso da nuvem, que podem ser atualizados periodicamente. Ao marcar esta caixa, você concorda que leu e aceita os <a href=\"https://www.shure.com/en-US/meta/legal/cloud-application-terms\" target=\"_blank\"><strong>Termos de uso da nuvem </strong></a>mais recentes.</div>",
+              "var.personalData": "<div style='margin-top: 10px; font-size: 10px; text-align: left;'>Seus dados pessoais serão processados pela Shure Incorporated, com sede nos Estados Unidos, e por suas afiliadas (“Shure”). A Shure sempre garante a proteção adequada ao transferir dados. Para saber mais sobre as práticas de privacidade da Shure e seus direitos, consulte nossa <a href=\"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>Política de Privacidade</strong></a> e <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>Política de Cookies</strong></a>.</div>",
+               "var.chinaConsent": "Aceito que meus dados pessoais sejam transferidos para fora da China de acordo com a Política de Privacidade da Shure e que a Shure Incorporated nos Estados Unidos e outras entidades do grupo global Shure processarão meus dados pessoais de acordo com a <a href='https://www.shure.com.cn/zh-CN/legal/privacy' target='_blank'><strong>Política de Privacidade da Shure</strong></a>."
+          },
+           "ro":{
+              "var.city": "Oraș/oraș",
+              "var.state": "Stat/Județ/Regiune",
+              "var.zipCode": "Cod poștal/cod poștal (dacă este cazul)",
+              "var.language": "Limba",
+              "var.country": "Țară/regiune",
+              "var.lmsDataPrivacy": "Termeni de confidențialitate a datelor (consultați pagina de pornire)",
+              "var.lmsPartnerKey": "Cheie de parteneri Shure (numai pentru partenerii Shure)",
+              "var.createAccount": "Submit",
+              "var.companyType": "Sunt un (un)",
+              "var.marketingOptIn": "Primiți e-mail securizat despre produse noi, știri despre companie, evenimente și multe altele",
+              "var.displayName": "Display Name",
+              "var.agreeTerms": "<div>I agree that I have read and accept the ShureCloud <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>",
+
+          }
+         };
+         
+         /* Adding validation to the country, locale dropdown for Shure Cloud */
+         //Added - 16 Sept 2024 - start
+
+         function validateCustomDropdown(element)
+         {
+             const parentElement = element.parentElement.parentElement;                         
+             if(!$(parentElement).find("#dropdown-error").length>0){
+                  htmlString = '<p id="dropdown-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>This field cannot be left blank</p>'
+                  $(parentElement).append(htmlString);
+                  $(parentElement).addClass('o-form-has-errors');   
+               }     
+              
+               return true;                         
+         }
+
+
+         function validateCountryDropdown()
+         {
+            element = document.getElementById('tmp2');
+            const parentElement = element.parentElement.parentElement;                           
+            if(!$(parentElement).find("#country-error").length>0){
+               htmlString = '<p id="country-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>This field cannot be left blank</p>'
+               $(parentElement).append(htmlString);
+               $(parentElement).addClass('o-form-has-errors');   
+            }  
+           
+            return true;       
+         }
+         function validateLocaleDropdown()
+         {
+             element = document.getElementById('tmpLocale');
+             const parentElement = element.parentElement.parentElement;                         
+             if(!$(parentElement).find("#locale-error").length>0){
+                  htmlString = '<p id="locale-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>This field cannot be left blank</p>'
+                  $(parentElement).append(htmlString);
+                  $(parentElement).addClass('o-form-has-errors');   
+               }     
+              
+               return true;                         
+         }
+
+         //Added - 16 Sept 2024 - end
+
+         // Salesforce Service Community
+         function validateAccountNumber()
+         {
+             const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
+             const parentElement = element.parentElement.parentElement;
+             if(!$(parentElement).find("#account-error").length>0){
+                  htmlString = '<p id="account-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>This field cannot be left blank</p>'
+                  $(parentElement).append(htmlString);
+                  $(parentElement).addClass('o-form-has-errors');
+                  disableLoginBtn();  
+               }     
+              
+               return true;                         
+         }
+
+         function validateLangDropdown() {
+            const element = document.querySelector("select[name='userProfile.locale']");
+            const parentElement = element.parentElement.parentElement;                           
+            if(!$(parentElement).find("#locale-error").length>0){
+               htmlString = '<p id="locale-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>This field cannot be left blank</p>'
+               $(parentElement).append(htmlString);
+               $(parentElement).addClass('o-form-has-errors');
+               disableLoginBtn();
+            }  
+           
+            return true; 
+         }
+         
+         //debugger;
+         var browserLang = OktaUtil.getSignInWidgetConfig().language;
+         var varLocaliztion;
+         if(config.i18n[browserLang])
+             varLocaliztion = config.i18n[browserLang];
+         else
+             varLocaliztion = config.i18n["en"];
+         
+         config.registration = {
+          parseSchema: function(schema, onSuccess, onFailure) {
+            const appId = oktaData.requestContext.app.value.id;
+            const tlmsSaiProvisioningId = "0oa15zgh8gtXo1FBU0h8";
+            const tlmsSaiSSOId = "0oa17wxhy9oyuYG6N0h8";
+            const tlmsAdminSSOId = "0oa18vc3usfAdo0M10h8";
+      
+               if(schema.find(x => x.name === 'userProfile.organization'))
+               {
+                  if (appId !== tlmsSaiProvisioningId || appId !== tlmsSaiSSOId || appId !== tlmsAdminSSOId) {
+                    schema.find(x => x.name === 'userProfile.organization').required = true;
+                  }
+               }
+               if(schema.find(x => x.name === 'userProfile.companyType'))
+               {
+                    schema.find(x => x.name === 'userProfile.companyType').required = false;
+               }
+               if(schema.find(x => x.name === 'userProfile.primaryApplication'))
+               {
+                    schema.find(x => x.name === 'userProfile.primaryApplication').required = false;
+               }
+
+               if(schema.find(x => x.name === 'userProfile.sfserv_language'))
+               {
+                    schema.find(x => x.name === 'userProfile.sfserv_language').required = false;
+               }
+
+               if (schema.find(x => x.name === 'userProfile.sf_timezone'))
+               {
+                    schema.find(x => x.name === 'userProfile.sf_timezone').required = false;
+               }
+
+               if(schema.find(x => x.name === 'userProfile.country'))
+               {
+                    schema.find(x => x.name === 'userProfile.country').required = false;
+                   
+               }
+               if(schema.find(x => x.name === 'userProfile.locale'))
+               {
+                    schema.find(x => x.name === 'userProfile.locale').required = false;
+               }
+               if(schema.find(x => x.name === 'userProfile.marketingOptIn'))
+               {
+                    schema.find(x => x.name === 'userProfile.marketingOptIn').required = false;
+               }
+               if(schema.find(x => x.name === 'userProfile.salesforcePartnerNum'))
+               {
+                    schema.find(x => x.name === 'userProfile.salesforcePartnerNum').required = false;
+               }
+
+              onSuccess(schema);
+             }, 
+             preSubmit: function (postData, onSuccess, onFailure) {
+               const oktaAppId = oktaData.requestContext.app.value.id;
+               const salesforceServiceCommunityDev = "0oarva6uyzITbxdJh0h7";
+               const salesforceServiceCommunityStg = "0oas4uaj2mDDcNivh0h7"; 
+              /*  Salesforce Service preSubmit */
+               // if (oktaAppId === "0oas4uaj2mDDcNivh0h7") {
+               //    let region = urlParams.get('region');
+               //    let sflanguage = urlParams.get('language');
+               //    if (region !== null && sflanguage !== null) {
+               //          postData.userProfile.sfserv_region = region;
+               //          postData.userProfile.language_sf = sflanguage;
+               //    } else {
+               //          // Pass some default value
+               //          postData.userProfile.sfserv_region = "en-US";
+               //          postData.userProfile.language_sf = "en_US";
+               //    }
+                  
+
+               // }
+               var companyType = "";   
+               var marketingOptIn = "";
+               var country = "";
+               var lmsDataPrivacy = "";
+               var title = "";
+               var locale = "";
+               var primaryApp = "";
+               let sfservLanguage = "";
+               let sfTimezone = "";
+               var error = "";
+               
+               if(postData.userProfile == undefined)
+                postData.userProfile = {};
+               if( $("select[name='userProfile.companyType']").length > 0)
+               {
+              companyType = $("select[name='userProfile.companyType']").val();
+                postData.userProfile.companyType = companyType;
+               }
+               
+               if( $("select[name='userProfile.primaryApplication']").length > 0)
+               {
+              primaryApp = $("select[name='userProfile.primaryApplication']").val();
+                postData.userProfile.primaryApplication = primaryApp;
+               }
+
+
+               if( $("select[name='userProfile.sfserv_language']").length > 0)
+               {
+              sfservLanguage = $("select[name='userProfile.sfserv_language']").val();
+                postData.userProfile.sfserv_language = sfservLanguage;
+               }
+
+               if( $("select[name='userProfile.sf_timezone']").length > 0)
+               {
+              sfTimezone = $("select[name='userProfile.sf_timezone']").val();
+                postData.userProfile.sf_timezone = sfTimezone;
+               }
+               
+               if( $("select[name='userProfile.marketingOptIn']").length > 0)
+               {
+              marketingOptIn = $("select[name='userProfile.marketingOptIn']").val();
+                postData.userProfile.marketingOptIn = marketingOptIn;
+               }
+
+               /* Adding validation to the country, locale dropdown for Shure Cloud */
+               //Modified - 16 Sept 2024 - start
+               if( $("select[name='userProfile.country'] option:selected").length > 0)
+               {               
+                country = $("select[name='userProfile.country']").val();                          
+                postData.userProfile.country = country;
+               }  
+               //Modified - 16 Sept 2024 - end     
+
+               if( $("select[name='userProfile.lmsDataPrivacy']").length > 0)
+               {
+                lmsDataPrivacy = $("select[name='userProfile.lmsDataPrivacy']").val();
+                postData.userProfile.lmsDataPrivacy = lmsDataPrivacy;
+               }
+               if( $("select[name='userProfile.title']").length > 0)
+               {
+                title = $("select[name='userProfile.title']").val();
+                postData.userProfile.title = title;
+               }
+
+               /* Adding validation to the country, locale dropdown for Shure Cloud */
+               //Modified - 16 Sept 2024 - start
+               if( $("select[name='userProfile.locale'] option:selected").length > 0)
+               {
+                locale = $("select[name='userProfile.locale']").val();
+                postData.userProfile.locale = locale;
+               } 
+               //Modified - 16 Sept 2024 - end                
+               
+               //debugger;
+               if(oktaData.requestContext.app.value.id === "0oar7si5jycDEwnOu0h7")  //"0oar7si5jycDEwnOu0h7" - Tech Portal Stage
+               {
+                  if(companyType == null || marketingOptIn == null || country == null || locale == null)
+                     {
+                       return false;
+                     }
+               }
+               else if(oktaData.requestContext.app.value.id == "0oa17wxhy9oyuYG6N0h8") // TalentLMS Saitraining - SSO
+               {
+                  if(country == null || lmsDataPrivacy == null || title == null || locale == null)
+                     {
+                       return false;
+                     }
+               }
+               if (oktaAppId === salesforceServiceCommunityDev || oktaAppId === salesforceServiceCommunityStg) {
+                  if (urlParams) {
+                     postData.userProfile.sfserv_region = urlParams.get('region') || 'en-US'; //updated by Val to be in the format of en-US -- 12/4/2024
+                     postData.userProfile.sf_Language = urlParams.get('language') || 'en_US';
+                  }
+               }
+               onSuccess(postData);
+             },
+             postSubmit: function (response, onSuccess, onFailure) {
+               // handle postsubmit callback
+               onSuccess(response);
+             } 
+         }         // Render the Okta Sign-In Widget
+         var oktaSignIn = new OktaSignIn(config);
+         oktaSignIn.renderEl({ el: '#okta-login-container' },
+             OktaUtil.completeLogin,
+             function(error) {
+                 // Logs errors that occur when configuring the widget.
+                 // Remove or replace this with your own custom error handler.
+                 console.log(error.message, error);
+             }
+         );
+         
+         
+         
+         
+         oktaSignIn.on('afterRender', function (context) {
+            if (context.controller === "primary-auth") {
+               $('.signup-info span:first-child').text("Don't have a My Shure ID?");
+            }
+
+            if (context.controller === "registration") { 
+                window.captchaVerified = false;
+                 window.captchaValidate = false;
+              if(oktaSignIn.getUser() == undefined)
+                 {
+                  loadCAPTCHA();
+                 }
+
+            const oktaAppId = oktaData.requestContext.app.value.id;
+            const salesforceServiceCommunityDev = "0oarva6uyzITbxdJh0h7";
+            const salesforceServiceCommunityStg = "0oas4uaj2mDDcNivh0h7";
+
+            $('.auth-footer .js-back').text("Already have a My Shure ID?");
+            if ($("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptin']").length>0) {
+               $("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptin']").after(varLocaliztion["var.policyText"]); 
+            }
+
+            
+            //WT-8801
+            if ($('div[data-se="o-form-fieldset-userProfile.OIDCDisplayName"] label').length > 0) {
+               $('div[data-se="o-form-fieldset-userProfile.OIDCDisplayName"] label').html(varLocaliztion["var.displayName"])
+            }
+            if($("div[data-se='o-form-fieldset-userProfile.marketingOptIn'] label").length>0) {
+               $("div[data-se='o-form-fieldset-userProfile.marketingOptIn'] label").html(varLocaliztion["var.marketingOptIn"]);
+            }
+
+            if($("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label").length>0) {
+               $("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label").html(varLocaliztion["var.cloudTerm"]);
+            }
+
+            if($("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptin'] label").length>0) {
+               $("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptin'] label").html(varLocaliztion["var.marketingOptIn"]);
+            }
+
+            
+
+            $('.button-primary').after(varLocaliztion["var.personalData"]);         
+            
+            // Salesforce Service registration
+               
+              if (oktaData.requestContext.app.value.id == "0oa10clovtkL6pqgh0h8") {  // 0oa10clovtkL6pqgh0h8 - WWB Scan Library QA
+               if($("div[data-se='o-form-fieldset-userProfile.primaryApplication'] span").length>0)
+               {
+                 //debugger;
+                   //$($("div[data-se='o-form-fieldset-userProfile.companyType'] span")[0]).hide();
+                   $("input[name='userProfile.primaryApplication']").replaceWith('<select name="userProfile.primaryApplication" id="primaryApplication">' +
+                       '<option value="Theater">Theater</option>' +
+                       '<option value="Broadcast">Broadcast</option>' +
+                       '<option value="Film/Location Sound">TV/Film</option>' +
+                       '<option value="Touring Sound">Touring/Live Sound</option>' +
+                       '<option value="House of Worship">House of Worship</option>' +
+                       '<option value="AV Conferencing and Meetings">Conferencing/Meetings</option>' +
+                       //'<option value="">Other</option>' +
+                   '</select>');
+                   $("select[name='userProfile.primaryApplication']")[0].selectedIndex = -1;
+               }
+             }
+
+             // Salesforce Service Community
+            if (oktaAppId === salesforceServiceCommunityDev || oktaAppId == salesforceServiceCommunityStg) {
+               $("label[data-se-for-name='userProfile.salesforceTnC']").html("<div>I agree that I have read and accept the Service <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>");
+               $("input[name='userProfile.locale']").replaceWith('<select name="userProfile.locale" id="tmpLocale">' +
+                     '<option disabled selected value style="display:none"></option>' +
+                     '<option value="en_US">English</option>' +
+                     '<option value="es_ES">Spanish</option>' +
+                     '<option value="fr_FR">French</option>' +
+                     '<option value="nl_NL">Dutch</option>' +
+                     '<option value="de_DE">German</option>' +
+                     '<option value="ja_JP">Japanese</option>' +
+                     '<option value="zh_TW">Traditional Chinese/Mandarin</option>' +
+                     //'<option value="">Other</option>' +
+                   '</select>');
+               const langSelect = document.querySelector("select[name='userProfile.locale']");
+
+               if (langSelect) {
+                  langSelect.addEventListener('change', function(event) {
+                     if (event.target && event.target.matches('select')) {  
+                                 const parentElement = event.target.parentElement.parentElement;
+                                 $(parentElement).removeClass('o-form-has-errors'); 
+                                 $("#language-error").remove();                              
+                           }
+                           if( $(langSelect).val().length > 0)
+                           {
+                              enableLoginBtn();
+                           }
+                  });
+               }
+
+
+               $("input[name='userProfile.sf_timezone']").replaceWith('<select name="userProfile.sf_timezone">' +
+                  '<option value="America/Chicago">(GMT-05:00) Central Daylight Time (America/Chicago)</option>' +
+                  '<option value="Pacific/Kiritimati">(GMT+14:00) Line Islands Time (Pacific/Kiritimati)</option>' +
+                  '<option value="Pacific/Chatham">(GMT+13:45) Chatham Daylight Time (Pacific/Chatham)</option>' +
+                  '<option value="Pacific/Auckland">(GMT+13:00) New Zealand Daylight Time (Pacific/Auckland)</option>' +
+                  '<option value="Pacific/Enderbury">(GMT+13:00) Phoenix Islands Time (Pacific/Enderbury)</option>' +
+                  '<option value="Pacific/Tongatapu">(GMT+13:00) Tonga Standard Time (Pacific/Tongatapu)</option>' +
+                  '<option value="Asia/Kamchatka">(GMT+12:00) Petropavlovsk-Kamchatski Standard Time (Asia/Kamchatka)</option>' +
+                  '<option value="Pacific/Fiji">(GMT+12:00) Fiji Standard Time (Pacific/Fiji)</option>' +
+                  '<option value="Pacific/Guadalcanal">(GMT+11:00) Solomon Islands Time (Pacific/Guadalcanal)</option>' +
+                  '<option value="Pacific/Norfolk">(GMT+11:00) Norfolk Island Standard Time (Pacific/Norfolk)</option>' +
+                  '<option value="Australia/Lord_Howe">(GMT+10:30) Lord Howe Standard Time (Australia/Lord_Howe)</option>' +
+                  '<option value="Australia/Brisbane">(GMT+10:00) Australian Eastern Standard Time (Australia/Brisbane)</option>' +
+                  '<option value="Australia/Sydney">(GMT+10:00) Australian Eastern Standard Time (Australia/Sydney)</option>' +
+                  '<option value="Australia/Adelaide">(GMT+09:30) Australian Central Standard Time (Australia/Adelaide)</option>' +
+                  '<option value="Australia/Darwin">(GMT+09:30) Australian Central Standard Time (Australia/Darwin)</option>' +
+                  '<option value="Asia/Seoul">(GMT+09:00) Korean Standard Time (Asia/Seoul)</option>' +
+                  '<option value="Asia/Tokyo">(GMT+09:00) Japan Standard Time (Asia/Tokyo)</option>' +
+                  '<option value="Asia/Hong_Kong">(GMT+08:00) Hong Kong Standard Time (Asia/Hong_Kong)</option>' +
+                  '<option value="Asia/Kuala_Lumpur">(GMT+08:00) Malaysia Time (Asia/Kuala_Lumpur)</option>' +
+                  '<option value="Asia/Manila">(GMT+08:00) Philippine Standard Time (Asia/Manila)</option>' +
+                  '<option value="Asia/Shanghai">(GMT+08:00) China Standard Time (Asia/Shanghai)</option>' +
+                  '<option value="Asia/Singapore">(GMT+08:00) Singapore Standard Time (Asia/Singapore)</option>' +
+                  '<option value="Asia/Taipei">(GMT+08:00) Taipei Standard Time (Asia/Taipei)</option>' +
+                  '<option value="Australia/Perth">(GMT+08:00) Australian Western Standard Time (Australia/Perth)</option>' +
+                  '<option value="Asia/Bangkok">(GMT+07:00) Indochina Time (Asia/Bangkok)</option>' +
+                  '<option value="Asia/Ho_Chi_Minh">(GMT+07:00) Indochina Time (Asia/Ho_Chi_Minh)</option>' +
+                  '<option value="Asia/Jakarta">(GMT+07:00) Western Indonesia Time (Asia/Jakarta)</option>' +
+                  '<option value="Asia/Rangoon">(GMT+06:30) Myanmar Time (Asia/Rangoon)</option>' +
+                  '<option value="Asia/Dhaka">(GMT+06:00) Bangladesh Standard Time (Asia/Dhaka)</option>' +
+                  '<option value="Asia/Kathmandu">(GMT+05:45) Nepal Time (Asia/Kathmandu)</option>' +
+                  '<option value="Asia/Colombo">(GMT+05:30) India Standard Time (Asia/Colombo)</option>' +
+                  '<option value="Asia/Kolkata">(GMT+05:30) India Standard Time (Asia/Kolkata)</option>' +
+                  '<option value="Asia/Karachi">(GMT+05:00) Pakistan Standard Time (Asia/Karachi)</option>' +
+                  '<option value="Asia/Tashkent">(GMT+05:00) Uzbekistan Standard Time (Asia/Tashkent)</option>' +
+                  '<option value="Asia/Yekaterinburg">(GMT+05:00) Yekaterinburg Standard Time (Asia/Yekaterinburg)</option>' +
+                  '<option value="Asia/Kabul">(GMT+04:30) Afghanistan Time (Asia/Kabul)</option>' +
+                  '<option value="Asia/Baku">(GMT+04:00) Azerbaijan Standard Time (Asia/Baku)</option>' +
+                  '<option value="Asia/Dubai">(GMT+04:00) Gulf Standard Time (Asia/Dubai)</option>' +
+                  '<option value="Asia/Tbilisi">(GMT+04:00) Georgia Standard Time (Asia/Tbilisi)</option>' +
+                  '<option value="Asia/Yerevan">(GMT+04:00) Armenia Standard Time (Asia/Yerevan)</option>' +
+                  '<option value="Africa/Cairo>(GMT+03:00) Eastern European Standard Time (Africa/Cairo)</option>' +
+                  '<option value="Africa/Nairobi">(GMT+03:00) East Africa Time (Africa/Nairobi)</option>' +
+                  '<option value="Asia/Baghdad">(GMT+03:00) Arabian Standard Time (Asia/Baghdad)</option>' +
+                  '<option value="Asia/Beirut">(GMT+03:00) Eastern European Summer Time (Asia/Beirut)</option>' +
+                  '<option value="Asia/Jerusalem">(GMT+03:00) Israel Daylight Time (Asia/Jerusalem)</option>' +
+                  '<option value="Asia/Kuwait">(GMT+03:00) Arabian Standard Time (Asia/Kuwait)</option>' +
+                  '<option value="Asia/Riyadh">(GMT+03:00) Arabian Standard Time (Asia/Riyadh)</option>' +
+                  '<option value="Europe/Athens">(GMT+03:00) Eastern European Summer Time (Europe/Athens)</option>' +
+                  '<option value="Europe/Bucharest">(GMT+03:00) Eastern European Summer Time (Europe/Bucharest)</option>' +
+                  '<option value="Europe/Helsinki">(GMT+03:00) Eastern European Summer Time (Europe/Helsinki)</option>' +
+                  '<option value="Europe/Istanbul">(GMT+03:00) Eastern European Standard Time (Europe/Istanbul)</option>' +
+                  '<option value="Europe/Minsk">(GMT+03:00) Moscow Standard Time (Europe/Minsk)</option>' +
+                  '<option value="Europe/Moscow">(GMT+03:00) Moscow Standard Time (Europe/Moscow)</option>' +
+                  '<option value="Africa/Johannesburg">(GMT+02:00) South Africa Standard Time (Africa/Johannesburg)</option>' +
+                  '<option value="Europe/Amsterdam">(GMT+02:00) Central European Summer Time (Europe/Amsterdam)</option>' +
+                  '<option value="Europe/Berlin">(GMT+02:00) Central European Summer Time (Europe/Berlin)</option>' +
+                  '<option value="Europe/Brussels">(GMT+02:00) Central European Summer Time (Europe/Brussels)</option>' +
+                  '<option value="Europe/Paris">(GMT+02:00) Central European Summer Time (Europe/Paris)</option>' +
+                  '<option value="Europe/Prague">(GMT+02:00) Central European Summer Time (Europe/Prague)</option>' +
+                  '<option value="Europe/Rome">(GMT+02:00) Central European Summer Time (Europe/Rome)</option>' +
+                  '<option value="Africa/Algiers">(GMT+01:00) Central European Standard Time (Africa/Algiers)</option>' +
+                  '<option value="Africa/Casablanca">(GMT+01:00) Western European Summer Time (Africa/Casablanca)</option>' +
+                  '<option value="Europe/Dublin">(GMT+01:00) Irish Standard Time (Europe/Dublin)</option>' +
+                  '<option value="Europe/Lisbon">(GMT+01:00) Western European Summer Time (Europe/Lisbon)</option>' +
+                  '<option value="Europe/London">(GMT+01:00) British Summer Time (Europe/London)</option>' +
+                  '<option value="Atlantic/Azores">(GMT+00:00) Azores Summer Time (Atlantic/Azores)</option>' +
+                  '<option value="GMT">(GMT+00:00) Greenwich Mean Time (GMT)</option>' +
+                  '<option value="America/Scoresbysund">(GMT-01:00) East Greenland Summer Time (America/Scoresbysund)</option>' +
+                  '<option value="Atlantic/Cape_Verde">(GMT-01:00) Cape Verde Standard Time (Atlantic/Cape_Verde)</option>' +
+                  '<option value="Atlantic/South_Georgia">(GMT-02:00) South Georgia Time (Atlantic/South_Georgia)</option>' +
+                  '<option value="America/St_Johns">(GMT-02:30) Newfoundland Daylight Time (America/St_Johns)</option>' +
+                  '<option value="America/Argentina/Buenos_Aires">(GMT-03:00) Argentina Standard Time (America/Argentina/Buenos_Aires)</option>' +
+                  '<option value="America/Halifax">(GMT-03:00) Atlantic Daylight Time (America/Halifax)</option>' +
+                  '<option value="America/Santiago">(GMT-03:00) Chile Summer Time (America/Santiago)</option>' +
+                  '<option value="America/Sao_Paulo">(GMT-03:00) Brasilia Standard Time (America/Sao_Paulo)</option>' +
+                  '<option value="Atlantic/Bermuda">(GMT-03:00) Atlantic Daylight Time (Atlantic/Bermuda)</option>' +
+                  '<option value="America/Caracas">(GMT-04:00) Venezuela Time (America/Caracas)</option>' +
+                  '<option value="America/Indiana/Indianapolis">(GMT-04:00) Eastern Daylight Time (America/Indiana/Indianapolis)</option>' +
+                  '<option value="America/New_York">(GMT-04:00) Eastern Daylight Time (America/New_York)</option>' +
+                  '<option value="America/Puerto_Rico">(GMT-04:00) Atlantic Standard Time (America/Puerto_Rico)</option>' +
+                  '<option value="America/Bogota">(GMT-05:00) Colombia Standard Time (America/Bogota)</option>' +
+                  '<option value="America/Lima">(GMT-05:00) Peru Standard Time (America/Lima)</option>' +
+                  '<option value="America/Panama">(GMT-05:00) Eastern Standard Time (America/Panama)</option>' +
+                  '<option value="America/Denver">(GMT-06:00) Mountain Daylight Time (America/Denver)</option>' +
+                  '<option value="America/El_Salvador">(GMT-06:00) Central Standard Time (America/El_Salvador)</option>' +
+                  '<option value="America/Mexico_City">(GMT-06:00) Central Standard Time (America/Mexico_City)</option>' +
+                  '<option value="America/Los_Angeles">(GMT-07:00) Pacific Daylight Time (America/Los_Angeles)</option>' +
+                  '<option value="America/Mazatlan">(GMT-07:00) Mexican Pacific Standard Time (America/Mazatlan)</option>' +
+                  '<option value="America/Phoenix">(GMT-07:00) Mountain Standard Time (America/Phoenix)</option>' +
+                  '<option value="America/Tijuana">(GMT-07:00) Pacific Daylight Time (America/Tijuana)</option>' +
+                  '<option value="America/Anchorage">(GMT-08:00) Alaska Daylight Time (America/Anchorage)</option>' +
+                  '<option value="Pacific/Pitcairn">(GMT-08:00) Pitcairn Time (Pacific/Pitcairn)</option>' +
+                  '<option value="America/Adak">(GMT-09:00) Hawaii-Aleutian Daylight Time (America/Adak)</option>' +
+                  '<option value="Pacific/Gambier">(GMT-09:00) Gambier Time (Pacific/Gambier)</option>' +
+                  '<option value="Pacific/Marquesas">(GMT-09:30) Marquesas Time (Pacific/Marquesas)</option>' +
+                  '<option value="Pacific/Honolulu">(GMT-10:00) Hawaii-Aleutian Standard Time (Pacific/Honolulu)</option>' +
+                  '<option value="Pacific/Niue">(GMT-11:00) Niue Time (Pacific/Niue)</option>' +
+                  '<option value="Pacific/Pago_Pago">(GMT-11:00) Samoa Standard Time (Pacific/Pago_Pago)</option>' +
+                     //'<option value="">Other</option>' +
+                   '</select>');
+
+
+                  $('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').change(function() {
+                     console.log("CHECKED")
+                     if(this.checked) {
+                        $("[data-se='o-form-fieldset-userProfile.salesforcePartnerNum']").addClass("show");
+                     }
+                  });
+
+                  $('div[data-se="o-form-fieldset-userProfile.salesforcePartnerNum"] div[data-se="o-form-input-container"]').append("<span style='font-size: 12px'>For assistance with your account number please contact your Shure Rep.</span>")
+
+
+                  $('input[name="userProfile.salesforcePartnerNum"]').on("blur", function() {
+                     if (this.value.length > 0) {
+                        const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
+                           const parentElement = element.parentElement.parentElement;
+                           if($(parentElement).find("#account-error").length>0){
+                              $(parentElement).removeClass('o-form-has-errors');
+                              $("#account-error").remove();   
+                              enableLoginBtn();
+                           }
+                     }
+                  });
+
+                  $('input[data-se-name="userProfile.sf_servicePartner"][value="false"]').change(function() {
+                     if(this.checked) {
+                        $("[data-se='o-form-fieldset-userProfile.salesforcePartnerNum']").removeClass("show");
+                        const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
+                        const parentElement = element.parentElement.parentElement;
+                        if($(parentElement).find("#account-error").length>0){
+                           $(parentElement).removeClass('o-form-has-errors');
+                           $("#account-error").remove();   
+                           enableLoginBtn();
+                        }
+                     }
+                  });
+
+
+                  if ($("div[data-se='o-form-fieldset-userProfile.firstName'] label").length > 0) {
+                     $("div[data-se='o-form-fieldset-userProfile.firstName'] label").html(varLocaliztion["var.firstName"]);
+                  }
+
+                  if ($("div[data-se='o-form-fieldset-userProfile.lastName'] label").length > 0) {
+                     $("div[data-se='o-form-fieldset-userProfile.lastName'] label").html(varLocaliztion["var.lastName"]);
+                  }
+
+                  if ($("div[data-se='o-form-fieldset-userProfile.email'] label").length > 0) {
+                     $("div[data-se='o-form-fieldset-userProfile.email'] label").html(
+                        varLocaliztion["var.email"]
+                     );
+                  }
+
+
+                  if ($("div[data-se='o-form-fieldset-userProfile.country'] label").length > 0) {
+                     $("div[data-se='o-form-fieldset-userProfile.country'] label").html(
+                        varLocaliztion["var.country"]
+                     );
+                  }
+
+                  if ($("div[data-se='o-form-fieldset-userProfile.sf_servicePartner'] .o-form-label").length > 0) {
+                     $("div[data-se='o-form-fieldset-userProfile.sf_servicePartner'] .o-form-label").html(
+                        varLocaliztion["var.shureDealer"]
+                     );
+                  }
+
+                  if ($("div[data-se='o-form-fieldset-userProfile.sfserv_language'] label").length > 0) {
+                     $("div[data-se='o-form-fieldset-userProfile.sfserv_language'] label").html(
+                        varLocaliztion["var.sfservLanguage"]
+                     );
+                  }
+
+                  if ($("div[data-se='o-form-fieldset-userProfile.sf_timezone'] label").length > 0) {
+                     $("div[data-se='o-form-fieldset-userProfile.sf_timezone'] label").html(
+                        varLocaliztion["var.timezone"]
+                     );
+                  }
+
+                  if ($("div[data-se='o-form-fieldset-userProfile.primaryPhone'] label").length > 0) {
+                     $("div[data-se='o-form-fieldset-userProfile.primaryPhone'] label").html(
+                        varLocaliztion["var.phone"]
+                     );
+                  }
+
+                  if ($("div[data-se='o-form-fieldset-userProfile.salesforcePartnerNum'] label").length > 0) {
+                     $("div[data-se='o-form-fieldset-userProfile.salesforcePartnerNum'] label").html(
+                        varLocaliztion["var.accountNumber"]
+                     );
+                  }
+
+
+                     $("input[name='userProfile.country']").replaceWith('<select name="userProfile.country" id="tmp2">' +
+                       '<option value="Afghanistan">Afghanistan</option>' +
+                       '<option value="Albania">Albania</option>' +
+                       '<option value="Algeria">Algeria</option>' +
+                       '<option value="Argentina">Argentina</option>' +
+                       '<option value="Armenia">Armenia</option>' +
+                       '<option value="Australia">Australia</option>' +
+                       '<option value="Austria">Austria</option>' +
+                       '<option value="Azerbaijan">Azerbaijan</option>' +
+                       '<option value="Bangladesh">Bangladesh</option>' +
+                       '<option value="Barbados">Barbados</option>' +
+                       '<option value="Belgium">Belgium</option>' +
+                       '<option value="Bermuda">Bermuda</option>' +
+                       '<option value="Bolivia, Plurinational State of">Bolivia</option>' +
+                       '<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>' +
+                       '<option value="Brazil">Brazil</option>' +
+                       '<option value="Virgin Islands, British">British Virgin Islands</option>' + 
+                       '<option value="American Virgin Islands">U.S. Virgin Islands</option>' + 
+                       '<option value="Bulgaria">Bulgaria</option>' +
+                       '<option value="Cambodia">Cambodia</option>' +
+                       '<option value="Cameroon">Cameroon</option>' +
+                       '<option value="Canada">Canada</option>' +
+                       '<option value="Cayman Islands">Cayman Islands</option>' +
+                       '<option value="Chile">Chile</option>' +
+                       '<option value="China">China</option>' +
+                       '<option value="Colombia">Colombia</option>' +
+                       '<option value="Congo, the Democratic Republic of the">Democratic Republic of the Congo</option>' +
+                       '<option value="Costa Rica">Costa Rica</option>' +
+                       '<option value="Cote d\'Ivoire">Cote d\'Ivoire</option>' +
+                       '<option value="Croatia">Croatia</option>' +
+                       '<option value="Curacao">Curacao</option>' +
+                       '<option value="Cyprus">Cyprus</option>' +
+                       '<option value="Czech Republic">Czech Republic</option>' +
+                       '<option value="Denmark">Denmark</option>' +
+                       '<option value="Dominican Republic">Dominican Republic</option>' +
+                       '<option value="Ecuador">Ecuador</option>' +
+                       '<option value="Egypt">Egypt</option>' +
+                       '<option value="El Salvador">El Salvador</option>' +
+                       '<option value="Estonia">Estonia</option>' +
+                       '<option value="Ethiopia">Ethiopia</option>' +
+                       '<option value="Falkland Islands">Falkland Islands (Malvinas)</option>' +
+                       '<option value="Fiji">Fiji</option>' +
+                       '<option value="Finland">Finland</option>' +
+                       '<option value="France">France</option>' +
+                       '<option value="Georgia">Georgia</option>' +
+                       '<option value="Germany">Germany</option>' +
+                       '<option value="Ghana">Ghana</option>' +
+                       '<option value="Greece">Greece</option>' +
+                       '<option value="Guatemala">Guatemala</option>' +
+                       '<option value="Guinea">Guinea</option>' +
+                       '<option value="Honduras">Honduras</option>' +
+                       '<option value="Hong Kong S.A.R.">Hong Kong S.A.R.</option>' +
+                       '<option value="Hungary">Hungary</option>' +
+                       '<option value="Iceland">Iceland</option>' +
+                       '<option value="India">India</option>' +
+                       '<option value="Indonesia">Indonesia</option>' +
+                       '<option value="Ireland">Ireland</option>' +
+                       '<option value="Israel">Israel</option>' +
+                       '<option value="Italy">Italy</option>' +
+                       '<option value="Jamaica">Jamaica</option>' +
+                       '<option value="Japan">Japan</option>' +
+                       '<option value="Jordan">Jordan</option>' +
+                       '<option value="Kazakhstan">Kazakhstan</option>' +
+                       '<option value="Kenya">Kenya</option>' +
+                       '<option value="Korea, Republic of">South Korea</option>' +
+                       '<option value="Kuwait">Kuwait</option>' +
+                       '<option value="Latvia">Latvia</option>' +
+                       '<option value="Lao People’s Democratic Republic">Laos</option>' +
+                       '<option value="Lebanon">Lebanon</option>' +
+                       '<option value="Lithuania">Lithuania</option>' +
+                       '<option value="Luxembourg">Luxembourg</option>' +
+                       '<option value="Macau">Macau</option>' +
+                       '<option value="Macedonia, the former Yugoslav Republic of">Macedonia</option>' +
+                       '<option value="Malawi">Malawi</option>' +
+                       '<option value="Malaysia">Malaysia</option>' +
+                       '<option value="Maldives">Maldives</option>' +
+                       '<option value="Malta">Malta</option>' +
+                       '<option value="Mauritius">Mauritius</option>' +
+                       '<option value="Mexico">Mexico</option>' +
+                       '<option value="Moldova, Republic of">Moldova</option>' +
+                       '<option value="Mongolia">Mongolia</option>' +
+                       '<option value="Montenegro">Montenegro</option>' +
+                       '<option value="Morocco">Morocco</option>' +
+                       '<option value="Mozambique">Mozambique</option>' +
+                       '<option value="Myanmar">Myanmar</option>' +
+                       '<option value="Nepal">Nepal</option>' +
+                       '<option value="Netherlands">Netherlands</option>' +
+                       '<option value="New Zealand">New Zealand</option>' +
+                       '<option value="Nicaragua">Nicaragua</option>' +
+                       '<option value="Nigeria">Nigeria</option>' +
+                       '<option value="Norway">Norway</option>' +
+                       '<option value="Oman">Oman</option>' +
+                       '<option value="Pakistan">Pakistan</option>' +
+                       '<option value="Palestinian Territory">Palestine Territory, Occupied</option>' +
+                       '<option value="Panama">Panama</option>' +
+                       '<option value="Paraguay">Paraguay</option>' +
+                       '<option value="Peru">Peru</option>' +
+                       '<option value="Philippines">Philippines</option>' +
+                       '<option value="Poland">Poland</option>' +
+                       '<option value="Portugal">Portugal</option>' +
+                       '<option value="Puerto Rico">Puerto Rico</option>' +
+                       '<option value="Qatar">Qatar</option>' +
+                       '<option value="Réunion">Reunion</option>' +
+                       '<option value="Romania">Romania</option>' +
+                       '<option value="Samoa">Samoa</option>' +
+                       '<option value="Saudi Arabia">Saudi Arabia</option>' +
+                       '<option value="Serbia and Montenegro (Former)">Serbia and Montenegro (Former)</option>' +
+                       '<option value="Seychelles">Seychelles</option>' +
+                       '<option value="Singapore">Singapore</option>' +
+                       '<option value="Slovakia">Slovakia</option>' +
+                       '<option value="Slovenia">Slovenia</option>' +
+                       '<option value="South Africa">South Africa</option>' +
+                       '<option value="Sudan">Sudan</option>' +
+                       '<option value="Spain">Spain</option>' +
+                       '<option value="Sri Lanka">Sri Lanka</option>' +
+                       '<option value="Sweden">Sweden</option>' +
+                       '<option value="Switzerland">Switzerland</option>' +
+                       '<option value="Taiwan">Chinese Taipei</option>' +
+                       '<option value="Tanzania">Tanzania, United Republic of</option>' +
+                       '<option value="Thailand">Thailand</option>' +
+                       '<option value="Trinidad and Tobago">Trinidad and Tobago</option>' +
+                       '<option value="Tunisia">Tunisia</option>' +
+                       '<option value="Turkey">Turkey</option>' +
+                       '<option value="Uganda">Uganda</option>' +
+                       '<option value="U.A.E.">U.A.E.</option>' +
+                       '<option value="United Kingdom">United Kingdom</option>' +
+                       '<option value="United States">United States</option>' +
+                       '<option value="Uruguay">Uruguay</option>' +
+                       '<option value="Venezuela">Venezuela</option>' +
+                       '<option value="Viet Nam">Vietnam</option>' +
+                       '<option value="Zambia">Zambia</option>' +
+                       '<option value="Zimbabwe">Zimbabwe</option>' +
+         
+                       '</select>');
+                 
+                    $("select[name='userProfile.country']")[0].selectedIndex = -1;
+
+               
+            }
+
+            if (oktaData.requestContext.app.value.id == "0oas4uaj2mDDcNivh0h7") {
+            
+            
+            document.querySelectorAll("[data-se='o-form-fieldset-userProfile.language_sf']")[0].style.display = "none";
+            document.querySelectorAll("[data-se='o-form-fieldset-userProfile.sfserv_region']")[0].style.display = "none";
+            let registerBtn = document.getElementsByClassName("button button-primary")[0];
+              let partnerNumberBox = document.querySelector('[data-se="o-form-fieldset-userProfile.salesforcePartnerNum"]');
+              let partnerNumText = document.getElementsByName('userProfile.salesforcePartnerNum')[0];
+              partnerNumberBox.style.display = "none";
+              let contentBox = document.querySelector('[data-se="o-form-content"]');
+              let isPartner = document.createElement("INPUT");
+
+                  
+  
+            isPartner.setAttribute("type", "checkbox");
+            isPartner.setAttribute("value", "Are you a Shure Partner?");
+            isPartner.setAttribute("id", "shure-partner-checkbox")
+            let partnerLabel = document.createElement("label");
+            partnerLabel.setAttribute("for", 'shure-partner-checkbox');
+            partnerLabel.innerHTML = " Are you a Shure Partner?";
+
+            partnerNumberBox.parentNode.insertBefore(isPartner, partnerNumberBox);
+            isPartner.parentNode.insertBefore(partnerLabel, isPartner.nextSibling)
+
+            isPartner.addEventListener('change', function() {
+               if (this.checked) {
+                  partnerNumberBox.style.display = "block";
+                  
+                  let optionalboxes = document.getElementsByClassName("o-form-explain")
+                  optionalboxes.forEach( (el) => {
+                                       el.style.display = "none";
+                                       });
+                                       
+                  /*partnerNumText.addEventListener('keyup', () => {
+                     if (partnerNumText.value.length > 0) {
+                        registerBtn.disabled = false;
+                     } else {
+                        registerBtn.disabled = true;
+                     }
+
+                     console.log(registerBtn.disabled);
+                  }
+                  );*/
+
+               } else {
+                  partnerNumberBox.style.display = "none";
+
+               }
+            });
+            
+
+
+         }
+
+
+      const appId = oktaData.requestContext.app.value.id;
+      const tlmsSaiProvisioningId = "0oa15zgh8gtXo1FBU0h8";
+      const tlmsSaiSSOId = "0oa17wxhy9oyuYG6N0h8";
+      const tlmsAdminSSOId = "0oa18vc3usfAdo0M10h8";
+      const techPortalDevId = "0oar7rd2idY4jLOrs0h7";
+      const techPortalStageId = "0oar7si5jycDEwnOu0h7";
+      const techPortalNewStageId = "0oa18utnxi2WYFZAg0h8";
+      const shureCloudQAId = "0oa1nixc9hhBl0EDF0h8";
+      const shureCloudQA2Id = "0oa27oe7fu2W8h2qX0h8";
+      const shureCloudPreprodId = "0oa24vxw4tzPvMIbF0h8";
+      const shureCloudStageId = "0oa1va0le084Ults80h8";
+      const salesforceServiceDev = "0oarva6uyzITbxdJh0h7";
+      const salesforceServiceStage = "0oas4uaj2mDDcNivh0h7";
+
+      if (appId === tlmsSaiProvisioningId || appId === tlmsSaiSSOId || appId === techPortalDevId || appId === techPortalStageId || appId === tlmsAdminSSOId || appId === techPortalNewStageId) {
+         config.i18n.en["var.createAccount"] = "Create a My Shure ID";
+         config.i18n.es["var.createAccount"] = "Enviar";
+         config.i18n.de["var.createAccount"] = "Absenden";
+         config.i18n.it["var.createAccount"] = "Invia";
+         config.i18n.ja["var.createAccount"] = "送信";
+         config.i18n.ko["var.createAccount"] = "제출";
+         config.i18n["nl-NL"]["var.createAccount"] = "Verzenden";
+         config.i18n.pl["var.createAccount"] = "Wyślij"; 
+         config.i18n["pt-BR"]["var.createAccount"] = "Enviar";
+         config.i18n["zh-CN"]["var.createAccount"] = "提交";
+         config.i18n["zh-TW"]["var.createAccount"] = "提交";    
+      }      
+
+            $('.button-primary').prop("value", varLocaliztion["var.createAccount"]);
+            //- Service Community $('.button-primary').after("<div style='margin-top: 10px; font-size: 10px; text-align: left;'>Your personal data will be processed by Shure Incorporated based in the USA and its affiliates for processing your service request. We always ensure adequate protection when transferring data. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit <strong style='font-weight: bold;font-color: black;'><a href='https://www.shure.com/en-US/meta/privacy' target='_blank'>our privacy policy</a></strong>.</div>");
+   
+               
+            if($("div[data-se='o-form-fieldset-userProfile.city'] label").length>0)
+            $("div[data-se='o-form-fieldset-userProfile.city'] label").html(varLocaliztion["var.city"]);      
+            if($("div[data-se='o-form-fieldset-userProfile.state'] label").length>0)
+            $("div[data-se='o-form-fieldset-userProfile.state'] label").html(varLocaliztion["var.state"]);      
+          if($("div[data-se='o-form-fieldset-userProfile.zipCode'] label").length>0)
+            $("div[data-se='o-form-fieldset-userProfile.zipCode'] label").html(varLocaliztion["var.zipCode"]);    
+          if($("div[data-se='o-form-fieldset-userProfile.companyType'] label").length>0)
+            $("div[data-se='o-form-fieldset-userProfile.companyType'] label").html(varLocaliztion["var.companyType"]);  
+              //$('o-form-fieldset-userProfile.state').prop("value", varLocaliztion["var.createAccount"]);
+             
+               if($("div[data-se='o-form-fieldset-userProfile.title'] span").length>0)
+               {
+                   //$($("div[data-se='o-form-fieldset-userProfile.title'] span")[0]).hide();
+                   $("input[name='userProfile.title']").replaceWith('<select name="userProfile.title" id="input52">' +
+                       '<option value="Executive">Executive</option>' +
+                       '<option value="Project Manager">Project Manager</option>' +
+                       '<option value="Design Engineer">Design Engineer</option>' +
+                       '<option value="Programmer">Programmer</option>' +
+                       '<option value="Technician">Technician</option>' +
+                       '<option value="Other">Other</option>' +
+                   '</select>');
+                   $("select[name='userProfile.title']")[0].selectedIndex = -1;
+               }
+            
+            
+               if($("div[data-se='o-form-fieldset-userProfile.companyType'] span").length>0)
+               {
+                 //debugger;
+                   //$($("div[data-se='o-form-fieldset-userProfile.companyType'] span")[0]).hide();
+                   $("input[name='userProfile.companyType']").replaceWith('<select name="userProfile.companyType" id="companyType">' +
+                       '<option value="Consultant">Consultant</option>' +
+                       '<option value="Dealer">Dealer</option>' +
+                       '<option value="Distributor">Distributor</option>' +
+                       '<option value="End-User">End-User</option>' +
+                       '<option value="Freelancer">Freelancer</option>' +
+                       '<option value="Other">Other</option>' +
+                       '<option value="Rental Company">Rental Company</option>' +
+                       '<option value="Sales Rep">Sales Rep</option>' +
+                       '<option value="System Integrator">System Integrator</option>' +
+                   '</select>');
+                   $("select[name='userProfile.companyType']")[0].selectedIndex = -1;
+               }
+
+               if($("div[data-se='o-form-fieldset-userProfile.marketingOptIn']").length>0)
+               {
+                 //debugger;
+                // $($("div[data-se='o-form-fieldset-userProfile.companyType'] span")[0]).hide();
+                  $("input[name='userProfile.marketingOptIn']").replaceWith('<select name="userProfile.marketingOptIn" id="marketingOptIn">' +
+                       '<option value="Yes">Yes</option>' +
+                       '<option value="No">No</option>' +
+                   '</select>');
+                  $("label[data-se-for-name='userProfile.marketingOptIn']").after($("select[name='userProfile.marketingOptIn']"));
+                 $("span[data-se='o-form-input-userProfile.marketingOptIn'] .custom-checkbox").removeClass("custom-checkbox");
+                  $("select[name='userProfile.marketingOptIn']")[0].selectedIndex = -1;
+                   $("div[data-se='o-form-fieldset-userProfile.marketingOptIn']").after("<div style='margin-top:10px !important; font-size: 10px;'>By selecting yes, you consent to receive emails from Shure Incorporated based in the USA and its affiliates (“Shure”), including new products, company updates, events, training, case studies, research, and promotions. You consent to the processing, tracking and analyzing of personal data, such as your: registration detail, website activity across devices, and other personal data provided on legal grounds, by Shure, Google LLC and salesforce.com Inc for tailoring emails to your interests. We always ensure adequate protection when transferring data. You can unsubscribe at any time via the link in each email or withdraw consent via <a href = \"mailto:privacy@shure.com\">privacy@shure.com</a>. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit our <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>privacy policy</strong></a> and <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>cookie policy<strong></a>.</div>"); 
+
+               }
+
+               if($("input[name='userProfile.RfscanTnC']").length > 0) { 
+                   $("label[data-se-for-name='userProfile.RfscanTnC']").html("<div>I agree to the <a href='https://scans.shure.com/cloud_terms' target='_blank'>Cloud Application Terms of Service</a> and the <a href='https://www.shure.com/en-US/meta/legal/terms-and-conditions-of-website-use' target='_blank'>Website Terms of Use</a> in connection with the WWB Scan Library.</div>") 
+                }
+               //Val added for Ignite
+               if($("input[name='userProfile.IgniteTnC']").length > 0) { 
+                   $("label[data-se-for-name='userProfile.IgniteTnC']").html(varLocaliztion["var.cloudTerms"]);
+                }
+               // *Val end of add for Ignite
+               
+               
+                   
+                  if($("div[data-se='o-form-fieldset-userProfile.country'] label").length>0) {
+                     $($("div[data-se='o-form-fieldset-userProfile.country'] label")[0]).html(varLocaliztion["var.country"]);  
+                     // if(oktaData.requestContext.app.value.id == "0oa17wxhy9oyuYG6N0h8") {
+                     //    $($("div[data-se='o-form-fieldset-userProfile.country'] span")[0]).hide();
+                     // }
+                    //$($("div[data-se='o-form-fieldset-userProfile.country'] span")[0]).hide();
+                    $("input[name='userProfile.country']").replaceWith('<select name="userProfile.country" id="tmp2">' +
+                       '<option value="Afghanistan">Afghanistan</option>' +
+                       '<option value="Albania">Albania</option>' +
+                       '<option value="Algeria">Algeria</option>' +
+                       '<option value="Argentina">Argentina</option>' +
+                       '<option value="Armenia">Armenia</option>' +
+                       '<option value="Australia">Australia</option>' +
+                       '<option value="Austria">Austria</option>' +
+                       '<option value="Azerbaijan">Azerbaijan</option>' +
+                       '<option value="Bangladesh">Bangladesh</option>' +
+                       '<option value="Barbados">Barbados</option>' +
+                       '<option value="Belgium">Belgium</option>' +
+                       '<option value="Bermuda">Bermuda</option>' +
+                       '<option value="Bolivia, Plurinational State of">Bolivia</option>' +
+                       '<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>' +
+                       '<option value="Brazil">Brazil</option>' +
+                       '<option value="Virgin Islands, British">British Virgin Islands</option>' + 
+                       '<option value="American Virgin Islands">U.S. Virgin Islands</option>' + 
+                       '<option value="Bulgaria">Bulgaria</option>' +
+                       '<option value="Cambodia">Cambodia</option>' +
+                       '<option value="Cameroon">Cameroon</option>' +
+                       '<option value="Canada">Canada</option>' +
+                       '<option value="Cayman Islands">Cayman Islands</option>' +
+                       '<option value="Chile">Chile</option>' +
+                       '<option value="China">China</option>' +
+                       '<option value="Colombia">Colombia</option>' +
+                       '<option value="Congo, the Democratic Republic of the">Democratic Republic of the Congo</option>' +
+                       '<option value="Costa Rica">Costa Rica</option>' +
+                       '<option value="Cote d\'Ivoire">Cote d\'Ivoire</option>' +
+                       '<option value="Croatia">Croatia</option>' +
+                       '<option value="Curacao">Curacao</option>' +
+                       '<option value="Cyprus">Cyprus</option>' +
+                       '<option value="Czech Republic">Czech Republic</option>' +
+                       '<option value="Denmark">Denmark</option>' +
+                       '<option value="Dominican Republic">Dominican Republic</option>' +
+                       '<option value="Ecuador">Ecuador</option>' +
+                       '<option value="Egypt">Egypt</option>' +
+                       '<option value="El Salvador">El Salvador</option>' +
+                       '<option value="Estonia">Estonia</option>' +
+                       '<option value="Ethiopia">Ethiopia</option>' +
+                       '<option value="Falkland Islands">Falkland Islands (Malvinas)</option>' +
+                       '<option value="Fiji">Fiji</option>' +
+                       '<option value="Finland">Finland</option>' +
+                       '<option value="France">France</option>' +
+                       '<option value="Georgia">Georgia</option>' +
+                       '<option value="Germany">Germany</option>' +
+                       '<option value="Ghana">Ghana</option>' +
+                       '<option value="Greece">Greece</option>' +
+                       '<option value="Guatemala">Guatemala</option>' +
+                       '<option value="Guinea">Guinea</option>' +
+                       '<option value="Honduras">Honduras</option>' +
+                       '<option value="Hong Kong S.A.R.">Hong Kong S.A.R.</option>' +
+                       '<option value="Hungary">Hungary</option>' +
+                       '<option value="Iceland">Iceland</option>' +
+                       '<option value="India">India</option>' +
+                       '<option value="Indonesia">Indonesia</option>' +
+                       '<option value="Ireland">Ireland</option>' +
+                       '<option value="Israel">Israel</option>' +
+                       '<option value="Italy">Italy</option>' +
+                       '<option value="Jamaica">Jamaica</option>' +
+                       '<option value="Japan">Japan</option>' +
+                       '<option value="Jordan">Jordan</option>' +
+                       '<option value="Kazakhstan">Kazakhstan</option>' +
+                       '<option value="Kenya">Kenya</option>' +
+                       '<option value="Korea, Republic of">South Korea</option>' +
+                       '<option value="Kuwait">Kuwait</option>' +
+                       '<option value="Latvia">Latvia</option>' +
+                       '<option value="Lao People’s Democratic Republic">Laos</option>' +
+                       '<option value="Lebanon">Lebanon</option>' +
+                       '<option value="Lithuania">Lithuania</option>' +
+                       '<option value="Luxembourg">Luxembourg</option>' +
+                       '<option value="Macau">Macau</option>' +
+                       '<option value="Macedonia, the former Yugoslav Republic of">Macedonia</option>' +
+                       '<option value="Malawi">Malawi</option>' +
+                       '<option value="Malaysia">Malaysia</option>' +
+                       '<option value="Maldives">Maldives</option>' +
+                       '<option value="Malta">Malta</option>' +
+                       '<option value="Mauritius">Mauritius</option>' +
+                       '<option value="Mexico">Mexico</option>' +
+                       '<option value="Moldova, Republic of">Moldova</option>' +
+                       '<option value="Mongolia">Mongolia</option>' +
+                       '<option value="Montenegro">Montenegro</option>' +
+                       '<option value="Morocco">Morocco</option>' +
+                       '<option value="Mozambique">Mozambique</option>' +
+                       '<option value="Myanmar">Myanmar</option>' +
+                       '<option value="Nepal">Nepal</option>' +
+                       '<option value="Netherlands">Netherlands</option>' +
+                       '<option value="New Zealand">New Zealand</option>' +
+                       '<option value="Nicaragua">Nicaragua</option>' +
+                       '<option value="Nigeria">Nigeria</option>' +
+                       '<option value="Norway">Norway</option>' +
+                       '<option value="Oman">Oman</option>' +
+                       '<option value="Pakistan">Pakistan</option>' +
+                       '<option value="Palestinian Territory">Palestine Territory, Occupied</option>' +
+                       '<option value="Panama">Panama</option>' +
+                       '<option value="Paraguay">Paraguay</option>' +
+                       '<option value="Peru">Peru</option>' +
+                       '<option value="Philippines">Philippines</option>' +
+                       '<option value="Poland">Poland</option>' +
+                       '<option value="Portugal">Portugal</option>' +
+                       '<option value="Puerto Rico">Puerto Rico</option>' +
+                       '<option value="Qatar">Qatar</option>' +
+                       '<option value="Réunion">Reunion</option>' +
+                       '<option value="Romania">Romania</option>' +
+                       '<option value="Samoa">Samoa</option>' +
+                       '<option value="Saudi Arabia">Saudi Arabia</option>' +
+                       '<option value="Serbia and Montenegro (Former)">Serbia and Montenegro (Former)</option>' +
+                       '<option value="Seychelles">Seychelles</option>' +
+                       '<option value="Singapore">Singapore</option>' +
+                       '<option value="Slovakia">Slovakia</option>' +
+                       '<option value="Slovenia">Slovenia</option>' +
+                       '<option value="South Africa">South Africa</option>' +
+                       '<option value="Sudan">Sudan</option>' +
+                       '<option value="Spain">Spain</option>' +
+                       '<option value="Sri Lanka">Sri Lanka</option>' +
+                       '<option value="Sweden">Sweden</option>' +
+                       '<option value="Switzerland">Switzerland</option>' +
+                       '<option value="Taiwan">Chinese Taipei</option>' +
+                       '<option value="Tanzania">Tanzania, United Republic of</option>' +
+                       '<option value="Thailand">Thailand</option>' +
+                       '<option value="Trinidad and Tobago">Trinidad and Tobago</option>' +
+                       '<option value="Tunisia">Tunisia</option>' +
+                       '<option value="Turkey">Turkey</option>' +
+                       '<option value="Uganda">Uganda</option>' +
+                       '<option value="U.A.E.">U.A.E.</option>' +
+                       '<option value="United Kingdom">United Kingdom</option>' +
+                       '<option value="United States">United States</option>' +
+                       '<option value="Uruguay">Uruguay</option>' +
+                       '<option value="Venezuela">Venezuela</option>' +
+                       '<option value="Viet Nam">Vietnam</option>' +
+                       '<option value="Zambia">Zambia</option>' +
+                       '<option value="Zimbabwe">Zimbabwe</option>' +
+         
+                       '</select>');
+                 
+                    $("select[name='userProfile.country']")[0].selectedIndex = -1;
+                  }
+
+
+                  // WT-8801
+                  if (appId === shureCloudQAId || appId === shureCloudQA2Id || appId === shureCloudPreprodId || appId === shureCloudStageId) {
+                     const localeSelect = $('select#tmp2');
+                     if (localeSelect) {
+                        localeSelect.on('change', function() {
+                           if (this.value === "China") {
+                              console.log('SHOW')
+                              $("label[data-se-for-name='userProfile.shurecloudTnC_China']").html(varLocaliztion["var.chinaConsent"]) 
+                              $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').addClass("show").insertAfter('[data-se="o-form-fieldset-userProfile.CloudMarketingOptin"]');
+
+                           } else {
+                              $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').removeClass("show");
+                           }
+                           enableLoginBtn();
+                        });
+                     }
+                  }
+
+                  /* Adding validation to the country, locale dropdown for Shure Cloud */
+                  //Added- 16 Sept 2024 - start
+                   const countrySelect = document.getElementById('tmp2');
+                    countrySelect.addEventListener('focusin', function(event) {
+                        if (event.target && event.target.matches('select')) {
+                           if(!$("select[name='userProfile.country'] option:selected").length>0){
+                              validateCountryDropdown();     
+                              disableLoginBtn();                                                                          
+                           }
+                            
+                        }
+                     });
+                   countrySelect.addEventListener('change', function(event) {
+                        if (event.target && event.target.matches('select')) {  
+                              const parentElement = event.target.parentElement.parentElement;
+                              $(parentElement).removeClass('o-form-has-errors'); 
+                              $("#country-error").remove();                              
+                        }
+                        if( $("select[name='userProfile.locale'] option:selected").length > 0)
+                        {
+                           enableLoginBtn();
+                        }
+                      });
+                  //Added - 16 Sept 2024 - end
+                  
+                 
+                   if($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label").length>0)
+                   {
+                     
+                     $($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label")[0]).html(varLocaliztion["var.lmsDataPrivacy"]);
+                    let lmsdatapriv = varLocaliztion["var.lmsDataPrivacy"].split(" ");
+                     lmsdatapriv = lmsdatapriv.slice(0,lmsdatapriv.length - 1).join(" ") + " <a href = \"https://sai.training.shure.com/data-privacy-terms\">" + lmsdatapriv[lmsdatapriv.length -1].slice(0,-1) + "</a>)";
+                     $($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label")[0]).html(lmsdatapriv);
+                  //   $($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] span")[0]).hide();
+                    $("input[name='userProfile.lmsDataPrivacy']").replaceWith('<select name="userProfile.lmsDataPrivacy" id="tmp3">' +
+                       '<option value="Agree">'+ varLocaliztion["var.yes"] +'</option>' +
+                       '<option value="Disagree">'+ varLocaliztion["var.no"] +'</option>' +
+                       '</select>');
+                    $("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy']").after("<div style='margin-top:10px !important; display:none;'>I consent to share my training records with my employer and employer’s supplier of Shure products as outlined <a href=\"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\">here</a>.");                  
+                    $("select[name='userProfile.lmsDataPrivacy']")[0].selectedIndex = -1;
+                   }
+                 
+                   if($("div[data-se='o-form-fieldset-userProfile.locale'] label").length>0)
+                   {
+                     $($("div[data-se='o-form-fieldset-userProfile.locale'] label")[0]).html(varLocaliztion["var.language"]);
+                   if(oktaData.requestContext.app.value.id == "0oa17wxhy9oyuYG6N0h8")
+               {
+                  // $($("div[data-se='o-form-fieldset-userProfile.locale'] span")[0]).hide();
+               }
+
+                    //$($("div[data-se='o-form-fieldset-userProfile.locale'] span")[0]).hide();
+                    $("input[name='userProfile.locale']").replaceWith('<select name="userProfile.locale" id="tmpLocale">' +
+                       '<option value="en_US">English</option>' +
+                       '<option value="es_ES">Español (Spanish)</option>' +
+                       '<option value="de_DE">Deutsch (German)</option>' +
+                       '<option value="fr_FR">Français (French)</option>' +
+                       '<option value="el_GR">Ελληνικά (Greek)</option>' +
+                       '<option value="it_IT">Italiano (Italian)</option>' +
+                       '<option value="ru_RU">Pусский (Russian)</option>' +
+                       '<option value="fi_FI">Suomi (Finnish)</option>' +
+                       '<option value="sr_CS">Српски (Serbian)</option>' +
+                       '<option value="uk_UA">Українська (Ukrainian)</option>' +
+                       '<option value="ca_ES">Català (Catalan)</option>' +
+                       '<option value="lv_LV">Latviešu (Latvian)</option>' +
+                       '<option value="cs_CZ">Čeština (Czech)</option>' +
+                       '<option value="sl_SI">Slovenščina (Slovenian)</option>' +
+                       '<option value="sk_SK">Slovenský (Slovak)</option>' +
+                       '<option value="tr_TR">Türkçe (Turkish)</option>' +
+                       '<option value="pt_PT">Português (Portuguese)</option>' +
+                       '<option value="zh_CN">Hànyǔ (Chinese Simplified)</option>' +
+                       '<option value="zh_TW">Hànyǔ (Chinese Traditional)</option>' +
+                       '<option value="nl_NL">Nederlands (Dutch)</option>' +
+                       '<option value="ja_JP">日本語 (Japanese)</option>' +
+                       '<option value="vi_VN">Tiếng Việt (Vietnamese)</option>' +
+                       '<option value="hr_HR">Hrvatski (Croatian)</option>' +
+                       '<option value="ka_GE">ქართული (Georgian)</option>' +
+                       '<option value="bs_BA">босански (Bosnian - Bosnia and Herzegovina)</option>' +
+                       '<option value="he_IL">עברית (Hebrew)</option>' +
+                       '<option value="ar_AE">العربية (Arabic - United Arab Emirates)</option>' +
+                       '<option value="lt_LT">Lietuvių kalba (Lithuanian)</option>' +
+                       '<option value="et_EE">Eesti (Estonian)</option>' +
+                       '<option value="fa_IR">فارسی (Persian - Iran)</option>' +
+                       '<option value="hu_HU">Magyar nyelv (Hungarian)</option>' +
+                       '<option value="sv_SE">Svenska (Swedish)</option>' +
+                       '<option value="nb_NO">Norsk (Norwegian)</option>' +
+                       '<option value="hy_AM">հայերէն (Armenian)</option>' +
+                       '<option value="mn_MN">монгол хэл (Mongolian)</option>' +
+                       '<option value="da_DK">Dansk (Danish)</option>' +
+                       '<option value="pl_PL">Polski (Polish)</option>' +
+                       '<option value="ko_KR">한국어 (Korean)</option>' +
+                       '<option value="id_ID">Bahasa Indonesia (Indonesian)</option>' +
+                       '<option value="th_TH">ภาษาไทย (Thai)</option>' +
+                       '<option value="pt_BR">Português Brasileira (Portuguese Brazil)</option>' +
+                       '<option value="ro_RO">Română (Romanian)</option>' +
+                       '<option value="hi_IN">हिन्दी (Hindi)</option>' +
+                       '</select>');
+         
+                    $("select[name='userProfile.locale']")[0].selectedIndex = -1;
+                   }
+                   if($("div[data-se='o-form-fieldset-userProfile.lmsPartnerKey'] label").length>0)
+                   {
+                     $($("div[data-se='o-form-fieldset-userProfile.lmsPartnerKey'] label")[0]).html(varLocaliztion["var.lmsPartnerKey"]);
+                   }
+                  
+                  /* Adding validation to the country, locale dropdown for Shure Cloud */
+                  //Added- 16 Sept 2024 - start
+                   const localeSelect = document.getElementById('tmpLocale');
+
+                   if (localeSelect) {
+                        localeSelect.addEventListener('focusin', function(event) {
+                           if (event.target && event.target.matches('select')) {
+                                 if(!$("select[name='userProfile.locale'] option:selected").length>0){
+                                    validateLocaleDropdown();   
+                                    disableLoginBtn();                                                                      
+                                 }
+                              
+                           }
+                        });
+
+                        localeSelect.addEventListener('change', function(event) {
+                           if (event.target && event.target.matches('select')) {                           
+                                 const parentElement = event.target.parentElement.parentElement;
+                                 $(parentElement).removeClass('o-form-has-errors'); 
+                                 $("#locale-error").remove();                              
+                           }
+                           if( $("select[name='userProfile.country'] option:selected").length > 0)
+                           {
+                              enableLoginBtn();  
+                           }
+                        });
+                   }
+                  //Added - 16 Sept 2024 - end
+            }
+
+
+            const jobSelect = document.querySelector('select[name="userProfile.title"]');
+            const dataPrivacySelect = document.querySelector('select[name="userProfile.lmsDataPrivacy"]');
+            if (jobSelect) {
+               jobSelect.addEventListener("focusin", (event) => {
+                  if (event.target && event.target.matches("select")) {
+                     if (
+                     !$(
+                        "select[name='userProfile.title'] option:selected"
+                     ).length > 0
+                     ) {
+                     validateCustomDropdown(jobSelect);
+                     disableLoginBtn();
+                     }
+                  }
+               });
+
+               jobSelect.addEventListener("change", function (event) {
+                  if (event.target && event.target.matches("select")) {
+                     const parentElement =
+                     event.target.parentElement.parentElement;
+                     $(parentElement).removeClass("o-form-has-errors");
+                     $("#dropdown-error").remove();
+                  }
+                  if (
+                     $("select[name='userProfile.title'] option:selected")
+                     .length > 0
+                  ) {
+                     enableLoginBtn();
+                  }
+               });
+            }
+
+            if (dataPrivacySelect) {
+               dataPrivacySelect.addEventListener("focusin", (event) => {
+                  if (event.target && event.target.matches("select")) {
+                     if (
+                     !$(
+                        "select[name='userProfile.lmsDataPrivacy'] option:selected"
+                     ).length > 0
+                     ) {
+                     validateCustomDropdown(dataPrivacySelect);
+                     disableLoginBtn();
+                     }
+                  }
+               });
+
+               dataPrivacySelect.addEventListener("change", function (event) {
+                  if (event.target && event.target.matches("select")) {
+                     const parentElement =
+                     event.target.parentElement.parentElement;
+                     $(parentElement).removeClass("o-form-has-errors");
+                     $("#dropdown-error").remove();
+                  }
+                  if (
+                     $("select[name='userProfile.lmsDataPrivacy'] option:selected")
+                     .length > 0
+                  ) {
+                     enableLoginBtn();
+                  }
+               });
+            }
+
+
+
+         });
+         
+         let loadCAPTCHA = () => {
+           const oktaId = document.getElementsByTagName('form')[0];
+           oktaId.addEventListener('submit', (event) => {checkCaptcha(event)});
+           document.querySelector('form input[type="submit"]').addEventListener("click", (event) => {
+               const canSubmit = checkCaptcha(event);
+           
+               if (!canSubmit) {
+                  event.preventDefault();
+               }
+               return;
+            });
+           const oktaLoginBtn = $(".button.button-primary");
+           const oktaLoginBtnDiv = $(".o-form-button-bar");
+           const captchaDiv = document.createElement('div');
+           captchaDiv.setAttribute('id','captchaDiv');
+           captchaDiv.className = 'h-captcha';
+           captchaDiv.style.margin = 'auto';
+           captchaDiv.style.width = '96%';
+           captchaDiv.style.paddingBottom = '10px';
+           captchaDiv.setAttribute('data-sitekey','3b9c1f8a-dd7c-4846-9ac6-a4aaac747df0');
+           captchaDiv.setAttribute('data-callback', 'captchaDone');
+           $(oktaLoginBtnDiv).before(captchaDiv);
+           const htmlBody = document.getElementsByTagName('body')[0];
+           const captchaScript = document.createElement('script');
+           captchaScript.src = 'https://js.hcaptcha.com/1/api.js';
+           captchaScript.setAttribute("nonce", "");
+           htmlBody.appendChild(captchaScript);
+           //debugger;
+           // disableLoginBtn();
+         };
+
+         window.captchaDone = (value) => {
+            if (value && value.length > 1) {
+               $("#showError").hide();
+            }
+         }
+   
+         let checkCaptcha = (event) => {   
+               
+           if (window.hcaptcha.getResponse() && window.hcaptcha.getResponse().length > 1) {
+            return true;           
+         } else {
+           event.preventDefault();
+           if (window.captchaValidate === false) {
+               const captchaDiv = document.getElementById('captchaDiv');
+               const errorDiv = document.createElement('div');
+               errorDiv.setAttribute('id','showError');
+               captchaDiv.appendChild(errorDiv);
+               errorDiv.innerHTML = '<span style="color:red;">You must click <span style="color:black">"I am a human"</span> checkbox</span>';
+               window.captchaValidate = true;
+           }
+         }
+         
+         };
+         
+         
+         
+         
+         window.verifyCaptcha = () => {
+            window.captchaVerified = true;
+           enableLoginBtn();
+           if(!($("select[name='userProfile.locale'] option:selected").length > 0))
+           {
+             validateLangDropdown();                  
+           }
+
+           if ($('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').is(":checked") && $('input[name="userProfile.salesforcePartnerNum"]').val().length === 0) {
+              validateAccountNumber();
+           }
+
+           
+           /* Adding validation to the country, locale dropdown for Shure Cloud */
+           //Added- 16 Sept 2024 - start
+            if(!($("select[name='userProfile.country'] option:selected").length > 0))
+           {
+            validateCountryDropdown();
+           }
+           if(!($("select[name='userProfile.locale'] option:selected").length > 0))
+           {
+             validateLocaleDropdown();                  
+           }
+   
+            if (!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)) {
+               validateCustomDropdown(
+                  $("select[name='userProfile.lmsDataPrivacy']")
+               );
+            }
+            if (!($("select[name='userProfile.title'] option:selected").length > 0)) {
+               validateCustomDropdown(
+                  $("select[name='userProfile.title']")
+               );
+            }
+        
+
+           if(!( $("select[name='userProfile.country'] option:selected").length > 0) || !($("select[name='userProfile.locale'] option:selected").length > 0) ||  $("select[name='userProfile.sfserv_language'] option:selected").val().length === 0)
+           {
+              disableLoginBtn();
+           }
+           //Added - 16 Sept 2024 - end
+
+            if(!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0))
+           {
+             validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"));                  
+           }
+           if(!($("select[name='userProfile.title'] option:selected").length > 0))
+           {
+             validateCustomDropdown($("select[name='userProfile.title']"));                  
+           }
+
+         };
+         
+         
+         let disableLoginBtn = () => { 
+            console.log('here')
+            const oktaLoginBtn = $(".button.button-primary");
+            $(oktaLoginBtn).attr('disabled', true);
+         };
+         
+         
+         let enableLoginBtn = () => {
+            const oktaLoginBtn = $(".button.button-primary");
+            $(oktaLoginBtn).attr('disabled', false);
+         };
+
+         /* Check if the CAPTCHA has been completed successfully before allowing the form to submit */
+         let oktaFormSubmit = () => {
+           if (window.captchaVerified) {
+             let response = grecaptcha.getResponse();
+             if (response.length > 0) {
+               return true;
+             } else {
+               console.log(response.length);
+             }
+           }
+         }
+
+      </script>
+
+   </body>
+</html>
