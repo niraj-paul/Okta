@@ -4,7 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex,nofollow" />
-    {{!-- <meta http-equiv="Content-Security-Policy" content="default-src" /> --}}
     <!-- Styles generated from theme -->
     <link href="{{themedStylesUrl}}" rel="stylesheet" type="text/css" />
     <!-- Favicon from theme -->
@@ -168,11 +167,6 @@
                width: 610px;
             }
          }
-
-         .radio-label {
-            padding-bottom: 5px !important;
-         }
-
          [data-se="o-form-fieldset-userProfile.sf_servicePartner"] .okta-form-label.o-form-label {
             font-weight: normal !important;
             font-family: din-2014, Arial, sans-serif !important;
@@ -202,14 +196,11 @@
             height: 100px !important;
             margin-bottom: 5px;
          }
-
          #shure-unified-registration #okta-login-container #okta-sign-in .o-form label[data-se-for-name="userProfile.shurecloudTnC_China"] {
             margin-bottom: 50px
          }
-         
          div[data-se="o-form-fieldset-userProfile.lmsDataPrivacy"] .o-form-explain,
-         div[data-se="o-form-fieldset-userProfile.title"] .o-form-explain,
-         .shadowDomRootAnnounce {
+         div[data-se="o-form-fieldset-userProfile.title"] .o-form-explain {
             display: none;
          }
 
@@ -219,7 +210,7 @@
   </head>
   <body id="shure-unified-registration">
       <div class="login-bg-image tb--background" style="background-image: {{bgImageUrl}}">
-         <img width="110" class="shure-logo__header" alt="shure logo" src="https://content-files.shure.com/Logos/shure_logo_black.png" />
+         <img width="150" class="shure-logo__header" alt="shure logo" src="https://content-files.shure.com/Logos/shure_logo_black.png" />
          <div class="shure-green-line"></div>
       </div>
     <br /><br /><br />
@@ -228,15 +219,11 @@
     that contains methods used to complete the Okta login flow. -->
     {{{OktaUtil}}}
     <script type="text/javascript">
-      var dataprivacyel;
       // "config" object contains default widget configuration
       // with any custom overrides defined in your admin settings.
       const config = OktaUtil.getSignInWidgetConfig();
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
-      /*if (urlParams.get('mode') != null && urlParams.get('mode') == "register") {
-        config.flow = 'signup';
-      }*/
 
       config.logo = "https://content-files.shure.com/Logos/shure_logo_black.png";
       config.features.registration = true;
@@ -257,7 +244,7 @@
       };
       config.helpLinks.help = helpLinksMap[config.language] || "https://p.shure.com/myshureid-faqs";
       config.i18n = {
-        en: {
+        "en": {
           "var.yes": "Yes",
           "var.no": "No",
           "var.city": "Town/City",
@@ -288,7 +275,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "This field cannot be left blank",
         },
-        es: {
+        "es": {
           "var.city": "Pueblo/Ciudad",
           "var.state": "Estado/Condado/Región",
           "var.zipCode": "Código postal/Código postal (si corresponde)",
@@ -317,7 +304,7 @@
           "var.alreadyHaveAccount": "¿Ya tiene su «Shure ID»?",
           "var.error": "Este campo no se puede dejar en blanco",
         },
-        de: {
+        "de": {
           "var.city": "Stadt/Stadt",
           "var.state": "Staat/Kreis/Region",
           "var.zipCode": "Postleitzahl/PLZ (falls zutreffend)",
@@ -346,7 +333,7 @@
           "var.alreadyHaveAccount": "Sie haben bereits eine My Shure ID?",
           "var.error": "Dieses Feld kann nicht leer gelassen werden",
         },
-        fr: {
+        "fr": {
           "var.city": "Ville/Ville",
           "var.state": "Etat/Comté/Région",
           "var.zipCode": "Code postal/code postal (le cas échéant)",
@@ -375,7 +362,7 @@
           "var.alreadyHaveAccount": "Vous avez déjà un identifiant My Shure ID ?",
           "var.error": "Ce champ ne peut pas être vide",
         },
-        el: {
+        "el": {
           "var.city": "Πόλη/Πόλη",
           "var.state": "Πολιτεία/Κομητεία/Περιοχή",
           "var.zipCode": "Ταχυδρομικός κώδικας/Ταχυδρομικός κώδικας (εάν υπάρχει)",
@@ -392,7 +379,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        it: {
+        "it": {
           "var.city": "Città/Città",
           "var.state": "Stato/Contea/Regione",
           "var.zipCode": "Codice postale/CAP (se applicabile)",
@@ -411,7 +398,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        ru: {
+        "ru": {
           "var.city": "Город / Город",
           "var.state": "Штат/округ/регион",
           "var.zipCode": "Почтовый индекс/индекс (если применимо)",
@@ -428,7 +415,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        fi: {
+        "fi": {
           "var.city": "Kaupunki kaupunki",
           "var.state": "Osavaltio/maakunta/alue",
           "var.zipCode": "Postinumero/postinumero (jos käytössä)",
@@ -445,7 +432,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        uk: {
+        "uk": {
           "var.city": "Місто/місто",
           "var.state": "Штат/округ/регіон",
           "var.zipCode": "Поштовий індекс (якщо є)",
@@ -462,7 +449,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        cs: {
+        "cs": {
           "var.city": "Město/město",
           "var.state": "Stát/kraj/region",
           "var.zipCode": "PSČ/PSČ (pokud existuje)",
@@ -479,7 +466,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        tr: {
+        "tr": {
           "var.city": "Kasaba/Şehir",
           "var.state": "Eyalet/İlçe/Bölge",
           "var.zipCode": "Posta Kodu/Posta Kodu (varsa)",
@@ -568,7 +555,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        ja: {
+        "ja": {
           "var.city": "町/市",
           "var.state": "州/郡/地域",
           "var.zipCode": "郵便番号/郵便番号（該当する場合)",
@@ -597,7 +584,7 @@
           "var.alreadyHaveAccount": "My Shure IDをすでにお持ちの方",
           "var.error": "このフィールドは空白のままにできません",
         },
-        vi: {
+        "vi": {
           "var.city": "Thị trấn / Thành phố",
           "var.state": "Tiểu bang / Quận / Khu vực",
           "var.zipCode": "Mã bưu điện / Mã Zip (nếu có)",
@@ -614,7 +601,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        hu: {
+        "hu": {
           "var.city": "város/város",
           "var.state": "állam/megye/régió",
           "var.zipCode": "Irányítószám/Irányítószám (ha van)",
@@ -631,7 +618,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        sv: {
+        "sv": {
           "var.city": "Stad/Stad",
           "var.state": "Stat/län/region",
           "var.zipCode": "Postnummer/Postnummer (om tillämpligt)",
@@ -648,7 +635,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        nb: {
+        "nb": {
           "var.city": "By/by",
           "var.state": "Stat/fylke/region",
           "var.zipCode": "Postnummer/postnummer (hvis aktuelt)",
@@ -665,7 +652,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        da: {
+        "da": {
           "var.city": "By/By",
           "var.state": "Stat/Amt/Region",
           "var.zipCode": "Postnummer/postnummer (hvis relevant)",
@@ -682,7 +669,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        pl: {
+        "pl": {
           "var.city": "Miasto",
           "var.state": "Stan/hrabstwo/region",
           "var.zipCode": "Kod pocztowy/kod pocztowy (jeśli dotyczy)",
@@ -699,7 +686,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        ko: {
+        "ko": {
           "var.city": "타운/시티",
           "var.state": "주/군/지역",
           "var.zipCode": "우편번호/우편번호(해당되는 경우)",
@@ -720,7 +707,7 @@
           "var.alreadyHaveAccount": "이미 My Shure ID가 있습니까?",
           "var.error": "이 필드는 비워둘 수 없습니다.",
         },
-        id: {
+        "id": {
           "var.city": "Kota/Kota",
           "var.state": "Negara Bagian/Kabupaten/Wilayah",
           "var.zipCode": "Kode Pos/Kode Pos (jika ada)",
@@ -737,7 +724,7 @@
           "var.alreadyHaveAccount": "Already have a My Shure ID?",
           "var.error": "Already have a My Shure ID?",
         },
-        th: {
+        "th": {
           "var.city": "เมือง/เมือง",
           "var.state": "รัฐ/เขต/ภูมิภาค",
           "var.zipCode": "รหัสไปรษณีย์/รหัสไปรษณีย์ (ถ้ามี)",
@@ -777,7 +764,7 @@
           "var.alreadyHaveAccount": "Já tem sua My Shure ID?",
           "var.error": "Este campo não pode ser deixado em branco",
         },
-        ro: {
+        "ro": {
           "var.city": "Oraș/oraș",
           "var.state": "Stat/Județ/Regiune",
           "var.zipCode": "Cod poștal/cod poștal (dacă este cazul)",
@@ -795,13 +782,13 @@
           "var.error": "Already have a My Shure ID?",
         },
       };
-
       /* Adding validation to the country, locale dropdown for Shure Cloud */
       //Added - 16 Sept 2024 - start
-      function validateCustomDropdown(element, varLocaliztion) {
+      function validateCountryDropdown(varLocaliztion) {
+        element = document.getElementById("tmp2");
         const parentElement = element.parentElement.parentElement;
-        if (!$(parentElement).find("#dropdown-error").length > 0) {
-          htmlString = '<p id="dropdown-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
+        if (!$(parentElement).find("#country-error").length > 0) {
+          htmlString = '<p id="country-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
             varLocaliztion["var.error"] +
           '</p>';
           $(parentElement).append(htmlString);
@@ -810,11 +797,10 @@
         return true;
       }
 
-      function validateCountryDropdown(varLocaliztion) {
-        element = document.getElementById("tmp2");
+      function validateCustomDropdown(element, varLocaliztion) {
         const parentElement = element.parentElement.parentElement;
-        if (!$(parentElement).find("#country-error").length > 0) {
-          htmlString = '<p id="country-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
+        if (!$(parentElement).find("#dropdown-error").length > 0) {
+          htmlString = '<p id="dropdown-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
             varLocaliztion["var.error"] +
           '</p>';
           $(parentElement).append(htmlString);
@@ -837,9 +823,7 @@
 
       // Salesforce Service Community
       function validateAccountNumber(varLocaliztion) {
-        const element = document.querySelector(
-          'input[name="userProfile.salesforcePartnerNum"]'
-        );
+        const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
         const parentElement = element.parentElement.parentElement;
         if (!$(parentElement).find("#account-error").length > 0) {
           htmlString =
@@ -870,12 +854,8 @@
         return true;
       }
 
-      //debugger;
       const browserLang = OktaUtil.getSignInWidgetConfig().language;
-      const varLocaliztion = config.i18n[browserLang]
-        ? config.i18n[browserLang]
-        : config.i18n["en"];
-
+      const varLocaliztion = config.i18n[browserLang] ? config.i18n[browserLang] : config.i18n["en"];
       config.registration = {
         parseSchema: function (schema, onSuccess, onFailure) {
           const appId = oktaData.requestContext.app.value.id;
@@ -922,20 +902,6 @@
           const oktaAppId = oktaData.requestContext.app.value.id;
           const salesforceServiceCommunityDev = "0oarva6uyzITbxdJh0h7";
           const salesforceServiceCommunityStg = "0oas4uaj2mDDcNivh0h7";
-          /*  Salesforce Service preSubmit */
-          // if (oktaAppId === "0oas4uaj2mDDcNivh0h7") {
-          //    let region = urlParams.get('region');
-          //    let sflanguage = urlParams.get('language');
-          //    if (region !== null && sflanguage !== null) {
-          //          postData.userProfile.sfserv_region = region;
-          //          postData.userProfile.language_sf = sflanguage;
-          //    } else {
-          //          // Pass some default value
-          //          postData.userProfile.sfserv_region = "en-US";
-          //          postData.userProfile.language_sf = "en_US";
-          //    }
-
-          // }
           var companyType = "";
           var marketingOptIn = "";
           var country = "";
@@ -998,24 +964,12 @@
           //debugger;
           if (oktaData.requestContext.app.value.id === "0oar7si5jycDEwnOu0h7") {
             //"0oar7si5jycDEwnOu0h7" - Tech Portal Stage
-            if (
-              companyType == null ||
-              marketingOptIn == null ||
-              country == null ||
-              locale == null
-            ) {
+            if (companyType == null || marketingOptIn == null || country == null || locale == null) {
               return false;
             }
-          } else if (
-            oktaData.requestContext.app.value.id == "0oa17wxhy9oyuYG6N0h8"
-          ) {
+          } else if (oktaData.requestContext.app.value.id == "0oa17wxhy9oyuYG6N0h8") {
             // TalentLMS Saitraining - SSO
-            if (
-              country == null ||
-              lmsDataPrivacy == null ||
-              title == null ||
-              locale == null
-            ) {
+            if (country == null || lmsDataPrivacy == null || title == null || locale == null) {
               return false;
             }
           }
@@ -1068,8 +1022,6 @@
             if($("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptin'] label").length>0) {
                $("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptin'] label").html(varLocaliztion["var.marketingOptIn"]);
             }
-
-            
 
             $('.button-primary').after(varLocaliztion["var.personalData"]);         
             
@@ -1163,7 +1115,7 @@
                   '<option value="Asia/Dubai">(GMT+04:00) Gulf Standard Time (Asia/Dubai)</option>' +
                   '<option value="Asia/Tbilisi">(GMT+04:00) Georgia Standard Time (Asia/Tbilisi)</option>' +
                   '<option value="Asia/Yerevan">(GMT+04:00) Armenia Standard Time (Asia/Yerevan)</option>' +
-                  '<option value="Africa/Cairo>(GMT+03:00) Eastern European Standard Time (Africa/Cairo)</option>' +
+                  '<option value="Africa/Cairo">(GMT+03:00) Eastern European Standard Time (Africa/Cairo)</option>' +
                   '<option value="Africa/Nairobi">(GMT+03:00) East Africa Time (Africa/Nairobi)</option>' +
                   '<option value="Asia/Baghdad">(GMT+03:00) Arabian Standard Time (Asia/Baghdad)</option>' +
                   '<option value="Asia/Beirut">(GMT+03:00) Eastern European Summer Time (Asia/Beirut)</option>' +
@@ -1482,7 +1434,6 @@
                     optionalboxes.forEach( (el) => {
                         el.style.display = "none";
                     });
-
                } else {
                   partnerNumberBox.style.display = "none";
 
@@ -1885,28 +1836,20 @@
             if (jobSelect) {
                jobSelect.addEventListener("focusin", (event) => {
                   if (event.target && event.target.matches("select")) {
-                     if (
-                     !$(
-                        "select[name='userProfile.title'] option:selected"
-                     ).length > 0
-                     ) {
-                     validateCustomDropdown(jobSelect, varLocaliztion);
-                     disableLoginBtn();
+                     if (!$("select[name='userProfile.title'] option:selected").length > 0) {
+                        validateCustomDropdown(jobSelect, varLocaliztion);
+                        disableLoginBtn();
                      }
                   }
                });
 
                jobSelect.addEventListener("change", function (event) {
                   if (event.target && event.target.matches("select")) {
-                     const parentElement =
-                     event.target.parentElement.parentElement;
+                     const parentElement = event.target.parentElement.parentElement;
                      $(parentElement).removeClass("o-form-has-errors");
                      $("#dropdown-error").remove();
                   }
-                  if (
-                     $("select[name='userProfile.title'] option:selected")
-                     .length > 0
-                  ) {
+                  if ($("select[name='userProfile.title'] option:selected").length > 0) {
                      enableLoginBtn();
                   }
                });
@@ -1915,34 +1858,26 @@
             if (dataPrivacySelect) {
                dataPrivacySelect.addEventListener("focusin", (event) => {
                   if (event.target && event.target.matches("select")) {
-                     if (
-                     !$(
-                        "select[name='userProfile.lmsDataPrivacy'] option:selected"
-                     ).length > 0
-                     ) {
-                     validateCustomDropdown(dataPrivacySelect, varLocaliztion);
-                     disableLoginBtn();
+                     if (!$("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0) {
+                        validateCustomDropdown(dataPrivacySelect, varLocaliztion);
+                        disableLoginBtn();
                      }
                   }
                });
 
                dataPrivacySelect.addEventListener("change", function (event) {
                   if (event.target && event.target.matches("select")) {
-                     const parentElement =
-                     event.target.parentElement.parentElement;
+                     const parentElement = event.target.parentElement.parentElement;
                      $(parentElement).removeClass("o-form-has-errors");
                      $("#dropdown-error").remove();
                   }
-                  if (
-                     $("select[name='userProfile.lmsDataPrivacy'] option:selected")
-                     .length > 0
-                  ) {
+                  if ($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0) {
                      enableLoginBtn();
                   }
                });
             }
          });
-         
+
          let loadCAPTCHA = () => {
            const oktaId = document.getElementsByTagName('form')[0];
            oktaId.addEventListener('submit', (event) => {checkCaptcha(event)});
@@ -1971,7 +1906,7 @@
            captchaScript.setAttribute("nonce", "");
            htmlBody.appendChild(captchaScript);
            //debugger;
-           // disableLoginBtn();
+           disableLoginBtn();
          };
 
          window.captchaDone = (value) => {
@@ -1996,11 +1931,11 @@
                 }
             }
          
-         };      
+         };
          
          window.verifyCaptcha = () => {
-            window.captchaVerified = true;
            enableLoginBtn();
+            window.captchaVerified = true;
            if(!($("select[name='userProfile.locale'] option:selected").length > 0)){
              validateLangDropdown(varLocaliztion);                  
            }
@@ -2034,10 +1969,9 @@
            }
          };
          
-         let disableLoginBtn = () => { 
-            console.log('here')
+         let disableLoginBtn = () => {
             const oktaLoginBtn = $(".button.button-primary");
-            $(oktaLoginBtn).attr('disabled', true);
+            $(oktaLoginBtn).prop('disabled', true)
          };
                 
          let enableLoginBtn = () => {
