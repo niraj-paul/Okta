@@ -1176,17 +1176,17 @@
       const tlmsPrimarySSOId = "0oa1ovubkkoa6K0PV0h8";
       const techPortalProdId = "0oa1iy1futi0uGSq00h8";
       
-      if (appId === tlmsSaiProvisioningId || appId === tlmsSaiSSOId || appId === techPortalProdId || appId === tlmsPrimarySSOId)  {
-         config.i18n.en["var.createAccount"] = "Create a My Shure Account"; //updated by Val from Submit to Create a My Shure Account - 2/21/2025
-         config.i18n.es["var.createAccount"] = "Enviar";
-         config.i18n.de["var.createAccount"] = "Absenden";
+      if (appId === tlmsSaiProvisioningId || appId === tlmsSaiSSOId || appId === techPortalDevId || appId === techPortalStageId || appId === tlmsAdminSSOId || appId === techPortalNewStageId) {
+         config.i18n.en["var.createAccount"] = "Create a My Shure ID";
+         config.i18n.es["var.createAccount"] = "Crear su «Shure ID»";
+         config.i18n.de["var.createAccount"] = "Erstellen Sie eine My Shure ID";
          config.i18n.it["var.createAccount"] = "Invia";
-         config.i18n.ja["var.createAccount"] = "送信";
-         config.i18n.ko["var.createAccount"] = "제출";
+         config.i18n.ja["var.createAccount"] = "My Shure IDを作成する";
+         config.i18n.ko["var.createAccount"] = "My Shure ID 만들기";
          config.i18n["nl-NL"]["var.createAccount"] = "Verzenden";
          config.i18n.pl["var.createAccount"] = "Wyślij"; 
-         config.i18n["pt-BR"]["var.createAccount"] = "Enviar";
-         config.i18n["zh-CN"]["var.createAccount"] = "提交";
+         config.i18n["pt-BR"]["var.createAccount"] = "Crie uma My Shure ID";
+         config.i18n["zh-CN"]["var.createAccount"] = "创建 My Shure ID";
          config.i18n["zh-TW"]["var.createAccount"] = "提交";    
       }
 
@@ -1367,7 +1367,7 @@
                      countrySelect.addEventListener('focusin', function(event) {
                         if (event.target && event.target.matches('select')) {
                            if(!$("select[name='userProfile.country'] option:selected").length>0){
-                              validateCountryDropdown();     
+                              validateCountryDropdown(varLocaliztion);     
                               disableLoginBtn();                                                                          
                            }
                             
@@ -1502,7 +1502,7 @@
                       localeSelect.addEventListener('focusin', function(event) {
                         if (event.target && event.target.matches('select')) {
                               if(!$("select[name='userProfile.locale'] option:selected").length>0){
-                                 validateLocaleDropdown();   
+                                 validateLocaleDropdown(varLocaliztion);
                                  disableLoginBtn();                                                                      
                               }
                            
@@ -2090,14 +2090,11 @@
            }
             //TalentLMS change Bobby and Val - 6/18/2025
             if (!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)) {
-               validateCustomDropdown(
-                  $("select[name='userProfile.lmsDataPrivacy']", varLocaliztion)
-               );
+               validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"), varLocaliztion);
             }
             if (!($("select[name='userProfile.title'] option:selected").length > 0)) {
-               validateCustomDropdown(
-                  $("select[name='userProfile.title']", varLocaliztion)
-               );
+               validateCustomDropdown($("select[name='userProfile.title']"), varLocaliztion);
+
             }
             //end of TalentLMSchange
            if(!( $("select[name='userProfile.country'] option:selected").length > 0) || !($("select[name='userProfile.locale'] option:selected").length > 0) ||  $("select[name='userProfile.sfserv_language'] option:selected").val().length === 0)
@@ -2107,13 +2104,11 @@
            
            //Added - 12/21/2024 - end
          //TalentLMS change Bobby and Val - 6/18/2025
-         if(!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0))
-           {
-             validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"));                 
+         if(!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)){
+             validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"), varLocaliztion);
            }
-           if(!($("select[name='userProfile.title'] option:selected").length > 0))
-           {
-             validateCustomDropdown($("select[name='userProfile.title']"));                 
+           if(!($("select[name='userProfile.title'] option:selected").length > 0)){
+             validateCustomDropdown($("select[name='userProfile.title']"), varLocaliztion);
            }
          //end of TalentLMS change
       };
