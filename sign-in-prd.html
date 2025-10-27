@@ -1065,6 +1065,8 @@
           // Salesforce Service Community LCM Changes - 1/8/2025 Val M.-- Beginning
           const oktaAppId = oktaData.requestContext.app.value.id;
           const salesforceServiceCommunityProd = "0oa1j2k5xmdhnZwFh0h8";
+         
+         $('.auth-footer .js-back').text(varLocaliztion["var.alreadyHaveAccount"]);
 
          // Web ticket - User Experience fixes - Developed by Bobby Stitt. Added by Val - 2/21/2025 - Start
          if ($("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd']").length>0) {
