@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex,nofollow" />
     <!-- Styles generated from theme -->
@@ -10,51 +10,47 @@
     <link rel="shortcut icon" href="{{faviconUrl}}" type="image/x-icon" />
     <title>{{pageTitle}}</title>
     {{{SignInWidgetResources}}}
-  	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-	<!-- Shure Styles -->  
-  	<link rel="stylesheet" type="text/css" href="https://content-files.shure.com/Okta_Pages/shure-styles3.css">
-    <link
-          rel="preload"
-          href="https://use.typekit.net/kge7zav.css"
-          as="style"
-          onLoad="this.onload=null;this.rel='stylesheet'"
-        />
-        <noscript>
-          <link rel="stylesheet" href="https://use.typekit.net/kge7zav.css" />
-        </noscript>
-	<style>
-      #okta-sign-in .o-form select{
-          width: 100% !important;
-          margin-top: 12px !important;
-       }
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Shure Styles -->
+    <link rel="stylesheet" type="text/css" href="https://content-files.shure.com/Okta_Pages/shure-styles3.css">
+   <link rel="preload" href="https://use.typekit.net/kge7zav.css" as="style"
+      onLoad="this.onload=null;this.rel='stylesheet'" />
+   <noscript>
+      <link rel="stylesheet" href="https://use.typekit.net/kge7zav.css" />
+   </noscript>
+    <style>
+      #okta-sign-in .o-form select {
+         width: 100% !important;
+         margin-top: 12px !important;
+      }
       #okta-sign-in .auth-content {
-        padding-top: 20px;
+         padding-top: 20px;
       }
       #okta-login-container .beacon-container {
-        display: none;
+         display: none;
       }
       #shure-unified-registration #okta-login-container #okta-sign-in .o-form .input-fix {
-        border-bottom: 1.25px solid #181818;
+         border-bottom: 1.25px solid #181818;
       }
       #shure-unified-registration #okta-login-container #okta-sign-in .o-form .input-fix input {
-        color: #181818;
-        padding-left: 4px;
+         color: #181818;
+         padding-left: 4px;
       }
       #shure-unified-registration #okta-login-container #okta-sign-in .o-form select {
-        color: #181818;
-        border-bottom: 1.25px solid #181818;
+         color: #181818;
+         border-bottom: 1.25px solid #181818;
       }
       #okta-sign-in .o-form .input-fix {
-        height: 34px;
+         height: 34px;
       }
       #okta-sign-in .siw-main-view .custom-checkbox {
-        width: 100%;
+         width: 100%;
       }
       #shure-unified-registration #okta-login-container #okta-sign-in .o-form label {padding-top: 4px;}
-         strong {font-weight: bold !important;}
+      strong {font-weight: bold !important;}
       #okta-sign-in [data-se="o-form-fieldset-userProfile.IgniteTnC"] {
-            margin-top: 10px;
-         }
+         margin-top: 10px;
+      }
          #shure-unified-registration {
             font-family: din-2014, Arial, sans-serif !important;
          }
@@ -105,8 +101,7 @@
             color: #8c8c8e;
          }
          #okta-sign-in.auth-container .o-form-explain.okta-form-input-error {padding-top: 28px;}
-
-        #shure-unified-registration #okta-login-container #okta-sign-in .auth-org-logo {max-height: 60px;}
+         #shure-unified-registration #okta-login-container #okta-sign-in .auth-org-logo {max-height: 60px;}
          #okta-login-container {margin: 16px;}
 
          #okta-sign-in.auth-container.main-container,
@@ -168,10 +163,7 @@
                width: 610px;
             }
          }
-        // End of Tablet and Mobile enhancement change.
-
-        // Salesforce Service Community LCM Changes - 1/8/2025 Val M.-- Beginning
-        [data-se="o-form-fieldset-userProfile.sf_servicePartner"] .okta-form-label.o-form-label {
+         [data-se="o-form-fieldset-userProfile.sf_servicePartner"] .okta-form-label.o-form-label {
             font-weight: normal !important;
             font-family: din-2014, Arial, sans-serif !important;
             font-size: 13px !important;
@@ -209,29 +201,25 @@
 
          .show { display: block !important; }
          .hide { display: none !important; }
-    </style>
-  </head>
-<body id="shure-unified-registration">
-    <div class="login-bg-image tb--background" style="background-image: {{bgImageUrl}}">
-      	<img width="150" class="shure-logo__header" alt="shure logo" src="https://content-files.shure.com/Logos/shure_logo_black.png" />
-  		<div class="shure-green-line"></div>
-  	</div>
-  	<br /><br /><br />
-    <div id="okta-login-container"></div>
-    <!--
-        "OktaUtil" defines a global OktaUtil object
-        that contains methods used to complete the Okta login flow.
-     -->
+   </style>
+   </head>
+   
+   <body id="shure-unified-registration">
+      <div class="login-bg-image tb--background" style="background-image: {{bgImageUrl}}">
+         <img width="150" class="shure-logo__header" alt="shure logo"
+            src="https://content-files.shure.com/Logos/shure_logo_black.png" />
+         <div class="shure-green-line"></div>
+      </div>
+      <br /><br /><br />
+      <div id="okta-login-container"></div>
+    <!-- "OktaUtil" defines a global OktaUtil object that contains methods used to complete the Okta login flow. -->
     {{{OktaUtil}}}
-
     <script type="text/javascript">
       // "config" object contains default widget configuration
       // with any custom overrides defined in your admin settings.
       const config = OktaUtil.getSignInWidgetConfig();
-      // Salesforce Service Community LCM Changes - 1/8/2025 Val M.-- Beginning
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
-      // End of Salesforce Service Community LCM Changes - 1/8/2025
       config.logo = 'https://content-files.shure.com/Logos/shure_logo_black.png';
       config.features.registration = true;
       config.features.rememberMe = true;
@@ -790,7 +778,6 @@
          }
       };
       /* Adding validation to the country, locale dropdown for Shure Cloud */
-      //Developed by Antony Kanagu - 16 Sept 2024, added to prod by Val Mezentsev - 12-21-2024 - start
       function validateCountryDropdown(varLocaliztion) {
         element = document.getElementById("tmp2");
         const parentElement = element.parentElement.parentElement;
@@ -864,242 +851,142 @@
       const browserLang = OktaUtil.getSignInWidgetConfig().language;
       const varLocaliztion = config.i18n[browserLang] ? config.i18n[browserLang] : config.i18n["en"];
       config.registration = {
-        	parseSchema: function(schema, onSuccess, onFailure) {
-              //TalentLMS Change Bobby and Val - 6/18/2025 
+         parseSchema: function (schema, onSuccess, onFailure) {
             const appId = oktaData.requestContext.app.value.id;
             const tlmsSaiProvisioningId = "0oa1ovuc5duq1KNFr0h8";
             const tlmsSaiSSOId = "0oa1ovu50uuufjCrd0h8";
             const tlmsAdminSSOId = "0oa1ovubkkoa6K0PV0h8";
-             //end of the TalentLMS change
-              //debugger;
-              if(schema.find(x => x.name === 'userProfile.organization')) {
-                  if (appId !== tlmsSaiProvisioningId || appId !== tlmsSaiSSOId || appId !== tlmsAdminSSOId) {
-                    schema.find(x => x.name === 'userProfile.organization').required = true;
-                  }
-               } 
-              if(schema.find(x => x.name === 'userProfile.companyType'))
-              {
-                 	schema.find(x => x.name === 'userProfile.companyType').required = false;
-              }
-              // Val - RF Scan - 6/12/2023
-              if(schema.find(x => x.name === 'userProfile.primaryApplication'))
-               {
-                    schema.find(x => x.name === 'userProfile.primaryApplication').required = false;
+            if(schema.find(x => x.name === 'userProfile.organization')) {
+               if (appId !== tlmsSaiProvisioningId || appId !== tlmsSaiSSOId || appId !== tlmsAdminSSOId) {
+                  schema.find(x => x.name === 'userProfile.organization').required = true;
                }
-               //End of 6/12/2023
-              // Salesforce Service Community LCM Changes - 1/8/2025 Val M.-- Beginning
-              if(schema.find(x => x.name === 'userProfile.sfserv_language'))
-               {
-                    schema.find(x => x.name === 'userProfile.sfserv_language').required = false;
-               }
-
-               if (schema.find(x => x.name === 'userProfile.sf_timezone'))
-               {
-                    schema.find(x => x.name === 'userProfile.sf_timezone').required = false;
-               }
-              // End of Salesforce Service Community LCM Changes - 1/8/2025
-
-              if(schema.find(x => x.name === 'userProfile.country'))
-              {
-                 	schema.find(x => x.name === 'userProfile.country').required = false;
-              }
-              if(schema.find(x => x.name === 'userProfile.locale'))
-              {
-                 	schema.find(x => x.name === 'userProfile.locale').required = false;
-              }
-               if(schema.find(x => x.name === 'userProfile.marketingOptIn'))
-              {
-                 	schema.find(x => x.name === 'userProfile.marketingOptIn').required = false;
-              }
-             onSuccess(schema);
-            },
-            preSubmit: function (postData, onSuccess, onFailure) {
-            // Salesforce Service Community LCM Changes - 1/8/2025 Val M.-- Beginning
+            }
+            if(schema.find(x => x.name === 'userProfile.companyType')) schema.find(x => x.name === 'userProfile.companyType').required = false;
+            if(schema.find(x => x.name === 'userProfile.primaryApplication')) schema.find(x => x.name === 'userProfile.primaryApplication').required = false;
+            if(schema.find(x => x.name === 'userProfile.sfserv_language')) schema.find(x => x.name === 'userProfile.sfserv_language').required = false;
+            if (schema.find(x => x.name === 'userProfile.sf_timezone')) schema.find(x => x.name === 'userProfile.sf_timezone').required = false;
+            if(schema.find(x => x.name === 'userProfile.country')) schema.find(x => x.name === 'userProfile.country').required = false;
+            if(schema.find(x => x.name === 'userProfile.locale')) schema.find(x => x.name === 'userProfile.locale').required = false;
+            if(schema.find(x => x.name === 'userProfile.marketingOptIn')) schema.find(x => x.name === 'userProfile.marketingOptIn').required = false;
+            onSuccess(schema);
+         },
+         preSubmit: function (postData, onSuccess, onFailure) {
             const oktaAppId = oktaData.requestContext.app.value.id;
             const salesforceServiceCommunityProd = "0oa1j2k5xmdhnZwFh0h8";
-            // End of Salesforce Service Community LCM Changes - 1/8/2025
-  
-                 
-              var companyType = "";   
-              var marketingOptIn = "";
-              var country = "";
-              var lmsDataPrivacy = "";
-              var title = "";
-              var locale = "";
-              // Val - RF Scan - 6/12/2023
-              var primaryApp = "";
-              // End of 6/12/2023
-              // Salesforce Service Community LCM Changes - 1/8/2025 Val M.-- Beginning
-              let sfservLanguage = "";
-              let sfTimezone = "";
-              // End of Salesforce Service Community LCM Changes - 1/8/2025
+            var companyType = "";
+            var marketingOptIn = "";
+            var country = "";
+            var lmsDataPrivacy = "";
+            var title = "";
+            var locale = "";
+            var primaryApp = "";
+            let sfservLanguage = "";
+            let sfTimezone = "";
+            if (postData.userProfile == undefined) postData.userProfile = {};
+            if ($("select[name='userProfile.companyType']").length > 0) {
+               companyType = $("select[name='userProfile.companyType']").val();
+               postData.userProfile.companyType = companyType;
+            }
+            if ($("select[name='userProfile.primaryApplication']").length > 0) {
+               primaryApp = $("select[name='userProfile.primaryApplication']").val();
+               postData.userProfile.primaryApplication = primaryApp;
+            }
+            if ($("select[name='userProfile.sfserv_language']").length > 0) {
+               sfservLanguage = $("select[name='userProfile.sfserv_language']").val();
+               postData.userProfile.sfserv_language = sfservLanguage;
+            }
 
-              if(postData.userProfile == undefined)
-              	postData.userProfile = {};
-              if( $("select[name='userProfile.companyType']").length > 0)
-              {
-            	companyType = $("select[name='userProfile.companyType']").val();
-              	postData.userProfile.companyType = companyType;
-              }
-              // Val - RF Scan - 6/12/2023
-              if( $("select[name='userProfile.primaryApplication']").length > 0)
-               {
-              primaryApp = $("select[name='userProfile.primaryApplication']").val();
-                postData.userProfile.primaryApplication = primaryApp;
+            if ($("select[name='userProfile.sf_timezone']").length > 0) {
+               sfTimezone = $("select[name='userProfile.sf_timezone']").val();
+               postData.userProfile.sf_timezone = sfTimezone;
+            }
+            if ($("select[name='userProfile.marketingOptIn']").length > 0) {
+               marketingOptIn = $("select[name='userProfile.marketingOptIn']").val();
+               postData.userProfile.marketingOptIn = marketingOptIn;
+            }
+            if ($("select[name='userProfile.country'] option:selected").length > 0) {
+               country = $("select[name='userProfile.country']").val();
+               postData.userProfile.country = country;
+            }
+
+            if ($("select[name='userProfile.lmsDataPrivacy']").length > 0) {
+               lmsDataPrivacy = $("select[name='userProfile.lmsDataPrivacy']").val();
+               postData.userProfile.lmsDataPrivacy = lmsDataPrivacy;
+            }
+            if ($("select[name='userProfile.title']").length > 0) {
+               title = $("select[name='userProfile.title']").val();
+               postData.userProfile.title = title;
+            }
+
+            /* Adding validation to the country, locale dropdown for Shure Cloud */
+            if ($("select[name='userProfile.locale'] option:selected").length > 0) {
+               locale = $("select[name='userProfile.locale']").val();
+               postData.userProfile.locale = locale;
+            }
+            if (oktaData.requestContext.app.value.id == "0oa1iy1futi0uGSq00h8") {
+               if (companyType == null || marketingOptIn == null || country == null || locale == null) {
+                  return false;
                }
-              // End of 6/12/2023
-
-              // Salesforce Service Community LCM Changes - 1/8/2025 Val M.-- Beginning
-               if( $("select[name='userProfile.sfserv_language']").length > 0)
-               {
-              sfservLanguage = $("select[name='userProfile.sfserv_language']").val();
-                postData.userProfile.sfserv_language = sfservLanguage;
+            } else if (oktaData.requestContext.app.value.id == "0oa1ovu50uuufjCrd0h8") {
+               if (country == null || lmsDataPrivacy == null || title == null || locale == null) {
+                  return false;
                }
-
-               if( $("select[name='userProfile.sf_timezone']").length > 0)
-               {
-              sfTimezone = $("select[name='userProfile.sf_timezone']").val();
-                postData.userProfile.sf_timezone = sfTimezone;
+            }
+            if (oktaAppId === salesforceServiceCommunityProd) {
+               if (urlParams) {
+                  postData.userProfile.sfserv_region = urlParams.get("region") || "en-US";
+                  postData.userProfile.sf_Language = urlParams.get("language") || "en_US";
                }
-              // End of Salesforce Service Community LCM Changes - 1/8/2025
-
-              if( $("select[name='userProfile.marketingOptIn']").length > 0)
-              {
-            	marketingOptIn = $("select[name='userProfile.marketingOptIn']").val();
-              	postData.userProfile.marketingOptIn = marketingOptIn;
-              }
-
-              /* Adding validation to the country, locale dropdown for Shure Cloud */
-               //Modification developed by Antony Kanagu - 16 Sept 2024, added by Val Mezentsev 12/21/2024 - start
-               if( $("select[name='userProfile.country'] option:selected").length > 0)
-               {               
-                country = $("select[name='userProfile.country']").val();                          
-                postData.userProfile.country = country;
-               }  
-               //Modified - 12/21/2024 - end   
-
-              if( $("select[name='userProfile.lmsDataPrivacy']").length > 0)
-              {
-              	lmsDataPrivacy = $("select[name='userProfile.lmsDataPrivacy']").val();
-              	postData.userProfile.lmsDataPrivacy = lmsDataPrivacy;
-              }
-              if( $("select[name='userProfile.title']").length > 0)
-              {
-              	title = $("select[name='userProfile.title']").val();
-              	postData.userProfile.title = title;
-              }
-
-               /* Adding validation to the country, locale dropdown for Shure Cloud */
-               //Modification developed by Antony Kanagu - 16 Sept 2024, added by Val Mezentsev 12/21/2024 - start
-               if( $("select[name='userProfile.locale'] option:selected").length > 0)
-               {
-                locale = $("select[name='userProfile.locale']").val();
-                postData.userProfile.locale = locale;
-               } 
-               //Modified - 12/21/2024 - end   
-              
-
-              // This is for the TechPortal
-              if(oktaData.requestContext.app.value.id == "0oa1iy1futi0uGSq00h8")
-              {
-                	if(companyType == null || marketingOptIn == null || country == null || locale == null)
-                    {
-                      return false;
-                    }
-              }
-              // This one is for the TalentLMS
-              else if(oktaData.requestContext.app.value.id == "0oa1ovu50uuufjCrd0h8")
-              {
-                	if(country == null || lmsDataPrivacy == null || title == null || locale == null)
-                    {
-                      return false;
-                    }
-              }
-              
-              // Salesforce Service Community LCM Changes - 1/8/2025 Val M.-- Beginning
-              if (oktaAppId === salesforceServiceCommunityProd) {
-                  if (urlParams) {
-                     postData.userProfile.sfserv_region = urlParams.get('region') || 'en-US'; //updated by Val to be in the format of en-US -- 12/4/2024
-                     postData.userProfile.sf_Language = urlParams.get('language') || 'en_US';
-                  }
-               }
-              // End of Salesforce Service Community LCM Changes - 1/8/2025
-              
+            }
 				onSuccess(postData);
-            },
-            postSubmit: function (response, onSuccess, onFailure) {
-                // handle postsubmit callback
-               onSuccess(response);
-            }
-        }
-      	console.log('config', config);
-        // Render the Okta Sign-In Widget
-        var oktaSignIn = new OktaSignIn(config);
-        console.log('okta', oktaSignIn);
-        oktaSignIn.renderEl({ el: '#okta-login-container' },
-            OktaUtil.completeLogin,
-            function(error) {
-                // Logs errors that occur when configuring the widget.
-                // Remove or replace this with your own custom error handler.
-                console.log(error.message, error);
-            }
-        );
+         },
+         postSubmit: function (response, onSuccess, onFailure) {
+            onSuccess(response);
+         }
+      };
+      // Render the Okta Sign-In Widget
+      var oktaSignIn = new OktaSignIn(config);
+      oktaSignIn.renderEl(
+         { el: "#okta-login-container" },
+         OktaUtil.completeLogin,
+         function (error) {
+            // Logs errors that occur when configuring the widget.
+            // Remove or replace this with your own custom error handler.
+            console.log(error.message, error);
+         }
+      );
 
-        
-      	oktaSignIn.on('afterRender', function (context) {
-            /*Web tickets - "My Shure Account" instead  "Account" - Developed by Bobby, moved by Val - 2/21/2025*/
-            if (context.controller === "primary-auth") {
-               $(".signup-info span:first-child").text(varLocaliztion["var.signUp"]);
+      oktaSignIn.on("afterRender", function (context) {
+         if (context.controller === "primary-auth") {
+            $(".signup-info span:first-child").text(varLocaliztion["var.signUp"]);
+         }
+         if (context.controller === "registration") {
+            window.captchaVerified = false;
+            window.captchaValidate = false;
+            if (oktaSignIn.getUser() == undefined) {
+               loadCAPTCHA();
             }
-
-            console.log("CONTEXT", context)
-            /*End 2/21/2025*/
-
-            if (context.controller === "registration") {  
-             	window.captchaVerified = false;
-                window.captchaValidate = false;
-            	if(oktaSignIn.getUser() == undefined)
-                {
-                	loadCAPTCHA();
-                }
-          // Salesforce Service Community LCM Changes - 1/8/2025 Val M.-- Beginning
-          const oktaAppId = oktaData.requestContext.app.value.id;
-          const salesforceServiceCommunityProd = "0oa1j2k5xmdhnZwFh0h8";
-         $('.auth-footer .js-back').text(varLocaliztion["var.alreadyHaveAccount"]);
-         // Web ticket - User Experience fixes - Developed by Bobby Stitt. Added by Val - 2/21/2025 - Start
-         if ($("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd']").length>0) {
+            const oktaAppId = oktaData.requestContext.app.value.id;
+            const salesforceServiceCommunityProd = "0oa1j2k5xmdhnZwFh0h8";
+            $('.auth-footer .js-back').text(varLocaliztion["var.alreadyHaveAccount"]);
+            if ($("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd']").length > 0) {
                $("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd']").after(varLocaliztion["var.policyText"]);
             }
-
-         //WT-8801
             if ($('div[data-se="o-form-fieldset-userProfile.OIDCDisplayName"] label').length > 0) {
                $('div[data-se="o-form-fieldset-userProfile.OIDCDisplayName"] label').html(varLocaliztion["var.displayName"])
             }
-            if($("div[data-se='o-form-fieldset-userProfile.marketingOptIn'] label").length>0) {
+            if($("div[data-se='o-form-fieldset-userProfile.marketingOptIn'] label").length > 0) {
                $("div[data-se='o-form-fieldset-userProfile.marketingOptIn'] label").html(varLocaliztion["var.marketingOptIn"]);
             }
-
-            if($("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label").length>0) {
+            if($("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label").length > 0) {
                $("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label").html(varLocaliztion["var.cloudTerms"]);
             }
-
-            if($("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd'] label").length>0) {
+            if($("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd'] label").length > 0) {
                $("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd'] label").html(varLocaliztion["var.marketingOptIn"]);
             }
-
-             $('.button-primary').after(varLocaliztion["var.personalData"]);
-
-
-         // End 2/21/2025
-
-              	$('.button-primary').prop("value", varLocaliztion["var.createAccount"]);
-				
-				// Val - adding bottom consent message - 8/15/2022
-				//$('.button-primary').after("<div style='margin-top: 10px; font-size: 10px; text-align: left;'>Your personal data will be processed by Shure Incorporated based in the USA and its affiliates for training purposes. We always ensure adequate protection when transferring data. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit <strong style='font-weight: bold;font-color: black;'><a href='https://www.shure.com/en-US/meta/privacy' target='_blank'>our privacy policy</a></strong>.</div>");
-				// Val - added a new consent message on 6/12/2023. This was discussed with app owners and approved by Legal team. 
-        ///*commented out by Val and Bobby 2/21/25 */ $('.button-primary').after("<div style='margin-top: 10px; font-size: 10px; text-align: left;'>Your personal data will be processed by Shure Incorporated in the USA and its affiliates (“Shure”). Shure always ensures adequate protection when transferring data. To learn more about Shure’s privacy practices and your rights, please visit our <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>Privacy Policy</strong></a> and <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>Cookie Policy</strong></a>.</div>");
-        //- Service Community $('.button-primary').after("<div style='margin-top: 10px; font-size: 10px; text-align: left;'>Your personal data will be processed by Shure Incorporated based in the USA and its affiliates for processing your service request. We always ensure adequate protection when transferring data. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit <strong style='font-weight: bold;font-color: black;'><a href='https://www.shure.com/en-US/meta/privacy' target='_blank'>our privacy policy</a></strong>.</div>");
-				// Val - End of consent
+            $('.button-primary').after(varLocaliztion["var.personalData"]);
+            // Salesforce Service registration
+            $('.button-primary').prop("value", varLocaliztion["var.createAccount"]);
 				
              if($("div[data-se='o-form-fieldset-userProfile.city'] label").length>0)
               	$("div[data-se='o-form-fieldset-userProfile.city'] label").html(varLocaliztion["var.city"]);      
@@ -1526,26 +1413,22 @@
                   //Added - 12/21/2024 - end
 
            } 
-    	
-      // This is for the RF Scan (WWB Scan Library) - 6/12/2023
-              if (oktaData.requestContext.app.value.id == "0oa1mhqercsYSq6i80h8") {
-              if($("div[data-se='o-form-fieldset-userProfile.primaryApplication'] span").length>0)
-               {
-                $("input[name='userProfile.primaryApplication']").replaceWith('<select name="userProfile.primaryApplication" id="primaryApplication">' +
+
+            if (oktaData.requestContext.app.value.id == "0oa1mhqercsYSq6i80h8") {
+               if ($("div[data-se='o-form-fieldset-userProfile.primaryApplication'] span").length > 0) {
+                  $("input[name='userProfile.primaryApplication']").replaceWith('<select name="userProfile.primaryApplication" id="primaryApplication">' +
                        '<option value="Theater">Theater</option>' +
                        '<option value="Broadcast">Broadcast</option>' +
-                       '<option value="Film/Location Sound">TV/Film</option>' + //updated by Val on 7/11/2023 CAB# 12493
-                       '<option value="Touring Sound">Touring/Live Sound</option>' + //updated by Val on 7/11/2023 CAB# 12493
+                       '<option value="Film/Location Sound">TV/Film</option>' +
+                       '<option value="Touring Sound">Touring/Live Sound</option>' +
                        '<option value="House of Worship">House of Worship</option>' +
-                       '<option value="AV Conferencing and Meetings">Conferencing/Meetings</option>' + //updated by Val on 7/11/2023 CAB# 12493
-                       //'<option value="Other">Other</option>' + //commented out by Val on 7/11/2023 CAB# 12493
+                       '<option value="AV Conferencing and Meetings">Conferencing/Meetings</option>' +
                    '</select>');
                    $("select[name='userProfile.primaryApplication']")[0].selectedIndex = -1;
                }
-             }
-             // End of 6/12/2023
+            }
 
-            // Salesforce Service Community LCM Changes - 1/8/2025 Val M.-- Beginning
+             // Salesforce Service Community
             if (oktaData.requestContext.app.value.id === "0oa1j2k5xmdhnZwFh0h8") {
                $("label[data-se-for-name='userProfile.salesforceTnC']").html("<div>I agree that I have read and accept the Service <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>");
                $("input[name='userProfile.locale']").replaceWith('<select name="userProfile.locale" id="tmpLocale">' +
@@ -1932,33 +1815,15 @@
                   
                   let optionalboxes = document.getElementsByClassName("o-form-explain")
                   optionalboxes.forEach( (el) => {
-                                       el.style.display = "none";
-                                       });
-                                       
-                  /*partnerNumText.addEventListener('keyup', () => {
-                     if (partnerNumText.value.length > 0) {
-                        registerBtn.disabled = false;
-                     } else {
-                        registerBtn.disabled = true;
-                     }
-
-                     console.log(registerBtn.disabled);
-                  }
-                  );*/
-
+                     el.style.display = "none";
+                  });
                } else {
                   partnerNumberBox.style.display = "none";
-
                }
             });
-            
-
-
          }
 
-            // End of Salesforce Service Community LCM Changes - 1/8/2025
-      //TalentLMS Change Bobby and Val - 6/18/2025
-      const jobSelect = document.querySelector('select[name="userProfile.title"]');
+            const jobSelect = document.querySelector('select[name="userProfile.title"]');
             const dataPrivacySelect = document.querySelector('select[name="userProfile.lmsDataPrivacy"]');
             if (jobSelect) {
                jobSelect.addEventListener("focusin", (event) => {
@@ -2042,112 +1907,58 @@
             }
          }
    
-         let checkCaptcha = (event) => {   
-               
-           if (window.hcaptcha.getResponse() && window.hcaptcha.getResponse().length > 1) {
-            return true;           
-         } else {
-           event.preventDefault();
-           if (window.captchaValidate === false) {
-               const captchaDiv = document.getElementById('captchaDiv');
-               const errorDiv = document.createElement('div');
-               errorDiv.setAttribute('id','showError');
-               captchaDiv.appendChild(errorDiv);
-               errorDiv.innerHTML = '<span style="color:red;">You must click <span style="color:black">"I am a human"</span> checkbox</span>';
-               window.captchaValidate = true;
-           }
-         }
+         let checkCaptcha = (event) => {
+            if (window.hcaptcha.getResponse() && window.hcaptcha.getResponse().length > 1) {
+               return true;           
+            } else {
+               event.preventDefault();
+               if (window.captchaValidate === false) {
+                  const captchaDiv = document.getElementById('captchaDiv');
+                  const errorDiv = document.createElement('div');
+                  errorDiv.setAttribute('id','showError');
+                  captchaDiv.appendChild(errorDiv);
+                  errorDiv.innerHTML = '<span style="color:red;">You must click <span style="color:black">"I am a human"</span> checkbox</span>';
+                  window.captchaValidate = true;
+               }
+            }
          
          };
 
-         //End of hCaptcha
-      
-      window.verifyCaptcha = () => {
-          enableLoginBtn();
-          window.captchaVerified = true;
-
-        // Salesforce Service Community LCM Changes - 1/8/2025 Val M.-- Beginning
-        if(!($("select[name='userProfile.locale'] option:selected").length > 0))
-           {
-             validateLangDropdown(varLocaliztion);                  
-           }
-
-           if ($('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').is(":checked") && $('input[name="userProfile.salesforcePartnerNum"]').val().length === 0) {
-              validateAccountNumber(varLocaliztion);
-           }
-        // End of Salesforce Service Community LCM Changes - 1/8/2025
-
-
-      /* Adding validation to the country, locale dropdown for Shure Cloud */
-           //Developed by Antony Kanagu - 16 Sept 2024, added by Val 12/21/2024 - start
-            if(!($("select[name='userProfile.country'] option:selected").length > 0))
-           {
-            validateCountryDropdown(varLocaliztion);
-           }
-           if(!($("select[name='userProfile.locale'] option:selected").length > 0))
-           {
-             validateLocaleDropdown(varLocaliztion);
-           }
-            //TalentLMS change Bobby and Val - 6/18/2025
-            if (!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)) {
-               validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"), varLocaliztion);
-            }
-            if (!($("select[name='userProfile.title'] option:selected").length > 0)) {
-               validateCustomDropdown($("select[name='userProfile.title']"), varLocaliztion);
-
-            }
-            //end of TalentLMSchange
-           if(!( $("select[name='userProfile.country'] option:selected").length > 0) || !($("select[name='userProfile.locale'] option:selected").length > 0) ||  $("select[name='userProfile.sfserv_language'] option:selected").val().length === 0)
-           {
-              disableLoginBtn();
-           }
-           
-           //Added - 12/21/2024 - end
-         //TalentLMS change Bobby and Val - 6/18/2025
-         if(!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)){
-             validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"), varLocaliztion);
-           }
-           if(!($("select[name='userProfile.title'] option:selected").length > 0)){
-             validateCustomDropdown($("select[name='userProfile.title']"), varLocaliztion);
-           }
-         //end of TalentLMS change
-      };
-       
-      let disableLoginBtn = () => {		
-			const oktaLoginBtn = $(".button.button-primary");
-			$(oktaLoginBtn).prop('disabled', true)
-		};
-      
-      
-      let enableLoginBtn = () => {
-		const oktaLoginBtn = $(".button.button-primary");
-        $(oktaLoginBtn).prop('disabled', false)
-      };
-
-        // Salesforce Service Community LCM Changes - 1/8/2025 Val M.-- Beginning
-         /*let disableLoginBtn = () => {  
-            const oktaLoginBtn = $(".button.button-primary");
-            $(oktaLoginBtn).attr('disabled', true);
-         };*/
+         window.verifyCaptcha = () => {
+            enableLoginBtn();
+            window.captchaVerified = true;
+            if (!($("select[name='userProfile.locale'] option:selected").length > 0)) validateLangDropdown(varLocaliztion);
+            if ($('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').is(":checked") && $('input[name="userProfile.salesforcePartnerNum"]').val().length === 0) validateAccountNumber(varLocaliztion);
+            if (!($("select[name='userProfile.country'] option:selected").length > 0)) validateCountryDropdown(varLocaliztion);
+            if (!($("select[name='userProfile.locale'] option:selected").length > 0)) validateLocaleDropdown(varLocaliztion);
+            if (!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"), varLocaliztion);
+            if (!($("select[name='userProfile.title'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.title']"), varLocaliztion);
+            if(!( $("select[name='userProfile.country'] option:selected").length > 0) || !($("select[name='userProfile.locale'] option:selected").length > 0) ||  $("select[name='userProfile.sfserv_language'] option:selected").val().length === 0) disableLoginBtn();
+            if(!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"), varLocaliztion);
+            if(!($("select[name='userProfile.title'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.title']"), varLocaliztion);
+         };
          
-         
-         /*let enableLoginBtn = () => {
+         let disableLoginBtn = () => {
             const oktaLoginBtn = $(".button.button-primary");
-            $(oktaLoginBtn).attr('disabled', false);
-         };*/
-        // End of Salesforce Service Community LCM Changes - 1/8/2025
+            $(oktaLoginBtn).prop('disabled', true)
+         };
+         
+         let enableLoginBtn = () => {
+            const oktaLoginBtn = $(".button.button-primary");
+            $(oktaLoginBtn).prop('disabled', false);
+         };
 
-        /* Check if the CAPTCHA has been completed successfully before allowing the form to submit */
-        let oktaFormSubmit = () => {
-          if (window.captchaVerified) {
-            let response = grecaptcha.getResponse();
-            if (response.length > 0) {
-              return true;
-            } else {
-              console.log(response.length);
-            }
-          }
-      }
-    </script>
-</body>
+         /* Check if the CAPTCHA has been completed successfully before allowing the form to submit */
+         let oktaFormSubmit = () => {
+           if (window.captchaVerified) {
+             let response = grecaptcha.getResponse();
+             if (response.length > 0) {
+               return true;
+             } else {
+               console.log(response.length);
+             }
+           }
+         }
+      </script>
+   </body>
 </html>
