@@ -205,15 +205,15 @@
    </head>
    
    <body id="shure-unified-registration">
-      <div class="login-bg-image tb--background" style="background-image: {{bgImageUrl}}">
-         <img width="150" class="shure-logo__header" alt="shure logo"
-            src="https://content-files.shure.com/Logos/shure_logo_black.png" />
-         <div class="shure-green-line"></div>
-      </div>
-      <br /><br /><br />
-      <div id="okta-login-container"></div>
-    <!-- "OktaUtil" defines a global OktaUtil object that contains methods used to complete the Okta login flow. -->
-    {{{OktaUtil}}}
+   <div class="login-bg-image tb--background" style="background-image: {{bgImageUrl}}">
+      <img width="150" class="shure-logo__header" alt="shure logo"
+         src="https://content-files.shure.com/Logos/shure_logo_black.png" />
+      <div class="shure-green-line"></div>
+   </div>
+   <br /><br /><br />
+   <div id="okta-login-container"></div>
+   <!-- "OktaUtil" defines a global OktaUtil object that contains methods used to complete the Okta login flow. -->
+   {{{OktaUtil}}}
    <script type="text/javascript">
       // "config" object contains default widget configuration
       // with any custom overrides defined in your admin settings.
@@ -989,403 +989,50 @@
             }
             $('.button-primary').after(varLocaliztion["var.personalData"]);
             // Salesforce Service registration
-            if (oktaData.requestContext.app.value.id == "0oa10clovtkL6pqgh0h8") {
-               if ($("div[data-se='o-form-fieldset-userProfile.primaryApplication'] span").length > 0) {
-                  $("input[name='userProfile.primaryApplication']").replaceWith('<select name="userProfile.primaryApplication" id="primaryApplication">' +
-                       '<option value="Theater">Theater</option>' +
-                       '<option value="Broadcast">Broadcast</option>' +
-                       '<option value="Film/Location Sound">TV/Film</option>' +
-                       '<option value="Touring Sound">Touring/Live Sound</option>' +
-                       '<option value="House of Worship">House of Worship</option>' +
-                       '<option value="AV Conferencing and Meetings">Conferencing/Meetings</option>' +
-                   '</select>');
-                   $("select[name='userProfile.primaryApplication']")[0].selectedIndex = -1;
-               }
+            $('.button-primary').prop("value", varLocaliztion["var.createAccount"]);
+
+            if($("div[data-se='o-form-fieldset-userProfile.city'] label").length > 0) $("div[data-se='o-form-fieldset-userProfile.city'] label").html(varLocaliztion["var.city"]);      
+            if($("div[data-se='o-form-fieldset-userProfile.state'] label").length > 0) $("div[data-se='o-form-fieldset-userProfile.state'] label").html(varLocaliztion["var.state"]);      
+            if($("div[data-se='o-form-fieldset-userProfile.zipCode'] label").length > 0) $("div[data-se='o-form-fieldset-userProfile.zipCode'] label").html(varLocaliztion["var.zipCode"]);    
+            if($("div[data-se='o-form-fieldset-userProfile.companyType'] label").length > 0) $("div[data-se='o-form-fieldset-userProfile.companyType'] label").html(varLocaliztion["var.companyType"]);
+            if($("div[data-se='o-form-fieldset-userProfile.title'] span").length>0) {
+               $("input[name='userProfile.title']").replaceWith('<select name="userProfile.title" id="input52">' +
+                  '<option value="Executive">Executive</option>' +
+                  '<option value="Project Manager">Project Manager</option>' +
+                  '<option value="Design Engineer">Design Engineer</option>' +
+                  '<option value="Programmer">Programmer</option>' +
+                  '<option value="Technician">Technician</option>' +
+                  '<option value="Other">Other</option>' +
+               '</select>');
+               $("select[name='userProfile.title']")[0].selectedIndex = -1;
             }
 
-             // Salesforce Service Community
-            if (oktaAppId === salesforceServiceCommunityDev || oktaAppId == salesforceServiceCommunityStg) {
-               $("label[data-se-for-name='userProfile.salesforceTnC']").html("<div>I agree that I have read and accept the Service <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>");
-               $("input[name='userProfile.locale']").replaceWith('<select name="userProfile.locale" id="tmpLocale">' +
-                     '<option disabled selected value style="display:none"></option>' +
-                     '<option value="en_US">English</option>' +
-                     '<option value="es_ES">Spanish</option>' +
-                     '<option value="fr_FR">French</option>' +
-                     '<option value="nl_NL">Dutch</option>' +
-                     '<option value="de_DE">German</option>' +
-                     '<option value="ja_JP">Japanese</option>' +
-                     '<option value="zh_TW">Traditional Chinese/Mandarin</option>' +
-                   '</select>');
-               const langSelect = document.querySelector("select[name='userProfile.locale']");
-               if (langSelect) {
-                  langSelect.addEventListener('change', function(event) {
-                     if (event.target && event.target.matches('select')) {  
-                                 const parentElement = event.target.parentElement.parentElement;
-                                 $(parentElement).removeClass('o-form-has-errors'); 
-                                 $("#language-error").remove();                              
-                           }
-                           if( $(langSelect).val().length > 0)
-                           {
-                              enableLoginBtn();
-                           }
-                  });
-               }
-
-               $("input[name='userProfile.sf_timezone']").replaceWith('<select name="userProfile.sf_timezone">' +
-                  '<option value="America/Chicago">(GMT-05:00) Central Daylight Time (America/Chicago)</option>' +
-                  '<option value="Pacific/Kiritimati">(GMT+14:00) Line Islands Time (Pacific/Kiritimati)</option>' +
-                  '<option value="Pacific/Chatham">(GMT+13:45) Chatham Daylight Time (Pacific/Chatham)</option>' +
-                  '<option value="Pacific/Auckland">(GMT+13:00) New Zealand Daylight Time (Pacific/Auckland)</option>' +
-                  '<option value="Pacific/Enderbury">(GMT+13:00) Phoenix Islands Time (Pacific/Enderbury)</option>' +
-                  '<option value="Pacific/Tongatapu">(GMT+13:00) Tonga Standard Time (Pacific/Tongatapu)</option>' +
-                  '<option value="Asia/Kamchatka">(GMT+12:00) Petropavlovsk-Kamchatski Standard Time (Asia/Kamchatka)</option>' +
-                  '<option value="Pacific/Fiji">(GMT+12:00) Fiji Standard Time (Pacific/Fiji)</option>' +
-                  '<option value="Pacific/Guadalcanal">(GMT+11:00) Solomon Islands Time (Pacific/Guadalcanal)</option>' +
-                  '<option value="Pacific/Norfolk">(GMT+11:00) Norfolk Island Standard Time (Pacific/Norfolk)</option>' +
-                  '<option value="Australia/Lord_Howe">(GMT+10:30) Lord Howe Standard Time (Australia/Lord_Howe)</option>' +
-                  '<option value="Australia/Brisbane">(GMT+10:00) Australian Eastern Standard Time (Australia/Brisbane)</option>' +
-                  '<option value="Australia/Sydney">(GMT+10:00) Australian Eastern Standard Time (Australia/Sydney)</option>' +
-                  '<option value="Australia/Adelaide">(GMT+09:30) Australian Central Standard Time (Australia/Adelaide)</option>' +
-                  '<option value="Australia/Darwin">(GMT+09:30) Australian Central Standard Time (Australia/Darwin)</option>' +
-                  '<option value="Asia/Seoul">(GMT+09:00) Korean Standard Time (Asia/Seoul)</option>' +
-                  '<option value="Asia/Tokyo">(GMT+09:00) Japan Standard Time (Asia/Tokyo)</option>' +
-                  '<option value="Asia/Hong_Kong">(GMT+08:00) Hong Kong Standard Time (Asia/Hong_Kong)</option>' +
-                  '<option value="Asia/Kuala_Lumpur">(GMT+08:00) Malaysia Time (Asia/Kuala_Lumpur)</option>' +
-                  '<option value="Asia/Manila">(GMT+08:00) Philippine Standard Time (Asia/Manila)</option>' +
-                  '<option value="Asia/Shanghai">(GMT+08:00) China Standard Time (Asia/Shanghai)</option>' +
-                  '<option value="Asia/Singapore">(GMT+08:00) Singapore Standard Time (Asia/Singapore)</option>' +
-                  '<option value="Asia/Taipei">(GMT+08:00) Taipei Standard Time (Asia/Taipei)</option>' +
-                  '<option value="Australia/Perth">(GMT+08:00) Australian Western Standard Time (Australia/Perth)</option>' +
-                  '<option value="Asia/Bangkok">(GMT+07:00) Indochina Time (Asia/Bangkok)</option>' +
-                  '<option value="Asia/Ho_Chi_Minh">(GMT+07:00) Indochina Time (Asia/Ho_Chi_Minh)</option>' +
-                  '<option value="Asia/Jakarta">(GMT+07:00) Western Indonesia Time (Asia/Jakarta)</option>' +
-                  '<option value="Asia/Rangoon">(GMT+06:30) Myanmar Time (Asia/Rangoon)</option>' +
-                  '<option value="Asia/Dhaka">(GMT+06:00) Bangladesh Standard Time (Asia/Dhaka)</option>' +
-                  '<option value="Asia/Kathmandu">(GMT+05:45) Nepal Time (Asia/Kathmandu)</option>' +
-                  '<option value="Asia/Colombo">(GMT+05:30) India Standard Time (Asia/Colombo)</option>' +
-                  '<option value="Asia/Kolkata">(GMT+05:30) India Standard Time (Asia/Kolkata)</option>' +
-                  '<option value="Asia/Karachi">(GMT+05:00) Pakistan Standard Time (Asia/Karachi)</option>' +
-                  '<option value="Asia/Tashkent">(GMT+05:00) Uzbekistan Standard Time (Asia/Tashkent)</option>' +
-                  '<option value="Asia/Yekaterinburg">(GMT+05:00) Yekaterinburg Standard Time (Asia/Yekaterinburg)</option>' +
-                  '<option value="Asia/Kabul">(GMT+04:30) Afghanistan Time (Asia/Kabul)</option>' +
-                  '<option value="Asia/Baku">(GMT+04:00) Azerbaijan Standard Time (Asia/Baku)</option>' +
-                  '<option value="Asia/Dubai">(GMT+04:00) Gulf Standard Time (Asia/Dubai)</option>' +
-                  '<option value="Asia/Tbilisi">(GMT+04:00) Georgia Standard Time (Asia/Tbilisi)</option>' +
-                  '<option value="Asia/Yerevan">(GMT+04:00) Armenia Standard Time (Asia/Yerevan)</option>' +
-                  '<option value="Africa/Cairo">(GMT+03:00) Eastern European Standard Time (Africa/Cairo)</option>' +
-                  '<option value="Africa/Nairobi">(GMT+03:00) East Africa Time (Africa/Nairobi)</option>' +
-                  '<option value="Asia/Baghdad">(GMT+03:00) Arabian Standard Time (Asia/Baghdad)</option>' +
-                  '<option value="Asia/Beirut">(GMT+03:00) Eastern European Summer Time (Asia/Beirut)</option>' +
-                  '<option value="Asia/Jerusalem">(GMT+03:00) Israel Daylight Time (Asia/Jerusalem)</option>' +
-                  '<option value="Asia/Kuwait">(GMT+03:00) Arabian Standard Time (Asia/Kuwait)</option>' +
-                  '<option value="Asia/Riyadh">(GMT+03:00) Arabian Standard Time (Asia/Riyadh)</option>' +
-                  '<option value="Europe/Athens">(GMT+03:00) Eastern European Summer Time (Europe/Athens)</option>' +
-                  '<option value="Europe/Bucharest">(GMT+03:00) Eastern European Summer Time (Europe/Bucharest)</option>' +
-                  '<option value="Europe/Helsinki">(GMT+03:00) Eastern European Summer Time (Europe/Helsinki)</option>' +
-                  '<option value="Europe/Istanbul">(GMT+03:00) Eastern European Standard Time (Europe/Istanbul)</option>' +
-                  '<option value="Europe/Minsk">(GMT+03:00) Moscow Standard Time (Europe/Minsk)</option>' +
-                  '<option value="Europe/Moscow">(GMT+03:00) Moscow Standard Time (Europe/Moscow)</option>' +
-                  '<option value="Africa/Johannesburg">(GMT+02:00) South Africa Standard Time (Africa/Johannesburg)</option>' +
-                  '<option value="Europe/Amsterdam">(GMT+02:00) Central European Summer Time (Europe/Amsterdam)</option>' +
-                  '<option value="Europe/Berlin">(GMT+02:00) Central European Summer Time (Europe/Berlin)</option>' +
-                  '<option value="Europe/Brussels">(GMT+02:00) Central European Summer Time (Europe/Brussels)</option>' +
-                  '<option value="Europe/Paris">(GMT+02:00) Central European Summer Time (Europe/Paris)</option>' +
-                  '<option value="Europe/Prague">(GMT+02:00) Central European Summer Time (Europe/Prague)</option>' +
-                  '<option value="Europe/Rome">(GMT+02:00) Central European Summer Time (Europe/Rome)</option>' +
-                  '<option value="Africa/Algiers">(GMT+01:00) Central European Standard Time (Africa/Algiers)</option>' +
-                  '<option value="Africa/Casablanca">(GMT+01:00) Western European Summer Time (Africa/Casablanca)</option>' +
-                  '<option value="Europe/Dublin">(GMT+01:00) Irish Standard Time (Europe/Dublin)</option>' +
-                  '<option value="Europe/Lisbon">(GMT+01:00) Western European Summer Time (Europe/Lisbon)</option>' +
-                  '<option value="Europe/London">(GMT+01:00) British Summer Time (Europe/London)</option>' +
-                  '<option value="Atlantic/Azores">(GMT+00:00) Azores Summer Time (Atlantic/Azores)</option>' +
-                  '<option value="GMT">(GMT+00:00) Greenwich Mean Time (GMT)</option>' +
-                  '<option value="America/Scoresbysund">(GMT-01:00) East Greenland Summer Time (America/Scoresbysund)</option>' +
-                  '<option value="Atlantic/Cape_Verde">(GMT-01:00) Cape Verde Standard Time (Atlantic/Cape_Verde)</option>' +
-                  '<option value="Atlantic/South_Georgia">(GMT-02:00) South Georgia Time (Atlantic/South_Georgia)</option>' +
-                  '<option value="America/St_Johns">(GMT-02:30) Newfoundland Daylight Time (America/St_Johns)</option>' +
-                  '<option value="America/Argentina/Buenos_Aires">(GMT-03:00) Argentina Standard Time (America/Argentina/Buenos_Aires)</option>' +
-                  '<option value="America/Halifax">(GMT-03:00) Atlantic Daylight Time (America/Halifax)</option>' +
-                  '<option value="America/Santiago">(GMT-03:00) Chile Summer Time (America/Santiago)</option>' +
-                  '<option value="America/Sao_Paulo">(GMT-03:00) Brasilia Standard Time (America/Sao_Paulo)</option>' +
-                  '<option value="Atlantic/Bermuda">(GMT-03:00) Atlantic Daylight Time (Atlantic/Bermuda)</option>' +
-                  '<option value="America/Caracas">(GMT-04:00) Venezuela Time (America/Caracas)</option>' +
-                  '<option value="America/Indiana/Indianapolis">(GMT-04:00) Eastern Daylight Time (America/Indiana/Indianapolis)</option>' +
-                  '<option value="America/New_York">(GMT-04:00) Eastern Daylight Time (America/New_York)</option>' +
-                  '<option value="America/Puerto_Rico">(GMT-04:00) Atlantic Standard Time (America/Puerto_Rico)</option>' +
-                  '<option value="America/Bogota">(GMT-05:00) Colombia Standard Time (America/Bogota)</option>' +
-                  '<option value="America/Lima">(GMT-05:00) Peru Standard Time (America/Lima)</option>' +
-                  '<option value="America/Panama">(GMT-05:00) Eastern Standard Time (America/Panama)</option>' +
-                  '<option value="America/Denver">(GMT-06:00) Mountain Daylight Time (America/Denver)</option>' +
-                  '<option value="America/El_Salvador">(GMT-06:00) Central Standard Time (America/El_Salvador)</option>' +
-                  '<option value="America/Mexico_City">(GMT-06:00) Central Standard Time (America/Mexico_City)</option>' +
-                  '<option value="America/Los_Angeles">(GMT-07:00) Pacific Daylight Time (America/Los_Angeles)</option>' +
-                  '<option value="America/Mazatlan">(GMT-07:00) Mexican Pacific Standard Time (America/Mazatlan)</option>' +
-                  '<option value="America/Phoenix">(GMT-07:00) Mountain Standard Time (America/Phoenix)</option>' +
-                  '<option value="America/Tijuana">(GMT-07:00) Pacific Daylight Time (America/Tijuana)</option>' +
-                  '<option value="America/Anchorage">(GMT-08:00) Alaska Daylight Time (America/Anchorage)</option>' +
-                  '<option value="Pacific/Pitcairn">(GMT-08:00) Pitcairn Time (Pacific/Pitcairn)</option>' +
-                  '<option value="America/Adak">(GMT-09:00) Hawaii-Aleutian Daylight Time (America/Adak)</option>' +
-                  '<option value="Pacific/Gambier">(GMT-09:00) Gambier Time (Pacific/Gambier)</option>' +
-                  '<option value="Pacific/Marquesas">(GMT-09:30) Marquesas Time (Pacific/Marquesas)</option>' +
-                  '<option value="Pacific/Honolulu">(GMT-10:00) Hawaii-Aleutian Standard Time (Pacific/Honolulu)</option>' +
-                  '<option value="Pacific/Niue">(GMT-11:00) Niue Time (Pacific/Niue)</option>' +
-                  '<option value="Pacific/Pago_Pago">(GMT-11:00) Samoa Standard Time (Pacific/Pago_Pago)</option>' +
-                   '</select>');
-
-                  $('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').change(function() {
-                     if(this.checked) {
-                        $("[data-se='o-form-fieldset-userProfile.salesforcePartnerNum']").addClass("show");
-                     }
-                  });
-
-                  $('div[data-se="o-form-fieldset-userProfile.salesforcePartnerNum"] div[data-se="o-form-input-container"]').append("<span style='font-size: 12px'>For assistance with your account number please contact your Shure Rep.</span>")
-
-
-                  $('input[name="userProfile.salesforcePartnerNum"]').on("blur", function() {
-                     if (this.value.length > 0) {
-                        const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
-                           const parentElement = element.parentElement.parentElement;
-                           if($(parentElement).find("#account-error").length>0){
-                              $(parentElement).removeClass('o-form-has-errors');
-                              $("#account-error").remove();   
-                              enableLoginBtn();
-                           }
-                     }
-                  });
-
-                  $('input[data-se-name="userProfile.sf_servicePartner"][value="false"]').change(function() {
-                     if(this.checked) {
-                        $("[data-se='o-form-fieldset-userProfile.salesforcePartnerNum']").removeClass("show");
-                        const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
-                        const parentElement = element.parentElement.parentElement;
-                        if($(parentElement).find("#account-error").length>0){
-                           $(parentElement).removeClass('o-form-has-errors');
-                           $("#account-error").remove();   
-                           enableLoginBtn();
-                        }
-                     }
-                  });
-
-                  if ($("div[data-se='o-form-fieldset-userProfile.firstName'] label").length > 0) {
-                     $("div[data-se='o-form-fieldset-userProfile.firstName'] label").html(varLocaliztion["var.firstName"]);
-                  }
-
-                  if ($("div[data-se='o-form-fieldset-userProfile.lastName'] label").length > 0) {
-                     $("div[data-se='o-form-fieldset-userProfile.lastName'] label").html(varLocaliztion["var.lastName"]);
-                  }
-
-                  if ($("div[data-se='o-form-fieldset-userProfile.email'] label").length > 0) {
-                     $("div[data-se='o-form-fieldset-userProfile.email'] label").html(
-                        varLocaliztion["var.email"]
-                     );
-                  }
-
-
-                  if ($("div[data-se='o-form-fieldset-userProfile.country'] label").length > 0) {
-                     $("div[data-se='o-form-fieldset-userProfile.country'] label").html(
-                        varLocaliztion["var.country"]
-                     );
-                  }
-
-                  if ($("div[data-se='o-form-fieldset-userProfile.sf_servicePartner'] .o-form-label").length > 0) {
-                     $("div[data-se='o-form-fieldset-userProfile.sf_servicePartner'] .o-form-label").html(
-                        varLocaliztion["var.shureDealer"]
-                     );
-                  }
-
-                  if ($("div[data-se='o-form-fieldset-userProfile.sfserv_language'] label").length > 0) {
-                     $("div[data-se='o-form-fieldset-userProfile.sfserv_language'] label").html(
-                        varLocaliztion["var.sfservLanguage"]
-                     );
-                  }
-
-                  if ($("div[data-se='o-form-fieldset-userProfile.sf_timezone'] label").length > 0) {
-                     $("div[data-se='o-form-fieldset-userProfile.sf_timezone'] label").html(
-                        varLocaliztion["var.timezone"]
-                     );
-                  }
-
-                  if ($("div[data-se='o-form-fieldset-userProfile.primaryPhone'] label").length > 0) {
-                     $("div[data-se='o-form-fieldset-userProfile.primaryPhone'] label").html(
-                        varLocaliztion["var.phone"]
-                     );
-                  }
-
-                  if ($("div[data-se='o-form-fieldset-userProfile.salesforcePartnerNum'] label").length > 0) {
-                     $("div[data-se='o-form-fieldset-userProfile.salesforcePartnerNum'] label").html(
-                        varLocaliztion["var.accountNumber"]
-                     );
-                  }
-
-                     $("input[name='userProfile.country']").replaceWith('<select name="userProfile.country" id="tmp2">' +
-                       '<option value="Afghanistan">Afghanistan</option>' +
-                       '<option value="Albania">Albania</option>' +
-                       '<option value="Algeria">Algeria</option>' +
-                       '<option value="Argentina">Argentina</option>' +
-                       '<option value="Armenia">Armenia</option>' +
-                       '<option value="Australia">Australia</option>' +
-                       '<option value="Austria">Austria</option>' +
-                       '<option value="Azerbaijan">Azerbaijan</option>' +
-                       '<option value="Bangladesh">Bangladesh</option>' +
-                       '<option value="Barbados">Barbados</option>' +
-                       '<option value="Belgium">Belgium</option>' +
-                       '<option value="Bermuda">Bermuda</option>' +
-                       '<option value="Bolivia, Plurinational State of">Bolivia</option>' +
-                       '<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>' +
-                       '<option value="Brazil">Brazil</option>' +
-                       '<option value="Virgin Islands, British">British Virgin Islands</option>' + 
-                       '<option value="American Virgin Islands">U.S. Virgin Islands</option>' + 
-                       '<option value="Bulgaria">Bulgaria</option>' +
-                       '<option value="Cambodia">Cambodia</option>' +
-                       '<option value="Cameroon">Cameroon</option>' +
-                       '<option value="Canada">Canada</option>' +
-                       '<option value="Cayman Islands">Cayman Islands</option>' +
-                       '<option value="Chile">Chile</option>' +
-                       '<option value="China">China</option>' +
-                       '<option value="Colombia">Colombia</option>' +
-                       '<option value="Congo, the Democratic Republic of the">Democratic Republic of the Congo</option>' +
-                       '<option value="Costa Rica">Costa Rica</option>' +
-                       '<option value="Cote d\'Ivoire">Cote d\'Ivoire</option>' +
-                       '<option value="Croatia">Croatia</option>' +
-                       '<option value="Curacao">Curacao</option>' +
-                       '<option value="Cyprus">Cyprus</option>' +
-                       '<option value="Czech Republic">Czech Republic</option>' +
-                       '<option value="Denmark">Denmark</option>' +
-                       '<option value="Dominican Republic">Dominican Republic</option>' +
-                       '<option value="Ecuador">Ecuador</option>' +
-                       '<option value="Egypt">Egypt</option>' +
-                       '<option value="El Salvador">El Salvador</option>' +
-                       '<option value="Estonia">Estonia</option>' +
-                       '<option value="Ethiopia">Ethiopia</option>' +
-                       '<option value="Falkland Islands">Falkland Islands (Malvinas)</option>' +
-                       '<option value="Fiji">Fiji</option>' +
-                       '<option value="Finland">Finland</option>' +
-                       '<option value="France">France</option>' +
-                       '<option value="Georgia">Georgia</option>' +
-                       '<option value="Germany">Germany</option>' +
-                       '<option value="Ghana">Ghana</option>' +
-                       '<option value="Greece">Greece</option>' +
-                       '<option value="Guatemala">Guatemala</option>' +
-                       '<option value="Guinea">Guinea</option>' +
-                       '<option value="Honduras">Honduras</option>' +
-                       '<option value="Hong Kong S.A.R.">Hong Kong S.A.R.</option>' +
-                       '<option value="Hungary">Hungary</option>' +
-                       '<option value="Iceland">Iceland</option>' +
-                       '<option value="India">India</option>' +
-                       '<option value="Indonesia">Indonesia</option>' +
-                       '<option value="Ireland">Ireland</option>' +
-                       '<option value="Israel">Israel</option>' +
-                       '<option value="Italy">Italy</option>' +
-                       '<option value="Jamaica">Jamaica</option>' +
-                       '<option value="Japan">Japan</option>' +
-                       '<option value="Jordan">Jordan</option>' +
-                       '<option value="Kazakhstan">Kazakhstan</option>' +
-                       '<option value="Kenya">Kenya</option>' +
-                       '<option value="Korea, Republic of">South Korea</option>' +
-                       '<option value="Kuwait">Kuwait</option>' +
-                       '<option value="Latvia">Latvia</option>' +
-                       '<option value="Lao People’s Democratic Republic">Laos</option>' +
-                       '<option value="Lebanon">Lebanon</option>' +
-                       '<option value="Lithuania">Lithuania</option>' +
-                       '<option value="Luxembourg">Luxembourg</option>' +
-                       '<option value="Macau">Macau</option>' +
-                       '<option value="Macedonia, the former Yugoslav Republic of">Macedonia</option>' +
-                       '<option value="Malawi">Malawi</option>' +
-                       '<option value="Malaysia">Malaysia</option>' +
-                       '<option value="Maldives">Maldives</option>' +
-                       '<option value="Malta">Malta</option>' +
-                       '<option value="Mauritius">Mauritius</option>' +
-                       '<option value="Mexico">Mexico</option>' +
-                       '<option value="Moldova, Republic of">Moldova</option>' +
-                       '<option value="Mongolia">Mongolia</option>' +
-                       '<option value="Montenegro">Montenegro</option>' +
-                       '<option value="Morocco">Morocco</option>' +
-                       '<option value="Mozambique">Mozambique</option>' +
-                       '<option value="Myanmar">Myanmar</option>' +
-                       '<option value="Nepal">Nepal</option>' +
-                       '<option value="Netherlands">Netherlands</option>' +
-                       '<option value="New Zealand">New Zealand</option>' +
-                       '<option value="Nicaragua">Nicaragua</option>' +
-                       '<option value="Nigeria">Nigeria</option>' +
-                       '<option value="Norway">Norway</option>' +
-                       '<option value="Oman">Oman</option>' +
-                       '<option value="Pakistan">Pakistan</option>' +
-                       '<option value="Palestinian Territory">Palestine Territory, Occupied</option>' +
-                       '<option value="Panama">Panama</option>' +
-                       '<option value="Paraguay">Paraguay</option>' +
-                       '<option value="Peru">Peru</option>' +
-                       '<option value="Philippines">Philippines</option>' +
-                       '<option value="Poland">Poland</option>' +
-                       '<option value="Portugal">Portugal</option>' +
-                       '<option value="Puerto Rico">Puerto Rico</option>' +
-                       '<option value="Qatar">Qatar</option>' +
-                       '<option value="Réunion">Reunion</option>' +
-                       '<option value="Romania">Romania</option>' +
-                       '<option value="Samoa">Samoa</option>' +
-                       '<option value="Saudi Arabia">Saudi Arabia</option>' +
-                       '<option value="Serbia and Montenegro (Former)">Serbia and Montenegro (Former)</option>' +
-                       '<option value="Seychelles">Seychelles</option>' +
-                       '<option value="Singapore">Singapore</option>' +
-                       '<option value="Slovakia">Slovakia</option>' +
-                       '<option value="Slovenia">Slovenia</option>' +
-                       '<option value="South Africa">South Africa</option>' +
-                       '<option value="Sudan">Sudan</option>' +
-                       '<option value="Spain">Spain</option>' +
-                       '<option value="Sri Lanka">Sri Lanka</option>' +
-                       '<option value="Sweden">Sweden</option>' +
-                       '<option value="Switzerland">Switzerland</option>' +
-                       '<option value="Taiwan">Chinese Taipei</option>' +
-                       '<option value="Tanzania">Tanzania, United Republic of</option>' +
-                       '<option value="Thailand">Thailand</option>' +
-                       '<option value="Trinidad and Tobago">Trinidad and Tobago</option>' +
-                       '<option value="Tunisia">Tunisia</option>' +
-                       '<option value="Turkey">Turkey</option>' +
-                       '<option value="Uganda">Uganda</option>' +
-                       '<option value="U.A.E.">U.A.E.</option>' +
-                       '<option value="United Kingdom">United Kingdom</option>' +
-                       '<option value="United States">United States</option>' +
-                       '<option value="Uruguay">Uruguay</option>' +
-                       '<option value="Venezuela">Venezuela</option>' +
-                       '<option value="Viet Nam">Vietnam</option>' +
-                       '<option value="Zambia">Zambia</option>' +
-                       '<option value="Zimbabwe">Zimbabwe</option>' +
-                       '</select>');
-                 
-                    $("select[name='userProfile.country']")[0].selectedIndex = -1;
+            if($("div[data-se='o-form-fieldset-userProfile.companyType'] span").length>0) {
+               $("input[name='userProfile.companyType']").replaceWith('<select name="userProfile.companyType" id="companyType">' +
+                  '<option value="Consultant">Consultant</option>' +
+                  '<option value="Dealer">Dealer</option>' +
+                  '<option value="Distributor">Distributor</option>' +
+                  '<option value="End-User">End-User</option>' +
+                  '<option value="Freelancer">Freelancer</option>' +
+                  '<option value="Other">Other</option>' +
+                  '<option value="Rental Company">Rental Company</option>' +
+                  '<option value="Sales Rep">Sales Rep</option>' +
+                  '<option value="System Integrator">System Integrator</option>' +
+               '</select>');
+               $("select[name='userProfile.companyType']")[0].selectedIndex = -1;
             }
-
-            if (oktaData.requestContext.app.value.id == "0oas4uaj2mDDcNivh0h7") {
-               document.querySelectorAll("[data-se='o-form-fieldset-userProfile.language_sf']")[0].style.display = "none";
-               document.querySelectorAll("[data-se='o-form-fieldset-userProfile.sfserv_region']")[0].style.display = "none";
-               let registerBtn = document.getElementsByClassName("button button-primary")[0];
-               let partnerNumberBox = document.querySelector('[data-se="o-form-fieldset-userProfile.salesforcePartnerNum"]');
-               let partnerNumText = document.getElementsByName('userProfile.salesforcePartnerNum')[0];
-               partnerNumberBox.style.display = "none";
-               let contentBox = document.querySelector('[data-se="o-form-content"]');
-               let isPartner = document.createElement("INPUT");
-
-               isPartner.setAttribute("type", "checkbox");
-               isPartner.setAttribute("value", "Are you a Shure Partner?");
-               isPartner.setAttribute("id", "shure-partner-checkbox")
-               let partnerLabel = document.createElement("label");
-               partnerLabel.setAttribute("for", 'shure-partner-checkbox');
-               partnerLabel.innerHTML = " Are you a Shure Partner?";
-
-               partnerNumberBox.parentNode.insertBefore(isPartner, partnerNumberBox);
-               isPartner.parentNode.insertBefore(partnerLabel, isPartner.nextSibling)
-
-               isPartner.addEventListener('change', function() {
-                  if (this.checked) {
-                     partnerNumberBox.style.display = "block";
-                     
-                     let optionalboxes = document.getElementsByClassName("o-form-explain")
-                     optionalboxes.forEach( (el) => {
-                        el.style.display = "none";
-                     });
-                  } else {
-                     partnerNumberBox.style.display = "none";
-                  }
-               });
+            if($("div[data-se='o-form-fieldset-userProfile.marketingOptIn']").length>0) {
+               $("input[name='userProfile.marketingOptIn']").replaceWith('<select name="userProfile.marketingOptIn" id="marketingOptIn">' +
+                     '<option value="Yes">Yes</option>' +
+                     '<option value="No">No</option>' +
+               '</select>');
+               $("label[data-se-for-name='userProfile.marketingOptIn']").after($("select[name='userProfile.marketingOptIn']"));
+               $("span[data-se='o-form-input-userProfile.marketingOptIn'] .custom-checkbox").removeClass("custom-checkbox");
+               $("select[name='userProfile.marketingOptIn']")[0].selectedIndex = -1;
+               $("div[data-se='o-form-fieldset-userProfile.marketingOptIn']").after("<div style='margin-top:10px !important; font-size: 10px;'>By selecting yes, you consent to receive emails from Shure Incorporated based in the USA and its affiliates (“Shure”), including new products, company updates, events, training, case studies, research, and promotions. You consent to the processing, tracking and analyzing of personal data, such as your: registration detail, website activity across devices, and other personal data provided on legal grounds, by Shure, Google LLC and salesforce.com Inc for tailoring emails to your interests. We always ensure adequate protection when transferring data. You can unsubscribe at any time via the link in each email or withdraw consent via <a href = \"mailto:privacy@shure.com\">privacy@shure.com</a>. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit our <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>privacy policy</strong></a> and <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>cookie policy<strong></a>.</div>"); 
+            }
+            if($("input[name='userProfile.RfscanTnC']").length > 0) { 
+               $("label[data-se-for-name='userProfile.RfscanTnC']").html("<div>I agree to the <a href='https://scans.shure.com/cloud_terms' target='_blank'>Cloud Application Terms of Service</a> and the <a href='https://www.shure.com/en-US/meta/legal/terms-and-conditions-of-website-use' target='_blank'>Website Terms of Use</a> in connection with the WWB Scan Library.</div>") 
             }
 
             const appId = oktaData.requestContext.app.value.id;
@@ -1416,65 +1063,10 @@
                config.i18n["zh-TW"]["var.createAccount"] = "提交";    
             }
 
-            console.log("create account", varLocaliztion["var.createAccount"]);
-            $('.button-primary').prop("value", varLocaliztion["var.createAccount"]);
-            //- Service Community $('.button-primary').after("<div style='margin-top: 10px; font-size: 10px; text-align: left;'>Your personal data will be processed by Shure Incorporated based in the USA and its affiliates for processing your service request. We always ensure adequate protection when transferring data. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit <strong style='font-weight: bold;font-color: black;'><a href='https://www.shure.com/en-US/meta/privacy' target='_blank'>our privacy policy</a></strong>.</div>");
-            if($("div[data-se='o-form-fieldset-userProfile.city'] label").length>0)
-            $("div[data-se='o-form-fieldset-userProfile.city'] label").html(varLocaliztion["var.city"]);      
-            if($("div[data-se='o-form-fieldset-userProfile.state'] label").length>0)
-            $("div[data-se='o-form-fieldset-userProfile.state'] label").html(varLocaliztion["var.state"]);      
-            if($("div[data-se='o-form-fieldset-userProfile.zipCode'] label").length>0)
-            $("div[data-se='o-form-fieldset-userProfile.zipCode'] label").html(varLocaliztion["var.zipCode"]);    
-            if($("div[data-se='o-form-fieldset-userProfile.companyType'] label").length>0)
-            $("div[data-se='o-form-fieldset-userProfile.companyType'] label").html(varLocaliztion["var.companyType"]);
-            
-            if($("div[data-se='o-form-fieldset-userProfile.title'] span").length>0) {
-               $("input[name='userProfile.title']").replaceWith('<select name="userProfile.title" id="input52">' +
-                  '<option value="Executive">Executive</option>' +
-                  '<option value="Project Manager">Project Manager</option>' +
-                  '<option value="Design Engineer">Design Engineer</option>' +
-                  '<option value="Programmer">Programmer</option>' +
-                  '<option value="Technician">Technician</option>' +
-                  '<option value="Other">Other</option>' +
-               '</select>');
-               $("select[name='userProfile.title']")[0].selectedIndex = -1;
-            }
-         
-         
-            if($("div[data-se='o-form-fieldset-userProfile.companyType'] span").length>0) {
-               $("input[name='userProfile.companyType']").replaceWith('<select name="userProfile.companyType" id="companyType">' +
-                  '<option value="Consultant">Consultant</option>' +
-                  '<option value="Dealer">Dealer</option>' +
-                  '<option value="Distributor">Distributor</option>' +
-                  '<option value="End-User">End-User</option>' +
-                  '<option value="Freelancer">Freelancer</option>' +
-                  '<option value="Other">Other</option>' +
-                  '<option value="Rental Company">Rental Company</option>' +
-                  '<option value="Sales Rep">Sales Rep</option>' +
-                  '<option value="System Integrator">System Integrator</option>' +
-               '</select>');
-               $("select[name='userProfile.companyType']")[0].selectedIndex = -1;
-            }
-
-            if($("div[data-se='o-form-fieldset-userProfile.marketingOptIn']").length>0) {
-               $("input[name='userProfile.marketingOptIn']").replaceWith('<select name="userProfile.marketingOptIn" id="marketingOptIn">' +
-                     '<option value="Yes">Yes</option>' +
-                     '<option value="No">No</option>' +
-                  '</select>');
-               $("label[data-se-for-name='userProfile.marketingOptIn']").after($("select[name='userProfile.marketingOptIn']"));
-               $("span[data-se='o-form-input-userProfile.marketingOptIn'] .custom-checkbox").removeClass("custom-checkbox");
-               $("select[name='userProfile.marketingOptIn']")[0].selectedIndex = -1;
-                  $("div[data-se='o-form-fieldset-userProfile.marketingOptIn']").after("<div style='margin-top:10px !important; font-size: 10px;'>By selecting yes, you consent to receive emails from Shure Incorporated based in the USA and its affiliates (“Shure”), including new products, company updates, events, training, case studies, research, and promotions. You consent to the processing, tracking and analyzing of personal data, such as your: registration detail, website activity across devices, and other personal data provided on legal grounds, by Shure, Google LLC and salesforce.com Inc for tailoring emails to your interests. We always ensure adequate protection when transferring data. You can unsubscribe at any time via the link in each email or withdraw consent via <a href = \"mailto:privacy@shure.com\">privacy@shure.com</a>. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit our <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>privacy policy</strong></a> and <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>cookie policy<strong></a>.</div>"); 
-            }
-
-            if($("input[name='userProfile.RfscanTnC']").length > 0) { 
-                  $("label[data-se-for-name='userProfile.RfscanTnC']").html("<div>I agree to the <a href='https://scans.shure.com/cloud_terms' target='_blank'>Cloud Application Terms of Service</a> and the <a href='https://www.shure.com/en-US/meta/legal/terms-and-conditions-of-website-use' target='_blank'>Website Terms of Use</a> in connection with the WWB Scan Library.</div>") 
-               }
-            //Val added for Ignite
             if($("input[name='userProfile.IgniteTnC']").length > 0) { 
                $("label[data-se-for-name='userProfile.IgniteTnC']").html(varLocaliztion["var.cloudTerms"]);
             }
-               
+
             if($("div[data-se='o-form-fieldset-userProfile.country'] label").length>0) {
                $($("div[data-se='o-form-fieldset-userProfile.country'] label")[0]).html(varLocaliztion["var.country"]);
                $("input[name='userProfile.country']").replaceWith('<select name="userProfile.country" id="tmp2">' +
@@ -1609,51 +1201,33 @@
                   '<option value="Viet Nam">Vietnam</option>' +
                   '<option value="Zambia">Zambia</option>' +
                   '<option value="Zimbabwe">Zimbabwe</option>' +
-   
                   '</select>');
             
                $("select[name='userProfile.country']")[0].selectedIndex = -1;
             }
 
-            // WT-8801
-            if (appId === shureCloudQAId || appId === shureCloudQA2Id || appId === shureCloudPreprodId || appId === shureCloudStageId) {
-               const localeSelect = $('select#tmp2');
-               if (localeSelect) {
-                  localeSelect.on('change', function() {
-                     if (this.value === "China") {
-                        console.log('SHOW')
-                        $("label[data-se-for-name='userProfile.shurecloudTnC_China']").html(varLocaliztion["var.chinaConsent"]) 
-                        $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').addClass("show").insertAfter('[data-se="o-form-fieldset-userProfile.CloudMarketingOptin"]');
-
-                     } else {
-                        $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').removeClass("show");
-                     }
-                     enableLoginBtn();
-                  });
-               }
-            }
-
             const countrySelect = document.getElementById('tmp2');
-            countrySelect.addEventListener('focusin', function(event) {
-               if (event.target && event.target.matches('select')) {
-                  if(!$("select[name='userProfile.country'] option:selected").length>0){
-                     validateCountryDropdown(varLocaliztion);     
-                     disableLoginBtn();                                                                          
-                  }
-                     
-               }
-            });
-            countrySelect.addEventListener('change', function(event) {
-               if (event.target && event.target.matches('select')) {  
-                  const parentElement = event.target.parentElement.parentElement;
-                  $(parentElement).removeClass('o-form-has-errors'); 
-                  $("#country-error").remove();
-               }
-               if( $("select[name='userProfile.locale'] option:selected").length > 0) {
+            if (countrySelect) {
+               countrySelect.addEventListener ('change', function() {
                   enableLoginBtn();
-               }
-            });
-            
+                  if (event.target && event.target.matches('select')) {  
+                        const parentElement = event.target.parentElement.parentElement;
+                        $(parentElement).removeClass('o-form-has-errors'); 
+                        $("#country-error").remove();                              
+                  }
+                  if( $("select[name='userProfile.locale'] option:selected").length > 0) {
+                     enableLoginBtn();
+                  }
+               }); 
+               countrySelect.addEventListener('focusin', function(event) {
+                  if (event.target && event.target.matches('select')) {
+                     if(!$("select[name='userProfile.country'] option:selected").length>0){
+                        validateCountryDropdown(varLocaliztion);     
+                        disableLoginBtn();                                                                          
+                     }
+                  }
+               });
+            }
             if($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label").length>0){
                $($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label")[0]).html(varLocaliztion["var.lmsDataPrivacy"]);
                let lmsdatapriv = varLocaliztion["var.lmsDataPrivacy"].split(" ");
@@ -1666,8 +1240,8 @@
                $("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy']").after("<div style='margin-top:10px !important; display:none;'>I consent to share my training records with my employer and employer’s supplier of Shure products as outlined <a href=\"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\">here</a>.");                  
                $("select[name='userProfile.lmsDataPrivacy']")[0].selectedIndex = -1;
             }
-         
-            if($("div[data-se='o-form-fieldset-userProfile.locale'] label").length>0){
+
+            if($("div[data-se='o-form-fieldset-userProfile.locale'] label").length>0) {
                $($("div[data-se='o-form-fieldset-userProfile.locale'] label")[0]).html(varLocaliztion["var.language"]);
 
                $("input[name='userProfile.locale']").replaceWith('<select name="userProfile.locale" id="tmpLocale">' +
@@ -1715,23 +1289,35 @@
                   '<option value="ro_RO">Română (Romanian)</option>' +
                   '<option value="hi_IN">हिन्दी (Hindi)</option>' +
                   '</select>');
-
                $("select[name='userProfile.locale']")[0].selectedIndex = -1;
             }
             if($("div[data-se='o-form-fieldset-userProfile.lmsPartnerKey'] label").length>0) {
                $($("div[data-se='o-form-fieldset-userProfile.lmsPartnerKey'] label")[0]).html(varLocaliztion["var.lmsPartnerKey"]);
             }
-            
+
+            let localeSelect = $('select#tmp2');
+            if (localeSelect) {
+               localeSelect.on('change', function() {
+                  if (this.value === "China") {
+                     console.log('SHOW')
+                     $("label[data-se-for-name='userProfile.shurecloudTnC_China']").html(varLocaliztion["var.chinaConsent"]) 
+                     $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').addClass("show").insertAfter('[data-se="o-form-fieldset-userProfile.CloudMarketingOptin"]');
+
+                  } else {
+                     $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').removeClass("show");
+                  }
+                  enableLoginBtn();
+               });
+            }
             /* Adding validation to the country, locale dropdown for Shure Cloud */
-            const localeSelect = document.getElementById('tmpLocale');
+            localeSelect = document.getElementById('tmpLocale');
             if (localeSelect) {
                localeSelect.addEventListener('focusin', function(event) {
                   if (event.target && event.target.matches('select')) {
-                        if(!$("select[name='userProfile.locale'] option:selected").length>0){
-                           validateLocaleDropdown(varLocaliztion);   
-                           disableLoginBtn();                                                                      
-                        }
-                     
+                     if(!$("select[name='userProfile.locale'] option:selected").length>0){
+                        validateLocaleDropdown(varLocaliztion);
+                        disableLoginBtn();                                                                      
+                     }
                   }
                });
 
@@ -1747,6 +1333,404 @@
                });
             }
 
+            if (oktaData.requestContext.app.value.id == "0oa10clovtkL6pqgh0h8") {
+               if ($("div[data-se='o-form-fieldset-userProfile.primaryApplication'] span").length > 0) {
+                  $("input[name='userProfile.primaryApplication']").replaceWith('<select name="userProfile.primaryApplication" id="primaryApplication">' +
+                     '<option value="Theater">Theater</option>' +
+                     '<option value="Broadcast">Broadcast</option>' +
+                     '<option value="Film/Location Sound">TV/Film</option>' +
+                     '<option value="Touring Sound">Touring/Live Sound</option>' +
+                     '<option value="House of Worship">House of Worship</option>' +
+                     '<option value="AV Conferencing and Meetings">Conferencing/Meetings</option>' +
+                  '</select>');
+                  $("select[name='userProfile.primaryApplication']")[0].selectedIndex = -1;
+               }
+            }
+
+            // Salesforce Service Community
+            if (oktaAppId === salesforceServiceCommunityDev || oktaAppId == salesforceServiceCommunityStg) {
+               $("label[data-se-for-name='userProfile.salesforceTnC']").html("<div>I agree that I have read and accept the Service <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>");
+               $("input[name='userProfile.locale']").replaceWith('<select name="userProfile.locale" id="tmpLocale">' +
+                     '<option disabled selected value style="display:none"></option>' +
+                     '<option value="en_US">English</option>' +
+                     '<option value="es_ES">Spanish</option>' +
+                     '<option value="fr_FR">French</option>' +
+                     '<option value="nl_NL">Dutch</option>' +
+                     '<option value="de_DE">German</option>' +
+                     '<option value="ja_JP">Japanese</option>' +
+                     '<option value="zh_TW">Traditional Chinese/Mandarin</option>' +
+                     '</select>');
+               const langSelect = document.querySelector("select[name='userProfile.locale']");
+               if (langSelect) {
+                  langSelect.addEventListener('change', function(event) {
+                     if (event.target && event.target.matches('select')) {  
+                                 const parentElement = event.target.parentElement.parentElement;
+                                 $(parentElement).removeClass('o-form-has-errors'); 
+                                 $("#language-error").remove();                              
+                           }
+                           if( $(langSelect).val().length > 0)
+                           {
+                              enableLoginBtn();
+                           }
+                  });
+               }
+
+               $("input[name='userProfile.sf_timezone']").replaceWith('<select name="userProfile.sf_timezone">' +
+                  '<option value="America/Chicago">(GMT-05:00) Central Daylight Time (America/Chicago)</option>' +
+                  '<option value="Pacific/Kiritimati">(GMT+14:00) Line Islands Time (Pacific/Kiritimati)</option>' +
+                  '<option value="Pacific/Chatham">(GMT+13:45) Chatham Daylight Time (Pacific/Chatham)</option>' +
+                  '<option value="Pacific/Auckland">(GMT+13:00) New Zealand Daylight Time (Pacific/Auckland)</option>' +
+                  '<option value="Pacific/Enderbury">(GMT+13:00) Phoenix Islands Time (Pacific/Enderbury)</option>' +
+                  '<option value="Pacific/Tongatapu">(GMT+13:00) Tonga Standard Time (Pacific/Tongatapu)</option>' +
+                  '<option value="Asia/Kamchatka">(GMT+12:00) Petropavlovsk-Kamchatski Standard Time (Asia/Kamchatka)</option>' +
+                  '<option value="Pacific/Fiji">(GMT+12:00) Fiji Standard Time (Pacific/Fiji)</option>' +
+                  '<option value="Pacific/Guadalcanal">(GMT+11:00) Solomon Islands Time (Pacific/Guadalcanal)</option>' +
+                  '<option value="Pacific/Norfolk">(GMT+11:00) Norfolk Island Standard Time (Pacific/Norfolk)</option>' +
+                  '<option value="Australia/Lord_Howe">(GMT+10:30) Lord Howe Standard Time (Australia/Lord_Howe)</option>' +
+                  '<option value="Australia/Brisbane">(GMT+10:00) Australian Eastern Standard Time (Australia/Brisbane)</option>' +
+                  '<option value="Australia/Sydney">(GMT+10:00) Australian Eastern Standard Time (Australia/Sydney)</option>' +
+                  '<option value="Australia/Adelaide">(GMT+09:30) Australian Central Standard Time (Australia/Adelaide)</option>' +
+                  '<option value="Australia/Darwin">(GMT+09:30) Australian Central Standard Time (Australia/Darwin)</option>' +
+                  '<option value="Asia/Seoul">(GMT+09:00) Korean Standard Time (Asia/Seoul)</option>' +
+                  '<option value="Asia/Tokyo">(GMT+09:00) Japan Standard Time (Asia/Tokyo)</option>' +
+                  '<option value="Asia/Hong_Kong">(GMT+08:00) Hong Kong Standard Time (Asia/Hong_Kong)</option>' +
+                  '<option value="Asia/Kuala_Lumpur">(GMT+08:00) Malaysia Time (Asia/Kuala_Lumpur)</option>' +
+                  '<option value="Asia/Manila">(GMT+08:00) Philippine Standard Time (Asia/Manila)</option>' +
+                  '<option value="Asia/Shanghai">(GMT+08:00) China Standard Time (Asia/Shanghai)</option>' +
+                  '<option value="Asia/Singapore">(GMT+08:00) Singapore Standard Time (Asia/Singapore)</option>' +
+                  '<option value="Asia/Taipei">(GMT+08:00) Taipei Standard Time (Asia/Taipei)</option>' +
+                  '<option value="Australia/Perth">(GMT+08:00) Australian Western Standard Time (Australia/Perth)</option>' +
+                  '<option value="Asia/Bangkok">(GMT+07:00) Indochina Time (Asia/Bangkok)</option>' +
+                  '<option value="Asia/Ho_Chi_Minh">(GMT+07:00) Indochina Time (Asia/Ho_Chi_Minh)</option>' +
+                  '<option value="Asia/Jakarta">(GMT+07:00) Western Indonesia Time (Asia/Jakarta)</option>' +
+                  '<option value="Asia/Rangoon">(GMT+06:30) Myanmar Time (Asia/Rangoon)</option>' +
+                  '<option value="Asia/Dhaka">(GMT+06:00) Bangladesh Standard Time (Asia/Dhaka)</option>' +
+                  '<option value="Asia/Kathmandu">(GMT+05:45) Nepal Time (Asia/Kathmandu)</option>' +
+                  '<option value="Asia/Colombo">(GMT+05:30) India Standard Time (Asia/Colombo)</option>' +
+                  '<option value="Asia/Kolkata">(GMT+05:30) India Standard Time (Asia/Kolkata)</option>' +
+                  '<option value="Asia/Karachi">(GMT+05:00) Pakistan Standard Time (Asia/Karachi)</option>' +
+                  '<option value="Asia/Tashkent">(GMT+05:00) Uzbekistan Standard Time (Asia/Tashkent)</option>' +
+                  '<option value="Asia/Yekaterinburg">(GMT+05:00) Yekaterinburg Standard Time (Asia/Yekaterinburg)</option>' +
+                  '<option value="Asia/Kabul">(GMT+04:30) Afghanistan Time (Asia/Kabul)</option>' +
+                  '<option value="Asia/Baku">(GMT+04:00) Azerbaijan Standard Time (Asia/Baku)</option>' +
+                  '<option value="Asia/Dubai">(GMT+04:00) Gulf Standard Time (Asia/Dubai)</option>' +
+                  '<option value="Asia/Tbilisi">(GMT+04:00) Georgia Standard Time (Asia/Tbilisi)</option>' +
+                  '<option value="Asia/Yerevan">(GMT+04:00) Armenia Standard Time (Asia/Yerevan)</option>' +
+                  '<option value="Africa/Cairo">(GMT+03:00) Eastern European Standard Time (Africa/Cairo)</option>' +
+                  '<option value="Africa/Nairobi">(GMT+03:00) East Africa Time (Africa/Nairobi)</option>' +
+                  '<option value="Asia/Baghdad">(GMT+03:00) Arabian Standard Time (Asia/Baghdad)</option>' +
+                  '<option value="Asia/Beirut">(GMT+03:00) Eastern European Summer Time (Asia/Beirut)</option>' +
+                  '<option value="Asia/Jerusalem">(GMT+03:00) Israel Daylight Time (Asia/Jerusalem)</option>' +
+                  '<option value="Asia/Kuwait">(GMT+03:00) Arabian Standard Time (Asia/Kuwait)</option>' +
+                  '<option value="Asia/Riyadh">(GMT+03:00) Arabian Standard Time (Asia/Riyadh)</option>' +
+                  '<option value="Europe/Athens">(GMT+03:00) Eastern European Summer Time (Europe/Athens)</option>' +
+                  '<option value="Europe/Bucharest">(GMT+03:00) Eastern European Summer Time (Europe/Bucharest)</option>' +
+                  '<option value="Europe/Helsinki">(GMT+03:00) Eastern European Summer Time (Europe/Helsinki)</option>' +
+                  '<option value="Europe/Istanbul">(GMT+03:00) Eastern European Standard Time (Europe/Istanbul)</option>' +
+                  '<option value="Europe/Minsk">(GMT+03:00) Moscow Standard Time (Europe/Minsk)</option>' +
+                  '<option value="Europe/Moscow">(GMT+03:00) Moscow Standard Time (Europe/Moscow)</option>' +
+                  '<option value="Africa/Johannesburg">(GMT+02:00) South Africa Standard Time (Africa/Johannesburg)</option>' +
+                  '<option value="Europe/Amsterdam">(GMT+02:00) Central European Summer Time (Europe/Amsterdam)</option>' +
+                  '<option value="Europe/Berlin">(GMT+02:00) Central European Summer Time (Europe/Berlin)</option>' +
+                  '<option value="Europe/Brussels">(GMT+02:00) Central European Summer Time (Europe/Brussels)</option>' +
+                  '<option value="Europe/Paris">(GMT+02:00) Central European Summer Time (Europe/Paris)</option>' +
+                  '<option value="Europe/Prague">(GMT+02:00) Central European Summer Time (Europe/Prague)</option>' +
+                  '<option value="Europe/Rome">(GMT+02:00) Central European Summer Time (Europe/Rome)</option>' +
+                  '<option value="Africa/Algiers">(GMT+01:00) Central European Standard Time (Africa/Algiers)</option>' +
+                  '<option value="Africa/Casablanca">(GMT+01:00) Western European Summer Time (Africa/Casablanca)</option>' +
+                  '<option value="Europe/Dublin">(GMT+01:00) Irish Standard Time (Europe/Dublin)</option>' +
+                  '<option value="Europe/Lisbon">(GMT+01:00) Western European Summer Time (Europe/Lisbon)</option>' +
+                  '<option value="Europe/London">(GMT+01:00) British Summer Time (Europe/London)</option>' +
+                  '<option value="Atlantic/Azores">(GMT+00:00) Azores Summer Time (Atlantic/Azores)</option>' +
+                  '<option value="GMT">(GMT+00:00) Greenwich Mean Time (GMT)</option>' +
+                  '<option value="America/Scoresbysund">(GMT-01:00) East Greenland Summer Time (America/Scoresbysund)</option>' +
+                  '<option value="Atlantic/Cape_Verde">(GMT-01:00) Cape Verde Standard Time (Atlantic/Cape_Verde)</option>' +
+                  '<option value="Atlantic/South_Georgia">(GMT-02:00) South Georgia Time (Atlantic/South_Georgia)</option>' +
+                  '<option value="America/St_Johns">(GMT-02:30) Newfoundland Daylight Time (America/St_Johns)</option>' +
+                  '<option value="America/Argentina/Buenos_Aires">(GMT-03:00) Argentina Standard Time (America/Argentina/Buenos_Aires)</option>' +
+                  '<option value="America/Halifax">(GMT-03:00) Atlantic Daylight Time (America/Halifax)</option>' +
+                  '<option value="America/Santiago">(GMT-03:00) Chile Summer Time (America/Santiago)</option>' +
+                  '<option value="America/Sao_Paulo">(GMT-03:00) Brasilia Standard Time (America/Sao_Paulo)</option>' +
+                  '<option value="Atlantic/Bermuda">(GMT-03:00) Atlantic Daylight Time (Atlantic/Bermuda)</option>' +
+                  '<option value="America/Caracas">(GMT-04:00) Venezuela Time (America/Caracas)</option>' +
+                  '<option value="America/Indiana/Indianapolis">(GMT-04:00) Eastern Daylight Time (America/Indiana/Indianapolis)</option>' +
+                  '<option value="America/New_York">(GMT-04:00) Eastern Daylight Time (America/New_York)</option>' +
+                  '<option value="America/Puerto_Rico">(GMT-04:00) Atlantic Standard Time (America/Puerto_Rico)</option>' +
+                  '<option value="America/Bogota">(GMT-05:00) Colombia Standard Time (America/Bogota)</option>' +
+                  '<option value="America/Lima">(GMT-05:00) Peru Standard Time (America/Lima)</option>' +
+                  '<option value="America/Panama">(GMT-05:00) Eastern Standard Time (America/Panama)</option>' +
+                  '<option value="America/Denver">(GMT-06:00) Mountain Daylight Time (America/Denver)</option>' +
+                  '<option value="America/El_Salvador">(GMT-06:00) Central Standard Time (America/El_Salvador)</option>' +
+                  '<option value="America/Mexico_City">(GMT-06:00) Central Standard Time (America/Mexico_City)</option>' +
+                  '<option value="America/Los_Angeles">(GMT-07:00) Pacific Daylight Time (America/Los_Angeles)</option>' +
+                  '<option value="America/Mazatlan">(GMT-07:00) Mexican Pacific Standard Time (America/Mazatlan)</option>' +
+                  '<option value="America/Phoenix">(GMT-07:00) Mountain Standard Time (America/Phoenix)</option>' +
+                  '<option value="America/Tijuana">(GMT-07:00) Pacific Daylight Time (America/Tijuana)</option>' +
+                  '<option value="America/Anchorage">(GMT-08:00) Alaska Daylight Time (America/Anchorage)</option>' +
+                  '<option value="Pacific/Pitcairn">(GMT-08:00) Pitcairn Time (Pacific/Pitcairn)</option>' +
+                  '<option value="America/Adak">(GMT-09:00) Hawaii-Aleutian Daylight Time (America/Adak)</option>' +
+                  '<option value="Pacific/Gambier">(GMT-09:00) Gambier Time (Pacific/Gambier)</option>' +
+                  '<option value="Pacific/Marquesas">(GMT-09:30) Marquesas Time (Pacific/Marquesas)</option>' +
+                  '<option value="Pacific/Honolulu">(GMT-10:00) Hawaii-Aleutian Standard Time (Pacific/Honolulu)</option>' +
+                  '<option value="Pacific/Niue">(GMT-11:00) Niue Time (Pacific/Niue)</option>' +
+                  '<option value="Pacific/Pago_Pago">(GMT-11:00) Samoa Standard Time (Pacific/Pago_Pago)</option>' +
+                     '</select>');
+
+               $('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').change(function() {
+                  if(this.checked) {
+                     $("[data-se='o-form-fieldset-userProfile.salesforcePartnerNum']").addClass("show");
+                  }
+               });
+
+               $('div[data-se="o-form-fieldset-userProfile.salesforcePartnerNum"] div[data-se="o-form-input-container"]').append("<span style='font-size: 12px'>For assistance with your account number please contact your Shure Rep.</span>")
+
+
+               $('input[name="userProfile.salesforcePartnerNum"]').on("blur", function() {
+                  if (this.value.length > 0) {
+                     const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
+                        const parentElement = element.parentElement.parentElement;
+                        if($(parentElement).find("#account-error").length>0){
+                           $(parentElement).removeClass('o-form-has-errors');
+                           $("#account-error").remove();   
+                           enableLoginBtn();
+                        }
+                  }
+               });
+
+               $('input[data-se-name="userProfile.sf_servicePartner"][value="false"]').change(function() {
+                  if(this.checked) {
+                     $("[data-se='o-form-fieldset-userProfile.salesforcePartnerNum']").removeClass("show");
+                     const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
+                     const parentElement = element.parentElement.parentElement;
+                     if($(parentElement).find("#account-error").length>0){
+                        $(parentElement).removeClass('o-form-has-errors');
+                        $("#account-error").remove();   
+                        enableLoginBtn();
+                     }
+                  }
+               });
+
+               if ($("div[data-se='o-form-fieldset-userProfile.firstName'] label").length > 0) {
+                  $("div[data-se='o-form-fieldset-userProfile.firstName'] label").html(varLocaliztion["var.firstName"]);
+               }
+
+               if ($("div[data-se='o-form-fieldset-userProfile.lastName'] label").length > 0) {
+                  $("div[data-se='o-form-fieldset-userProfile.lastName'] label").html(varLocaliztion["var.lastName"]);
+               }
+
+               if ($("div[data-se='o-form-fieldset-userProfile.email'] label").length > 0) {
+                  $("div[data-se='o-form-fieldset-userProfile.email'] label").html(
+                     varLocaliztion["var.email"]
+                  );
+               }
+
+
+               if ($("div[data-se='o-form-fieldset-userProfile.country'] label").length > 0) {
+                  $("div[data-se='o-form-fieldset-userProfile.country'] label").html(
+                     varLocaliztion["var.country"]
+                  );
+               }
+
+               if ($("div[data-se='o-form-fieldset-userProfile.sf_servicePartner'] .o-form-label").length > 0) {
+                  $("div[data-se='o-form-fieldset-userProfile.sf_servicePartner'] .o-form-label").html(
+                     varLocaliztion["var.shureDealer"]
+                  );
+               }
+
+               if ($("div[data-se='o-form-fieldset-userProfile.sfserv_language'] label").length > 0) {
+                  $("div[data-se='o-form-fieldset-userProfile.sfserv_language'] label").html(
+                     varLocaliztion["var.sfservLanguage"]
+                  );
+               }
+
+               if ($("div[data-se='o-form-fieldset-userProfile.sf_timezone'] label").length > 0) {
+                  $("div[data-se='o-form-fieldset-userProfile.sf_timezone'] label").html(
+                     varLocaliztion["var.timezone"]
+                  );
+               }
+
+               if ($("div[data-se='o-form-fieldset-userProfile.primaryPhone'] label").length > 0) {
+                  $("div[data-se='o-form-fieldset-userProfile.primaryPhone'] label").html(
+                     varLocaliztion["var.phone"]
+                  );
+               }
+
+               if ($("div[data-se='o-form-fieldset-userProfile.salesforcePartnerNum'] label").length > 0) {
+                  $("div[data-se='o-form-fieldset-userProfile.salesforcePartnerNum'] label").html(
+                     varLocaliztion["var.accountNumber"]
+                  );
+               }
+
+               $("input[name='userProfile.country']").replaceWith('<select name="userProfile.country" id="tmp2">' +
+                  '<option value="Afghanistan">Afghanistan</option>' +
+                  '<option value="Albania">Albania</option>' +
+                  '<option value="Algeria">Algeria</option>' +
+                  '<option value="Argentina">Argentina</option>' +
+                  '<option value="Armenia">Armenia</option>' +
+                  '<option value="Australia">Australia</option>' +
+                  '<option value="Austria">Austria</option>' +
+                  '<option value="Azerbaijan">Azerbaijan</option>' +
+                  '<option value="Bangladesh">Bangladesh</option>' +
+                  '<option value="Barbados">Barbados</option>' +
+                  '<option value="Belgium">Belgium</option>' +
+                  '<option value="Bermuda">Bermuda</option>' +
+                  '<option value="Bolivia, Plurinational State of">Bolivia</option>' +
+                  '<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>' +
+                  '<option value="Brazil">Brazil</option>' +
+                  '<option value="Virgin Islands, British">British Virgin Islands</option>' + 
+                  '<option value="American Virgin Islands">U.S. Virgin Islands</option>' + 
+                  '<option value="Bulgaria">Bulgaria</option>' +
+                  '<option value="Cambodia">Cambodia</option>' +
+                  '<option value="Cameroon">Cameroon</option>' +
+                  '<option value="Canada">Canada</option>' +
+                  '<option value="Cayman Islands">Cayman Islands</option>' +
+                  '<option value="Chile">Chile</option>' +
+                  '<option value="China">China</option>' +
+                  '<option value="Colombia">Colombia</option>' +
+                  '<option value="Congo, the Democratic Republic of the">Democratic Republic of the Congo</option>' +
+                  '<option value="Costa Rica">Costa Rica</option>' +
+                  '<option value="Cote d\'Ivoire">Cote d\'Ivoire</option>' +
+                  '<option value="Croatia">Croatia</option>' +
+                  '<option value="Curacao">Curacao</option>' +
+                  '<option value="Cyprus">Cyprus</option>' +
+                  '<option value="Czech Republic">Czech Republic</option>' +
+                  '<option value="Denmark">Denmark</option>' +
+                  '<option value="Dominican Republic">Dominican Republic</option>' +
+                  '<option value="Ecuador">Ecuador</option>' +
+                  '<option value="Egypt">Egypt</option>' +
+                  '<option value="El Salvador">El Salvador</option>' +
+                  '<option value="Estonia">Estonia</option>' +
+                  '<option value="Ethiopia">Ethiopia</option>' +
+                  '<option value="Falkland Islands">Falkland Islands (Malvinas)</option>' +
+                  '<option value="Fiji">Fiji</option>' +
+                  '<option value="Finland">Finland</option>' +
+                  '<option value="France">France</option>' +
+                  '<option value="Georgia">Georgia</option>' +
+                  '<option value="Germany">Germany</option>' +
+                  '<option value="Ghana">Ghana</option>' +
+                  '<option value="Greece">Greece</option>' +
+                  '<option value="Guatemala">Guatemala</option>' +
+                  '<option value="Guinea">Guinea</option>' +
+                  '<option value="Honduras">Honduras</option>' +
+                  '<option value="Hong Kong S.A.R.">Hong Kong S.A.R.</option>' +
+                  '<option value="Hungary">Hungary</option>' +
+                  '<option value="Iceland">Iceland</option>' +
+                  '<option value="India">India</option>' +
+                  '<option value="Indonesia">Indonesia</option>' +
+                  '<option value="Ireland">Ireland</option>' +
+                  '<option value="Israel">Israel</option>' +
+                  '<option value="Italy">Italy</option>' +
+                  '<option value="Jamaica">Jamaica</option>' +
+                  '<option value="Japan">Japan</option>' +
+                  '<option value="Jordan">Jordan</option>' +
+                  '<option value="Kazakhstan">Kazakhstan</option>' +
+                  '<option value="Kenya">Kenya</option>' +
+                  '<option value="Korea, Republic of">South Korea</option>' +
+                  '<option value="Kuwait">Kuwait</option>' +
+                  '<option value="Latvia">Latvia</option>' +
+                  '<option value="Lao People’s Democratic Republic">Laos</option>' +
+                  '<option value="Lebanon">Lebanon</option>' +
+                  '<option value="Lithuania">Lithuania</option>' +
+                  '<option value="Luxembourg">Luxembourg</option>' +
+                  '<option value="Macau">Macau</option>' +
+                  '<option value="Macedonia, the former Yugoslav Republic of">Macedonia</option>' +
+                  '<option value="Malawi">Malawi</option>' +
+                  '<option value="Malaysia">Malaysia</option>' +
+                  '<option value="Maldives">Maldives</option>' +
+                  '<option value="Malta">Malta</option>' +
+                  '<option value="Mauritius">Mauritius</option>' +
+                  '<option value="Mexico">Mexico</option>' +
+                  '<option value="Moldova, Republic of">Moldova</option>' +
+                  '<option value="Mongolia">Mongolia</option>' +
+                  '<option value="Montenegro">Montenegro</option>' +
+                  '<option value="Morocco">Morocco</option>' +
+                  '<option value="Mozambique">Mozambique</option>' +
+                  '<option value="Myanmar">Myanmar</option>' +
+                  '<option value="Nepal">Nepal</option>' +
+                  '<option value="Netherlands">Netherlands</option>' +
+                  '<option value="New Zealand">New Zealand</option>' +
+                  '<option value="Nicaragua">Nicaragua</option>' +
+                  '<option value="Nigeria">Nigeria</option>' +
+                  '<option value="Norway">Norway</option>' +
+                  '<option value="Oman">Oman</option>' +
+                  '<option value="Pakistan">Pakistan</option>' +
+                  '<option value="Palestinian Territory">Palestine Territory, Occupied</option>' +
+                  '<option value="Panama">Panama</option>' +
+                  '<option value="Paraguay">Paraguay</option>' +
+                  '<option value="Peru">Peru</option>' +
+                  '<option value="Philippines">Philippines</option>' +
+                  '<option value="Poland">Poland</option>' +
+                  '<option value="Portugal">Portugal</option>' +
+                  '<option value="Puerto Rico">Puerto Rico</option>' +
+                  '<option value="Qatar">Qatar</option>' +
+                  '<option value="Réunion">Reunion</option>' +
+                  '<option value="Romania">Romania</option>' +
+                  '<option value="Samoa">Samoa</option>' +
+                  '<option value="Saudi Arabia">Saudi Arabia</option>' +
+                  '<option value="Serbia and Montenegro (Former)">Serbia and Montenegro (Former)</option>' +
+                  '<option value="Seychelles">Seychelles</option>' +
+                  '<option value="Singapore">Singapore</option>' +
+                  '<option value="Slovakia">Slovakia</option>' +
+                  '<option value="Slovenia">Slovenia</option>' +
+                  '<option value="South Africa">South Africa</option>' +
+                  '<option value="Sudan">Sudan</option>' +
+                  '<option value="Spain">Spain</option>' +
+                  '<option value="Sri Lanka">Sri Lanka</option>' +
+                  '<option value="Sweden">Sweden</option>' +
+                  '<option value="Switzerland">Switzerland</option>' +
+                  '<option value="Taiwan">Chinese Taipei</option>' +
+                  '<option value="Tanzania">Tanzania, United Republic of</option>' +
+                  '<option value="Thailand">Thailand</option>' +
+                  '<option value="Trinidad and Tobago">Trinidad and Tobago</option>' +
+                  '<option value="Tunisia">Tunisia</option>' +
+                  '<option value="Turkey">Turkey</option>' +
+                  '<option value="Uganda">Uganda</option>' +
+                  '<option value="U.A.E.">U.A.E.</option>' +
+                  '<option value="United Kingdom">United Kingdom</option>' +
+                  '<option value="United States">United States</option>' +
+                  '<option value="Uruguay">Uruguay</option>' +
+                  '<option value="Venezuela">Venezuela</option>' +
+                  '<option value="Viet Nam">Vietnam</option>' +
+                  '<option value="Zambia">Zambia</option>' +
+                  '<option value="Zimbabwe">Zimbabwe</option>' +
+                  '</select>');
+            
+               $("select[name='userProfile.country']")[0].selectedIndex = -1;
+            }
+
+            if (oktaData.requestContext.app.value.id == "0oas4uaj2mDDcNivh0h7") {
+               document.querySelectorAll("[data-se='o-form-fieldset-userProfile.language_sf']")[0].style.display = "none";
+               document.querySelectorAll("[data-se='o-form-fieldset-userProfile.sfserv_region']")[0].style.display = "none";
+               let registerBtn = document.getElementsByClassName("button button-primary")[0];
+               let partnerNumberBox = document.querySelector('[data-se="o-form-fieldset-userProfile.salesforcePartnerNum"]');
+               let partnerNumText = document.getElementsByName('userProfile.salesforcePartnerNum')[0];
+               partnerNumberBox.style.display = "none";
+               let contentBox = document.querySelector('[data-se="o-form-content"]');
+               let isPartner = document.createElement("INPUT");
+
+               isPartner.setAttribute("type", "checkbox");
+               isPartner.setAttribute("value", "Are you a Shure Partner?");
+               isPartner.setAttribute("id", "shure-partner-checkbox")
+               let partnerLabel = document.createElement("label");
+               partnerLabel.setAttribute("for", 'shure-partner-checkbox');
+               partnerLabel.innerHTML = " Are you a Shure Partner?";
+
+               partnerNumberBox.parentNode.insertBefore(isPartner, partnerNumberBox);
+               isPartner.parentNode.insertBefore(partnerLabel, isPartner.nextSibling)
+
+               isPartner.addEventListener('change', function() {
+                  if (this.checked) {
+                     partnerNumberBox.style.display = "block";
+                     
+                     let optionalboxes = document.getElementsByClassName("o-form-explain")
+                     optionalboxes.forEach( (el) => {
+                        el.style.display = "none";
+                     });
+                  } else {
+                     partnerNumberBox.style.display = "none";
+                  }
+               });
+            }
          }
 
          const jobSelect = document.querySelector('select[name="userProfile.title"]');
@@ -1876,15 +1860,15 @@
 
       /* Check if the CAPTCHA has been completed successfully before allowing the form to submit */
       let oktaFormSubmit = () => {
-           if (window.captchaVerified) {
-             let response = grecaptcha.getResponse();
-             if (response.length > 0) {
-               return true;
-             } else {
-               console.log(response.length);
-             }
-           }
+         if (window.captchaVerified) {
+            let response = grecaptcha.getResponse();
+            if (response.length > 0) {
+            return true;
+            } else {
+            console.log(response.length);
+            }
          }
+      }
    </script>
    </body>
 </html>
