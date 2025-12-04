@@ -1031,7 +1031,6 @@
                   });
                }
 
-
                $("input[name='userProfile.sf_timezone']").replaceWith('<select name="userProfile.sf_timezone">' +
                   '<option value="America/Chicago">(GMT-05:00) Central Daylight Time (America/Chicago)</option>' +
                   '<option value="Pacific/Kiritimati">(GMT+14:00) Line Islands Time (Pacific/Kiritimati)</option>' +
@@ -1131,9 +1130,7 @@
                   '<option value="Pacific/Honolulu">(GMT-10:00) Hawaii-Aleutian Standard Time (Pacific/Honolulu)</option>' +
                   '<option value="Pacific/Niue">(GMT-11:00) Niue Time (Pacific/Niue)</option>' +
                   '<option value="Pacific/Pago_Pago">(GMT-11:00) Samoa Standard Time (Pacific/Pago_Pago)</option>' +
-                     //'<option value="">Other</option>' +
                    '</select>');
-
 
                   $('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').change(function() {
                      if(this.checked) {
@@ -1168,7 +1165,6 @@
                         }
                      }
                   });
-
 
                   if ($("div[data-se='o-form-fieldset-userProfile.firstName'] label").length > 0) {
                      $("div[data-se='o-form-fieldset-userProfile.firstName'] label").html(varLocaliztion["var.firstName"]);
@@ -1220,7 +1216,6 @@
                         varLocaliztion["var.accountNumber"]
                      );
                   }
-
 
                      $("input[name='userProfile.country']").replaceWith('<select name="userProfile.country" id="tmp2">' +
                        '<option value="Afghanistan">Afghanistan</option>' +
@@ -1354,12 +1349,9 @@
                        '<option value="Viet Nam">Vietnam</option>' +
                        '<option value="Zambia">Zambia</option>' +
                        '<option value="Zimbabwe">Zimbabwe</option>' +
-         
                        '</select>');
                  
                     $("select[name='userProfile.country']")[0].selectedIndex = -1;
-
-               
             }
 
             if (oktaData.requestContext.app.value.id == "0oas4uaj2mDDcNivh0h7") {
