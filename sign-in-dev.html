@@ -100,7 +100,6 @@
          .agree-modal:disabled {
             color: #8c8c8e;
          }
-         #okta-sign-in.auth-container .o-form-explain.okta-form-input-error {padding-top: 28px;}
          #shure-unified-registration #okta-login-container #okta-sign-in .auth-org-logo {max-height: 60px;}
          #okta-login-container {margin: 16px;}
 
@@ -1204,6 +1203,52 @@
                   '</select>');
             
                $("select[name='userProfile.country']")[0].selectedIndex = -1;
+            }
+
+            // Allow Unicode letters, marks, and specified special characters in NAME fields
+            const nameInputs = ['userProfile.firstName', 'userProfile.lastName', 'userProfile.OIDCDisplayName'];
+            const allowedOrSpecialRegex = /([\-_'’ .\/]|[\p{L}\p{M}])/u;
+            nameInputs.forEach(function(nameInput) {
+               const inputElement = document.querySelector(`input[name='${nameInput}']`);
+               if (inputElement) {
+                  inputElement.setAttribute('maxlength', '50');
+                  let isComposing = false;
+                  inputElement.addEventListener('compositionstart', function() {
+                     isComposing = true;
+                  });
+                  inputElement.addEventListener('compositionend', function() {
+                     isComposing = false;
+                     filterNameInput(inputElement);
+                  });
+                  inputElement.addEventListener('input', function(e) {
+                     if (!isComposing) {
+                        filterNameInput(inputElement);
+                     }
+                  });
+               }
+            });
+
+            function filterNameInput(inputElement) {
+               let value = inputElement.value;
+               let filtered = '';
+               let lastWasSpecial = false;
+               for (let char of value.normalize('NFC')) {
+                  if (allowedOrSpecialRegex.test(char)) {
+                     if (/^[\-_'’ .\/]$/.test(char)) {
+                        if (!lastWasSpecial && filtered.length > 0) {
+                           filtered += char;
+                           lastWasSpecial = true;
+                        }
+                     } else {
+                        filtered += char;
+                        lastWasSpecial = false;
+                     }
+                  }
+               }
+               filtered = filtered.replace(/^[\-_'’ .\/]+/, '');
+               if (filtered !== value) {
+                  inputElement.value = filtered;
+               }
             }
 
             const countrySelect = document.getElementById('tmp2');
