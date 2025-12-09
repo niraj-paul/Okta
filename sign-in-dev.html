@@ -778,15 +778,17 @@
       };
       /* Adding validation to the country, locale dropdown for Shure Cloud */
       function validateCountryDropdown(varLocaliztion) {
-        element = document.getElementById("tmp2");
-        const parentElement = element.parentElement.parentElement;
-        if (!$(parentElement).find("#country-error").length > 0) {
-          htmlString = '<p id="country-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
-            varLocaliztion["var.error"] +
-          '</p>';
-          $(parentElement).append(htmlString);
-          $(parentElement).addClass("o-form-has-errors");
-        }
+         const selectElement = document.getElementById("tmp2");
+         if (selectElement && selectElement.selectedIndex < 0) {
+            const parentElement = selectElement.parentElement.parentElement;
+            if (!$(parentElement).find("#country-error").length > 0) {
+               htmlString = '<p id="country-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
+                  varLocaliztion["var.error"] +
+               '</p>';
+               $(parentElement).append(htmlString);
+               $(parentElement).addClass("o-form-has-errors");
+            }
+         }
         return true;
       }
 
@@ -802,15 +804,17 @@
         return true;
       }
       function validateLocaleDropdown(varLocaliztion) {
-        element = document.getElementById("tmpLocale");
-        const parentElement = element.parentElement.parentElement;
-        if (!$(parentElement).find("#locale-error").length > 0) {
-          htmlString = '<p id="locale-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
-            varLocaliztion["var.error"] +
-          '</p>';
-          $(parentElement).append(htmlString);
-          $(parentElement).addClass("o-form-has-errors");
-        }
+         const selectElement = document.getElementById("tmpLocale");
+         if (selectElement && selectElement.selectedIndex < 0) {
+            const parentElement = selectElement.parentElement.parentElement;
+            if (!$(parentElement).find("#locale-error").length > 0) {
+               htmlString = '<p id="locale-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
+                  varLocaliztion["var.error"] +
+               '</p>';
+               $(parentElement).append(htmlString);
+               $(parentElement).addClass("o-form-has-errors");
+            }
+         }
         return true;
       }
 
@@ -950,8 +954,6 @@
          { el: "#okta-login-container" },
          OktaUtil.completeLogin,
          function (error) {
-            // Logs errors that occur when configuring the widget.
-            // Remove or replace this with your own custom error handler.
             console.log(error.message, error);
          }
       );
@@ -1266,10 +1268,8 @@
                }); 
                countrySelect.addEventListener('focusin', function(event) {
                   if (event.target && event.target.matches('select')) {
-                     if(!$("select[name='userProfile.country'] option:selected").length>0){
-                        validateCountryDropdown(varLocaliztion);     
-                        disableLoginBtn();                                                                          
-                     }
+                     validateCountryDropdown(varLocaliztion);
+                     // disableLoginBtn();
                   }
                });
             }
@@ -1288,7 +1288,6 @@
 
             if($("div[data-se='o-form-fieldset-userProfile.locale'] label").length>0) {
                $($("div[data-se='o-form-fieldset-userProfile.locale'] label")[0]).html(varLocaliztion["var.language"]);
-
                $("input[name='userProfile.locale']").replaceWith('<select name="userProfile.locale" id="tmpLocale">' +
                   '<option value="en_US">English</option>' +
                   '<option value="es_ES">Español (Spanish)</option>' +
@@ -1347,7 +1346,6 @@
                      console.log('SHOW')
                      $("label[data-se-for-name='userProfile.shurecloudTnC_China']").html(varLocaliztion["var.chinaConsent"]) 
                      $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').addClass("show").insertAfter('[data-se="o-form-fieldset-userProfile.CloudMarketingOptin"]');
-
                   } else {
                      $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').removeClass("show");
                   }
@@ -1359,10 +1357,8 @@
             if (localeSelect) {
                localeSelect.addEventListener('focusin', function(event) {
                   if (event.target && event.target.matches('select')) {
-                     if(!$("select[name='userProfile.locale'] option:selected").length>0){
-                        validateLocaleDropdown(varLocaliztion);
-                        disableLoginBtn();                                                                      
-                     }
+                     validateLocaleDropdown(varLocaliztion);
+                     // disableLoginBtn();
                   }
                });
 
@@ -1825,15 +1821,12 @@
          }
       });
 
-      let loadCAPTCHA = () => {
+      const loadCAPTCHA = () => {
          const oktaId = document.getElementsByTagName('form')[0];
          oktaId.addEventListener('submit', (event) => {checkCaptcha(event)});
          document.querySelector('form input[type="submit"]').addEventListener("click", (event) => {
             const canSubmit = checkCaptcha(event);
-         
-            if (!canSubmit) {
-               event.preventDefault();
-            }
+            if (!canSubmit) event.preventDefault();
             return;
          });
          const oktaLoginBtn = $(".button.button-primary");
@@ -1842,7 +1835,7 @@
          captchaDiv.setAttribute('id','captchaDiv');
          captchaDiv.className = 'h-captcha';
          captchaDiv.style.margin = 'auto';
-         captchaDiv.style.width = '96%';
+         captchaDiv.style.width = '302px';
          captchaDiv.style.paddingBottom = '10px';
          captchaDiv.setAttribute('data-sitekey','3b9c1f8a-dd7c-4846-9ac6-a4aaac747df0');
          captchaDiv.setAttribute('data-callback', 'captchaDone');
@@ -1852,18 +1845,20 @@
          captchaScript.src = 'https://js.hcaptcha.com/1/api.js';
          captchaScript.setAttribute("nonce", "");
          htmlBody.appendChild(captchaScript);
-         //debugger;
          disableLoginBtn();
       };
 
       window.captchaDone = (value) => {
          if (value && value.length > 1) {
+            enableLoginBtn();
             $("#showError").hide();
          }
       }
 
-      let checkCaptcha = (event) => {
+      const checkCaptcha = (event) => {
          if (window.hcaptcha.getResponse() && window.hcaptcha.getResponse().length > 1) {
+            validateCountryDropdown(varLocaliztion);
+            validateLocaleDropdown(varLocaliztion);
             return true;           
          } else {
             event.preventDefault();
@@ -1879,41 +1874,43 @@
       
       };
 
-      window.verifyCaptcha = () => {
-         enableLoginBtn();
-         window.captchaVerified = true;
-         if (!($("select[name='userProfile.locale'] option:selected").length > 0)) validateLangDropdown(varLocaliztion);
-         if ($('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').is(":checked") && $('input[name="userProfile.salesforcePartnerNum"]').val().length === 0) validateAccountNumber(varLocaliztion);
-         if (!($("select[name='userProfile.country'] option:selected").length > 0)) validateCountryDropdown(varLocaliztion);
-         if (!($("select[name='userProfile.locale'] option:selected").length > 0)) validateLocaleDropdown(varLocaliztion);
-         if (!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"), varLocaliztion);
-         if (!($("select[name='userProfile.title'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.title']"), varLocaliztion);
-         if(!( $("select[name='userProfile.country'] option:selected").length > 0) || !($("select[name='userProfile.locale'] option:selected").length > 0) ||  $("select[name='userProfile.sfserv_language'] option:selected").val().length === 0) disableLoginBtn();
-         if(!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"), varLocaliztion);
-         if(!($("select[name='userProfile.title'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.title']"), varLocaliztion);
+      // window.verifyCaptcha = () => {
+      //    enableLoginBtn();
+      //    window.captchaVerified = true;
+      //    if (!($("select[name='userProfile.locale'] option:selected").length > 0)) validateLangDropdown(varLocaliztion);
+      //    if ($('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').is(":checked") && $('input[name="userProfile.salesforcePartnerNum"]').val().length === 0) validateAccountNumber(varLocaliztion);
+      //    if (!($("select[name='userProfile.country'] option:selected").length > 0)) validateCountryDropdown(varLocaliztion);
+      //    if (!($("select[name='userProfile.locale'] option:selected").length > 0)) validateLocaleDropdown(varLocaliztion);
+      //    if (!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"), varLocaliztion);
+      //    if (!($("select[name='userProfile.title'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.title']"), varLocaliztion);
+      //    // if(!( $("select[name='userProfile.country'] option:selected").length > 0) || !($("select[name='userProfile.locale'] option:selected").length > 0) ||  $("select[name='userProfile.sfserv_language'] option:selected").val().length === 0) disableLoginBtn();
+      //    if(!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"), varLocaliztion);
+      //    if(!($("select[name='userProfile.title'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.title']"), varLocaliztion);
+      // };
+      
+      const disableLoginBtn = () => {
+         const oktaLoginBtn = document.querySelector("input[type='submit']");
+         oktaLoginBtn.disabled = true;
+         oktaLoginBtn.classList.remove('button-primary');
       };
       
-      let disableLoginBtn = () => {
-         const oktaLoginBtn = $(".button.button-primary");
-         $(oktaLoginBtn).prop('disabled', true)
-      };
-      
-      let enableLoginBtn = () => {
-         const oktaLoginBtn = $(".button.button-primary");
-         $(oktaLoginBtn).prop('disabled', false);
+      const enableLoginBtn = () => {
+         const oktaLoginBtn = document.querySelector("input[type='submit']");
+         oktaLoginBtn.disabled = false;
+         oktaLoginBtn.classList.add('button-primary');
       };
 
       /* Check if the CAPTCHA has been completed successfully before allowing the form to submit */
-      let oktaFormSubmit = () => {
-         if (window.captchaVerified) {
-            let response = grecaptcha.getResponse();
-            if (response.length > 0) {
-            return true;
-            } else {
-            console.log(response.length);
-            }
-         }
-      }
+      // let oktaFormSubmit = () => {
+      //    if (window.captchaVerified) {
+      //       let response = grecaptcha.getResponse();
+      //       if (response.length > 0) {
+      //       return true;
+      //       } else {
+      //       console.log(response.length);
+      //       }
+      //    }
+      // }
    </script>
    </body>
 </html>
