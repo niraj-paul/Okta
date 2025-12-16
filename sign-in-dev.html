@@ -1209,11 +1209,11 @@
 
             // Allow Unicode letters, marks, and specified special characters in NAME fields
             const nameInputs = ['userProfile.firstName', 'userProfile.lastName', 'userProfile.OIDCDisplayName'];
-            const allowedOrSpecialRegex = /([\-_'’ .\/]|[\p{L}\p{M}])/u;
+            const allowedOrSpecialRegex = /([\-_'’ .]|[\p{L}\p{M}])/u;
             nameInputs.forEach(function(nameInput) {
                const inputElement = document.querySelector(`input[name='${nameInput}']`);
                if (inputElement) {
-                  inputElement.setAttribute('maxlength', '50');
+                  inputElement.setAttribute('maxlength', '40');
                   let isComposing = false;
                   inputElement.addEventListener('compositionstart', function() {
                      isComposing = true;
@@ -1236,7 +1236,7 @@
                let lastWasSpecial = false;
                for (let char of value.normalize('NFC')) {
                   if (allowedOrSpecialRegex.test(char)) {
-                     if (/^[\-_'’ .\/]$/.test(char)) {
+                     if (/^[\-_'’ .]$/.test(char)) {
                         if (!lastWasSpecial && filtered.length > 0) {
                            filtered += char;
                            lastWasSpecial = true;
@@ -1247,7 +1247,7 @@
                      }
                   }
                }
-               filtered = filtered.replace(/^[\-_'’ .\/]+/, '');
+               filtered = filtered.replace(/^[\-_'’ .]+/, '');
                if (filtered !== value) {
                   inputElement.value = filtered;
                }
