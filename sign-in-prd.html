@@ -968,8 +968,6 @@
             if (oktaSignIn.getUser() == undefined) {
                loadCAPTCHA();
             }
-            const oktaAppId = oktaData.requestContext.app.value.id;
-            const salesforceServiceCommunityProd = "0oa1j2k5xmdhnZwFh0h8";
             $('.auth-footer .js-back').text(varLocaliztion["var.alreadyHaveAccount"]);
             if ($("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd']").length > 0) {
                $("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd']").after(varLocaliztion["var.policyText"]);
