@@ -983,7 +983,7 @@
                $("div[data-se='o-form-fieldset-userProfile.marketingOptIn'] label").html(varLocaliztion["var.marketingOptIn"]);
             }
             if($("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label").length > 0) {
-               $("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label").html(varLocaliztion["var.cloudTerm"]);
+               $("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label").html(varLocaliztion["var.cloudTerms"]);
             }
             if($("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptin'] label").length > 0) {
                $("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptin'] label").html(varLocaliztion["var.marketingOptIn"]);
@@ -1030,10 +1030,7 @@
                $("label[data-se-for-name='userProfile.marketingOptIn']").after($("select[name='userProfile.marketingOptIn']"));
                $("span[data-se='o-form-input-userProfile.marketingOptIn'] .custom-checkbox").removeClass("custom-checkbox");
                $("select[name='userProfile.marketingOptIn']")[0].selectedIndex = -1;
-               $("div[data-se='o-form-fieldset-userProfile.marketingOptIn']").after("<div style='margin-top:10px !important; font-size: 10px;'>By selecting yes, you consent to receive emails from Shure Incorporated based in the USA and its affiliates (“Shure”), including new products, company updates, events, training, case studies, research, and promotions. You consent to the processing, tracking and analyzing of personal data, such as your: registration detail, website activity across devices, and other personal data provided on legal grounds, by Shure, Google LLC and salesforce.com Inc for tailoring emails to your interests. We always ensure adequate protection when transferring data. You can unsubscribe at any time via the link in each email or withdraw consent via <a href = \"mailto:privacy@shure.com\">privacy@shure.com</a>. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit our <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>privacy policy</strong></a> and <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>cookie policy<strong></a>.</div>"); 
-            }
-            if($("input[name='userProfile.RfscanTnC']").length > 0) { 
-               $("label[data-se-for-name='userProfile.RfscanTnC']").html("<div>I agree to the <a href='https://scans.shure.com/cloud_terms' target='_blank'>Cloud Application Terms of Service</a> and the <a href='https://www.shure.com/en-US/meta/legal/terms-and-conditions-of-website-use' target='_blank'>Website Terms of Use</a> in connection with the WWB Scan Library.</div>") 
+               $("div[data-se='o-form-fieldset-userProfile.marketingOptIn']").after("<div style='margin-top:10px !important; font-size: 10px;'>By selecting yes, you consent to receive emails from Shure Incorporated based in the USA and its affiliates (“Shure”), including new products, company updates, events, training, case studies, research, and promotions. You consent to the processing, tracking and analyzing of personal data, such as your: registration detail, website activity across devices, and other personal data provided on legal grounds, by Shure, Google LLC and salesforce.com Inc for tailoring emails to your interests. We always ensure adequate protection when transferring data. You can unsubscribe at any time via the link in each email or withdraw consent via <a href = \"mailto:privacy@shure.com\">privacy@shure.com</a>. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit our <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>privacy policy</strong></a> and <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>cookie policy</strong></a>.</div>"); 
             }
 
             const appId = oktaData.requestContext.app.value.id;
@@ -1273,16 +1270,16 @@
                   }
                });
             }
-            if($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label").length>0){
+            if($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label").length>0) {
                $($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label")[0]).html(varLocaliztion["var.lmsDataPrivacy"]);
                let lmsdatapriv = varLocaliztion["var.lmsDataPrivacy"].split(" ");
                lmsdatapriv = lmsdatapriv.slice(0,lmsdatapriv.length - 1).join(" ") + " <a href = \"https://sai.training.shure.com/data-privacy-terms\">" + lmsdatapriv[lmsdatapriv.length -1].slice(0,-1) + "</a>)";
                $($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label")[0]).html(lmsdatapriv);
+               $($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] span")[0]).hide();
                $("input[name='userProfile.lmsDataPrivacy']").replaceWith('<select name="userProfile.lmsDataPrivacy" id="tmp3">' +
-                  '<option value="Agree">'+ varLocaliztion["var.yes"] +'</option>' +
-                  '<option value="Disagree">'+ varLocaliztion["var.no"] +'</option>' +
+                  '<option value="I Agree">'+ varLocaliztion["var.yes"] +'</option>' +
+                  '<option value="I Disagree">'+ varLocaliztion["var.no"] +'</option>' +
                   '</select>');
-               $("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy']").after("<div style='margin-top:10px !important; display:none;'>I consent to share my training records with my employer and employer’s supplier of Shure products as outlined <a href=\"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\">here</a>.");                  
                $("select[name='userProfile.lmsDataPrivacy']")[0].selectedIndex = -1;
             }
 
@@ -1339,9 +1336,9 @@
                $($("div[data-se='o-form-fieldset-userProfile.lmsPartnerKey'] label")[0]).html(varLocaliztion["var.lmsPartnerKey"]);
             }
 
-            let localeSelect = $('select#tmp2');
+            let localeSelect = document.getElementById('tmp2');
             if (localeSelect) {
-               localeSelect.on('change', function() {
+               localeSelect.addEventListener('change', function() {
                   if (this.value === "China") {
                      console.log('SHOW')
                      $("label[data-se-for-name='userProfile.shurecloudTnC_China']").html(varLocaliztion["var.chinaConsent"]) 
@@ -1873,20 +1870,6 @@
          }
       
       };
-
-      // window.verifyCaptcha = () => {
-      //    enableLoginBtn();
-      //    window.captchaVerified = true;
-      //    if (!($("select[name='userProfile.locale'] option:selected").length > 0)) validateLangDropdown(varLocaliztion);
-      //    if ($('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').is(":checked") && $('input[name="userProfile.salesforcePartnerNum"]').val().length === 0) validateAccountNumber(varLocaliztion);
-      //    if (!($("select[name='userProfile.country'] option:selected").length > 0)) validateCountryDropdown(varLocaliztion);
-      //    if (!($("select[name='userProfile.locale'] option:selected").length > 0)) validateLocaleDropdown(varLocaliztion);
-      //    if (!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"), varLocaliztion);
-      //    if (!($("select[name='userProfile.title'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.title']"), varLocaliztion);
-      //    // if(!( $("select[name='userProfile.country'] option:selected").length > 0) || !($("select[name='userProfile.locale'] option:selected").length > 0) ||  $("select[name='userProfile.sfserv_language'] option:selected").val().length === 0) disableLoginBtn();
-      //    if(!($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.lmsDataPrivacy']"), varLocaliztion);
-      //    if(!($("select[name='userProfile.title'] option:selected").length > 0)) validateCustomDropdown($("select[name='userProfile.title']"), varLocaliztion);
-      // };
       
       const disableLoginBtn = () => {
          const oktaLoginBtn = document.querySelector("input[type='submit']");
@@ -1899,18 +1882,6 @@
          oktaLoginBtn.disabled = false;
          oktaLoginBtn.classList.add('button-primary');
       };
-
-      /* Check if the CAPTCHA has been completed successfully before allowing the form to submit */
-      // let oktaFormSubmit = () => {
-      //    if (window.captchaVerified) {
-      //       let response = grecaptcha.getResponse();
-      //       if (response.length > 0) {
-      //       return true;
-      //       } else {
-      //       console.log(response.length);
-      //       }
-      //    }
-      // }
    </script>
    </body>
 </html>
