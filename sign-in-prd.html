@@ -210,7 +210,16 @@
       <div class="shure-green-line"></div>
    </div>
    <br /><br /><br />
-   <div id="okta-login-container"></div>
+   <div id="okta-login-container"
+      data-tlms-sai-provisioning-id="0oa1ovuc5duq1KNFr0h8"
+      data-tlms-sai-sso-id="0oa1ovu50uuufjCrd0h8"
+      data-tlms-admin-sso-id="0oa1ovubkkoa6K0PV0h8"
+      data-tech-portal-dev-id=""
+      data-tech-portal-id="0oa1iy1futi0uGSq00h8"
+      data-tech-portal-new-stage-id=""
+      data-salesforce-service-dev=""
+      data-salesforce-service="0oa1j2k5xmdhnZwFh0h8"
+   ></div>
    <!-- "OktaUtil" defines a global OktaUtil object that contains methods used to complete the Okta login flow. -->
    {{{OktaUtil}}}
    <script type="text/javascript">
@@ -222,6 +231,19 @@
       config.logo = 'https://content-files.shure.com/Logos/shure_logo_black.png';
       config.features.registration = true;
       config.features.rememberMe = true;
+
+      const appId = oktaData.requestContext.app.value.id;
+      const idDataset = document.getElementById('okta-login-container').dataset;
+      const {
+         tlmsSaiProvisioningId,
+         tlmsSaiSsoId,
+         tlmsAdminSsoId,
+         techPortalDevId,
+         techPortalId,
+         techPortalNewStageId,
+         salesforceServiceDev,
+         salesforceService
+      } = idDataset;
       const helpLinksMap = {
          "en": "https://p.shure.com/myshureid-faqs",
          "de": "https://p.shure.com/de-DE/myshureid-faqs",
@@ -855,12 +877,8 @@
       const varLocaliztion = config.i18n[browserLang] ? config.i18n[browserLang] : config.i18n["en"];
       config.registration = {
          parseSchema: function (schema, onSuccess, onFailure) {
-            const appId = oktaData.requestContext.app.value.id;
-            const tlmsSaiProvisioningId = "0oa1ovuc5duq1KNFr0h8";
-            const tlmsSaiSSOId = "0oa1ovu50uuufjCrd0h8";
-            const tlmsAdminSSOId = "0oa1ovubkkoa6K0PV0h8";
             if(schema.find(x => x.name === 'userProfile.organization')) {
-               if (appId !== tlmsSaiProvisioningId || appId !== tlmsSaiSSOId || appId !== tlmsAdminSSOId) {
+               if (appId !== tlmsSaiProvisioningId || appId !== tlmsSaiSsoId || appId !== tlmsAdminSsoId) {
                   schema.find(x => x.name === 'userProfile.organization').required = true;
                }
             }
@@ -874,8 +892,6 @@
             onSuccess(schema);
          },
          preSubmit: function (postData, onSuccess, onFailure) {
-            const oktaAppId = oktaData.requestContext.app.value.id;
-            const salesforceServiceCommunityProd = "0oa1j2k5xmdhnZwFh0h8";
             var companyType = "";
             var marketingOptIn = "";
             var country = "";
@@ -926,16 +942,16 @@
                locale = $("select[name='userProfile.locale']").val();
                postData.userProfile.locale = locale;
             }
-            if (oktaData.requestContext.app.value.id == "0oa1iy1futi0uGSq00h8") {
+            if (appId === techPortalId) {
                if (companyType == null || marketingOptIn == null || country == null || locale == null) {
                   return false;
                }
-            } else if (oktaData.requestContext.app.value.id == "0oa1ovu50uuufjCrd0h8") {
+            } else if (appId === tlmsSaiSsoId) {
                if (country == null || lmsDataPrivacy == null || title == null || locale == null) {
                   return false;
                }
             }
-            if (oktaAppId === salesforceServiceCommunityProd) {
+            if (appId === salesforceServiceDev || appId === salesforceService) {
                if (urlParams) {
                   postData.userProfile.sfserv_region = urlParams.get("region") || "en-US";
                   postData.userProfile.sf_Language = urlParams.get("language") || "en_US";
@@ -969,8 +985,10 @@
                loadCAPTCHA();
             }
             $('.auth-footer .js-back').text(varLocaliztion["var.alreadyHaveAccount"]);
-            if ($("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd']").length > 0) {
-               $("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd']").after(varLocaliztion["var.policyText"]);
+            const CloudMarketingOptin = document.querySelector('[data-se*="CloudMarketingOptin"]');
+            if (CloudMarketingOptin) {
+               CloudMarketingOptin.insertAdjacentHTML('afterend', varLocaliztion["var.policyText"]);
+               CloudMarketingOptin.querySelector('label').innerHTML = varLocaliztion["var.marketingOptIn"];
             }
             if ($('div[data-se="o-form-fieldset-userProfile.OIDCDisplayName"] label').length > 0) {
                $('div[data-se="o-form-fieldset-userProfile.OIDCDisplayName"] label').html(varLocaliztion["var.displayName"])
@@ -980,9 +998,6 @@
             }
             if($("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label").length > 0) {
                $("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label").html(varLocaliztion["var.cloudTerms"]);
-            }
-            if($("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd'] label").length > 0) {
-               $("div[data-se='o-form-fieldset-userProfile.CloudMarketingOptinPrd'] label").html(varLocaliztion["var.marketingOptIn"]);
             }
             $('.button-primary').after(varLocaliztion["var.personalData"]);
             // Salesforce Service registration
@@ -1030,13 +1045,7 @@
                $("div[data-se='o-form-fieldset-userProfile.marketingOptIn']").after("<div style='margin-top:10px !important; font-size: 10px;'>By selecting yes, you consent to receive emails from Shure Incorporated based in the USA and its affiliates (“Shure”), including new products, company updates, events, training, case studies, research, and promotions. You consent to the processing, tracking and analyzing of personal data, such as your: registration detail, website activity across devices, and other personal data provided on legal grounds, by Shure, Google LLC and salesforce.com Inc for tailoring emails to your interests. We always ensure adequate protection when transferring data. You can unsubscribe at any time via the link in each email or withdraw consent via <a href = \"mailto:privacy@shure.com\">privacy@shure.com</a>. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit our <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>privacy policy</strong></a> and <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>cookie policy</strong></a>.</div>"); 
             }
 
-            const appId = oktaData.requestContext.app.value.id;
-            const tlmsSaiProvisioningId = "0oa1ovuc5duq1KNFr0h8";
-            const tlmsSaiSSOId = "0oa1ovu50uuufjCrd0h8";
-            const tlmsPrimarySSOId = "0oa1ovubkkoa6K0PV0h8";
-            const techPortalProdId = "0oa1iy1futi0uGSq00h8";
-
-            if (appId === tlmsSaiProvisioningId || appId === tlmsSaiSSOId || appId === techPortalProdId || appId === tlmsPrimarySSOId)  {
+            if (appId === tlmsSaiProvisioningId || appId === tlmsSaiSsoId || appId === techPortalDevId || appId === techPortalId || appId === tlmsAdminSsoId || appId === techPortalNewStageId) {
                config.i18n.en["var.createAccount"] = "Create a My Shure ID";
                config.i18n.es["var.createAccount"] = "Crear su «Shure ID»";
                config.i18n.de["var.createAccount"] = "Erstellen Sie eine My Shure ID";
@@ -1055,8 +1064,8 @@
             }
 
             if($("div[data-se='o-form-fieldset-userProfile.country'] label").length>0) {
-               $($("div[data-se='o-form-fieldset-userProfile.country'] label")[0]).html(varLocaliztion["var.country"]);  
-               if(oktaData.requestContext.app.value.id == "0oa1ovu50uuufjCrd0h8") {
+               $($("div[data-se='o-form-fieldset-userProfile.country'] label")[0]).html(varLocaliztion["var.country"]);
+               if(appId == tlmsSaiSsoId) {
                   $($("div[data-se='o-form-fieldset-userProfile.country'] span")[0]).hide();
                }
                $("input[name='userProfile.country']").replaceWith('<select name="userProfile.country" id="tmp2">' +
@@ -1277,7 +1286,7 @@
 
             if($("div[data-se='o-form-fieldset-userProfile.locale'] label").length>0) {
                $($("div[data-se='o-form-fieldset-userProfile.locale'] label")[0]).html(varLocaliztion["var.language"]);
-               if(oktaData.requestContext.app.value.id == "0oa1ovu50uuufjCrd0h8") {
+               if(appId == tlmsSaiSsoId) {
                   $($("div[data-se='o-form-fieldset-userProfile.locale'] span")[0]).hide();
                }
                $("input[name='userProfile.locale']").replaceWith('<select name="userProfile.locale" id="tmpLocale">' +
@@ -1335,9 +1344,8 @@
             if (localeSelect) {
                localeSelect.addEventListener('change', function() {
                   if (this.value === "China") {
-                     console.log('SHOW')
-                     $("label[data-se-for-name='userProfile.shurecloudTnC_China']").html(varLocaliztion["var.chinaConsent"]) 
-                     $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').addClass("show").insertAfter('[data-se="o-form-fieldset-userProfile.CloudMarketingOptinPrd"]');
+                     $("label[data-se-for-name='userProfile.shurecloudTnC_China']").html(varLocaliztion["var.chinaConsent"]);
+                     $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').addClass("show").insertAfter('div[data-se*="CloudMarketingOptin"]');
                   } else {
                      $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').removeClass("show");
                   }
@@ -1366,22 +1374,8 @@
                });
             }
 
-            if (oktaData.requestContext.app.value.id == "0oa1mhqercsYSq6i80h8") {
-               if ($("div[data-se='o-form-fieldset-userProfile.primaryApplication'] span").length > 0) {
-                  $("input[name='userProfile.primaryApplication']").replaceWith('<select name="userProfile.primaryApplication" id="primaryApplication">' +
-                     '<option value="Theater">Theater</option>' +
-                     '<option value="Broadcast">Broadcast</option>' +
-                     '<option value="Film/Location Sound">TV/Film</option>' +
-                     '<option value="Touring Sound">Touring/Live Sound</option>' +
-                     '<option value="House of Worship">House of Worship</option>' +
-                     '<option value="AV Conferencing and Meetings">Conferencing/Meetings</option>' +
-                  '</select>');
-                  $("select[name='userProfile.primaryApplication']")[0].selectedIndex = -1;
-               }
-            }
-
             // Salesforce Service Community
-            if (oktaData.requestContext.app.value.id === "0oa1j2k5xmdhnZwFh0h8") {
+            if (appId === salesforceServiceDev || appId === salesforceService) {
                $("label[data-se-for-name='userProfile.salesforceTnC']").html("<div>I agree that I have read and accept the Service <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>");
                $("input[name='userProfile.locale']").replaceWith('<select name="userProfile.locale" id="tmpLocale">' +
                      '<option disabled selected value style="display:none"></option>' +
@@ -1396,15 +1390,12 @@
                const langSelect = document.querySelector("select[name='userProfile.locale']");
                if (langSelect) {
                   langSelect.addEventListener('change', function(event) {
-                     if (event.target && event.target.matches('select')) {  
-                                 const parentElement = event.target.parentElement.parentElement;
-                                 $(parentElement).removeClass('o-form-has-errors'); 
-                                 $("#language-error").remove();                              
-                           }
-                           if( $(langSelect).val().length > 0)
-                           {
-                              enableLoginBtn();
-                           }
+                     if (event.target && event.target.matches('select')) {
+                        const parentElement = event.target.parentElement.parentElement;
+                        $(parentElement).removeClass('o-form-has-errors'); 
+                        $("#language-error").remove();                              
+                     }
+                     if($(langSelect).val().length > 0) enableLoginBtn();
                   });
                }
 
@@ -1731,7 +1722,7 @@
                $("select[name='userProfile.country']")[0].selectedIndex = -1;
             }
 
-            if (oktaData.requestContext.app.value.id == "0oa1j2k5xmdhnZwFh0h8") {
+            if (appId == salesforceService) {
                document.querySelectorAll("[data-se='o-form-fieldset-userProfile.language_sf']")[0].style.display = "none";
                document.querySelectorAll("[data-se='o-form-fieldset-userProfile.sfserv_region']")[0].style.display = "none";
                let registerBtn = document.getElementsByClassName("button button-primary")[0];
