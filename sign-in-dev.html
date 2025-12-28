@@ -840,79 +840,81 @@
             "var.error": "Already have a My Shure ID?"
          }
       };
+      /* Small helpers */
+      const $all = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+      const $1 = (sel, root = document) => root.querySelector(sel);
+
       /* Adding validation to the country, locale dropdown for Shure Cloud */
       function validateCountryDropdown(varLocaliztion) {
          const selectElement = document.getElementById("tmp2");
          if (selectElement && selectElement.selectedIndex < 0) {
             const parentElement = selectElement.parentElement.parentElement;
-            if (!$(parentElement).find("#country-error").length > 0) {
+            if (!parentElement.querySelector('#country-error')) {
                htmlString = '<p id="country-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
                   varLocaliztion["var.error"] +
                '</p>';
-               $(parentElement).append(htmlString);
-               $(parentElement).addClass("o-form-has-errors");
+               parentElement.insertAdjacentHTML('beforeend', htmlString);
+               parentElement.classList.add('o-form-has-errors');
             }
          }
         return true;
       }
 
       function validateCustomDropdown(element, varLocaliztion) {
-        const parentElement = element.parentElement.parentElement;
-        if (!$(parentElement).find("#dropdown-error").length > 0) {
-          htmlString = '<p id="dropdown-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
-            varLocaliztion["var.error"] +
-          '</p>';
-          $(parentElement).append(htmlString);
-          $(parentElement).addClass("o-form-has-errors");
-        }
-        return true;
+         const parentElement = element.parentElement.parentElement;
+         if (!parentElement.querySelector('#dropdown-error')) {
+            htmlString = '<p id="dropdown-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
+               varLocaliztion["var.error"] +
+            '</p>';
+            parentElement.insertAdjacentHTML('beforeend', htmlString);
+            parentElement.classList.add('o-form-has-errors');
+         }
+         return true;
       }
       function validateLocaleDropdown(varLocaliztion) {
          const selectElement = document.getElementById("tmpLocale");
          if (selectElement && selectElement.selectedIndex < 0) {
             const parentElement = selectElement.parentElement.parentElement;
-            if (!$(parentElement).find("#locale-error").length > 0) {
+            if (!parentElement.querySelector('#locale-error')) {
                htmlString = '<p id="locale-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
                   varLocaliztion["var.error"] +
                '</p>';
-               $(parentElement).append(htmlString);
-               $(parentElement).addClass("o-form-has-errors");
+               parentElement.insertAdjacentHTML('beforeend', htmlString);
+               parentElement.classList.add('o-form-has-errors');
             }
          }
-        return true;
+         return true;
       }
 
       // Salesforce Service Community
       function validateAccountNumber(varLocaliztion) {
-        const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
-        const parentElement = element.parentElement.parentElement;
-        if (!$(parentElement).find("#account-error").length > 0) {
-          htmlString =
-            '<p id="account-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
-            varLocaliztion["var.error"] +
-            '</p>';
-          $(parentElement).append(htmlString);
-          $(parentElement).addClass("o-form-has-errors");
-          disableLoginBtn();
-        }
-        return true;
+         const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
+         const parentElement = element.parentElement.parentElement;
+         if (!parentElement.querySelector('#account-error')) {
+            htmlString =
+               '<p id="account-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
+               varLocaliztion["var.error"] +
+               '</p>';
+            parentElement.insertAdjacentHTML('beforeend', htmlString);
+            parentElement.classList.add('o-form-has-errors');
+            disableLoginBtn();
+         }
+         return true;
       }
 
       function validateLangDropdown(varLocaliztion) {
-        const element = document.querySelector(
-          "select[name='userProfile.locale']"
-        );
-        const parentElement = element.parentElement.parentElement;
-        if (!$(parentElement).find("#locale-error").length > 0) {
-          htmlString =
-            '<p id="locale-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
-            varLocaliztion["var.error"] +
-            '</p>';
-          $(parentElement).append(htmlString);
-          $(parentElement).addClass("o-form-has-errors");
-          disableLoginBtn();
-        }
-        return true;
+         const element = document.querySelector("select[name='userProfile.locale']");
+         const parentElement = element.parentElement.parentElement;
+         if (!parentElement.querySelector('#locale-error')) {
+            htmlString =
+               '<p id="locale-error" class="okta-form-input-error o-form-input-error o-form-explain" role="alert"><span class="icon icon-16 error-16-small" role="img" aria-label="Error"></span>' +
+               varLocaliztion["var.error"] +
+               '</p>';
+            parentElement.insertAdjacentHTML('beforeend', htmlString);
+            parentElement.classList.add('o-form-has-errors');
+            disableLoginBtn();
+         }
+         return true;
       }
 
       const browserLang = OktaUtil.getSignInWidgetConfig().language;
