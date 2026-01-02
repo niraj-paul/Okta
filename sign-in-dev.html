@@ -936,62 +936,42 @@
             onSuccess(schema);
          },
          preSubmit: function (postData, onSuccess, onFailure) {
-            var companyType = "";
-            var marketingOptIn = "";
-            var country = "";
-            var lmsDataPrivacy = "";
-            var title = "";
-            var locale = "";
-            var primaryApp = "";
-            let sfservLanguage = "";
-            let sfTimezone = "";
             if (postData.userProfile == undefined) postData.userProfile = {};
-            if ($("select[name='userProfile.companyType']").length > 0) {
-               companyType = $("select[name='userProfile.companyType']").val();
-               postData.userProfile.companyType = companyType;
-            }
-            if ($("select[name='userProfile.primaryApplication']").length > 0) {
-               primaryApp = $("select[name='userProfile.primaryApplication']").val();
-               postData.userProfile.primaryApplication = primaryApp;
-            }
-            if ($("select[name='userProfile.sfserv_language']").length > 0) {
-               sfservLanguage = $("select[name='userProfile.sfserv_language']").val();
-               postData.userProfile.sfserv_language = sfservLanguage;
-            }
 
-            if ($("select[name='userProfile.sf_timezone']").length > 0) {
-               sfTimezone = $("select[name='userProfile.sf_timezone']").val();
-               postData.userProfile.sf_timezone = sfTimezone;
-            }
-            if ($("select[name='userProfile.marketingOptIn']").length > 0) {
-               marketingOptIn = $("select[name='userProfile.marketingOptIn']").val();
-               postData.userProfile.marketingOptIn = marketingOptIn;
-            }
-            if ($("select[name='userProfile.country'] option:selected").length > 0) {
-               country = $("select[name='userProfile.country']").val();
-               postData.userProfile.country = country;
-            }
+            const getSelectValue = (name) => {
+               const sel = document.querySelector(`select[name="${name}"]`);
+               if (!sel) return undefined;
+               // if no selection returns empty string; keeps key present
+               return sel.value === undefined ? "" : sel.value;
+            };
 
-            if ($("select[name='userProfile.lmsDataPrivacy']").length > 0) {
-               lmsDataPrivacy = $("select[name='userProfile.lmsDataPrivacy']").val();
-               postData.userProfile.lmsDataPrivacy = lmsDataPrivacy;
-            }
-            if ($("select[name='userProfile.title']").length > 0) {
-               title = $("select[name='userProfile.title']").val();
-               postData.userProfile.title = title;
-            }
+            const setIfPresent = (fullName) => {
+               const val = getSelectValue(fullName);
+               if (val !== undefined) {
+                  const key = fullName.split('.').pop();
+                  postData.userProfile[key] = val;
+               }
+            };
 
-            /* Adding validation to the country, locale dropdown for Shure Cloud */
-            if ($("select[name='userProfile.locale'] option:selected").length > 0) {
-               locale = $("select[name='userProfile.locale']").val();
-               postData.userProfile.locale = locale;
-            }
+            // map selects to userProfile keys
+            setIfPresent('userProfile.companyType');
+            setIfPresent('userProfile.primaryApplication');
+            setIfPresent('userProfile.sfserv_language');
+            setIfPresent('userProfile.sf_timezone');
+            setIfPresent('userProfile.marketingOptIn');
+            setIfPresent('userProfile.country');
+            setIfPresent('userProfile.lmsDataPrivacy');
+            setIfPresent('userProfile.title');
+            setIfPresent('userProfile.locale');
+            console.log("Post Data:", postData);
+
+            // validations: treat empty string as missing
             if (appId === techPortalId) {
-               if (companyType == null || marketingOptIn == null || country == null || locale == null) {
+               if (!postData.userProfile.companyType || !postData.userProfile.marketingOptIn || !postData.userProfile.country || !postData.userProfile.locale) {
                   return false;
                }
             } else if (appId === tlmsSaiSsoId) {
-               if (country == null || lmsDataPrivacy == null || title == null || locale == null) {
+               if (!postData.userProfile.country || !postData.userProfile.lmsDataPrivacy || !postData.userProfile.title || !postData.userProfile.locale) {
                   return false;
                }
             }
@@ -1001,7 +981,7 @@
                   postData.userProfile.sf_Language = urlParams.get("language") || "en_US";
                }
             }
-				onSuccess(postData);
+            onSuccess(postData);
          },
          postSubmit: function (response, onSuccess, onFailure) {
             onSuccess(response);
