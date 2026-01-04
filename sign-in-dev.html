@@ -873,10 +873,12 @@
                if (igniteLabel) igniteLabel.innerHTML = varLocaliztion["var.cloudTerms"];
             }
 
-            if($("div[data-se='o-form-fieldset-userProfile.country'] label").length>0) {
-               $($("div[data-se='o-form-fieldset-userProfile.country'] label")[0]).html(varLocaliztion["var.country"]);
+            const countryLabelEl = document.querySelector("div[data-se='o-form-fieldset-userProfile.country'] label");
+            if (countryLabelEl) {
+               countryLabelEl.innerHTML = varLocaliztion["var.country"];
                if(appId == tlmsSaiSsoId) {
-                  $($("div[data-se='o-form-fieldset-userProfile.country'] span")[0]).hide();
+                  const spanEl = document.querySelector("div[data-se='o-form-fieldset-userProfile.country'] span");
+                  if (spanEl) spanEl.style.display = 'none';
                }
                $("input[name='userProfile.country']").replaceWith('<select name="userProfile.country" id="tmp2">' +
                   '<option value="Afghanistan">Afghanistan</option>' +
