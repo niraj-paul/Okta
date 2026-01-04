@@ -880,7 +880,9 @@
                   const spanEl = document.querySelector("div[data-se='o-form-fieldset-userProfile.country'] span");
                   if (spanEl) spanEl.style.display = 'none';
                }
-               $("input[name='userProfile.country']").replaceWith('<select name="userProfile.country" id="tmp2">' +
+               const countryInput = document.querySelector("input[name='userProfile.country']");
+               if (countryInput) {
+                  countryInput.insertAdjacentHTML('afterend','<select name="userProfile.country" id="tmp2">' +
                   '<option value="Afghanistan">Afghanistan</option>' +
                   '<option value="Albania">Albania</option>' +
                   '<option value="Algeria">Algeria</option>' +
@@ -1014,8 +1016,10 @@
                   '<option value="Zimbabwe">Zimbabwe</option>' +
                   '</select>');
             
+                  countryInput.remove();
                   const selCountryEl = document.querySelector("select[name='userProfile.country']");
                   if (selCountryEl) selCountryEl.selectedIndex = -1;
+               }
             }
 
             // Allow Unicode letters, marks, and specified special characters in NAME fields
@@ -1105,7 +1109,9 @@
                   const locSpan = document.querySelector("div[data-se='o-form-fieldset-userProfile.locale'] span");
                   if (locSpan) locSpan.style.display = 'none';
                }
-               $("input[name='userProfile.locale']").replaceWith('<select name="userProfile.locale" id="tmpLocale">' +
+               const localeInput = document.querySelector("input[name='userProfile.locale']");
+               if (localeInput) {
+                  localeInput.insertAdjacentHTML('afterend','<select name="userProfile.locale" id="tmpLocale">' +
                   '<option value="en_US">English</option>' +
                   '<option value="es_ES">Español (Spanish)</option>' +
                   '<option value="de_DE">Deutsch (German)</option>' +
@@ -1150,10 +1156,10 @@
                   '<option value="ro_RO">Română (Romanian)</option>' +
                   '<option value="hi_IN">हिन्दी (Hindi)</option>' +
                   '</select>');
-               $("select[name='userProfile.locale']")[0].selectedIndex = -1;
-            }
-            if($("div[data-se='o-form-fieldset-userProfile.lmsPartnerKey'] label").length>0) {
-               $($("div[data-se='o-form-fieldset-userProfile.lmsPartnerKey'] label")[0]).html(varLocaliztion["var.lmsPartnerKey"]);
+                  localeInput.remove();
+                  const selLocale3 = document.querySelector("select[name='userProfile.locale']");
+                  if (selLocale3) selLocale3.selectedIndex = -1;
+               }
             }
             const lmsPartnerKeyLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.lmsPartnerKey'] label");
             if (lmsPartnerKeyLabel) lmsPartnerKeyLabel.innerHTML = varLocaliztion["var.lmsPartnerKey"];
@@ -1400,50 +1406,9 @@
 
                const salesPartnerLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.salesforcePartnerNum'] label");
                if (salesPartnerLabel) salesPartnerLabel.innerHTML = varLocaliztion["var.accountNumber"];
-               if ($("div[data-se='o-form-fieldset-userProfile.email'] label").length > 0) {
-                  $("div[data-se='o-form-fieldset-userProfile.email'] label").html(
-                     varLocaliztion["var.email"]
-                  );
-               }
 
-
-               if ($("div[data-se='o-form-fieldset-userProfile.country'] label").length > 0) {
-                  $("div[data-se='o-form-fieldset-userProfile.country'] label").html(
-                     varLocaliztion["var.country"]
-                  );
-               }
-
-               if ($("div[data-se='o-form-fieldset-userProfile.sf_servicePartner'] .o-form-label").length > 0) {
-                  $("div[data-se='o-form-fieldset-userProfile.sf_servicePartner'] .o-form-label").html(
-                     varLocaliztion["var.shureDealer"]
-                  );
-               }
-
-               if ($("div[data-se='o-form-fieldset-userProfile.sfserv_language'] label").length > 0) {
-                  $("div[data-se='o-form-fieldset-userProfile.sfserv_language'] label").html(
-                     varLocaliztion["var.sfservLanguage"]
-                  );
-               }
-
-               if ($("div[data-se='o-form-fieldset-userProfile.sf_timezone'] label").length > 0) {
-                  $("div[data-se='o-form-fieldset-userProfile.sf_timezone'] label").html(
-                     varLocaliztion["var.timezone"]
-                  );
-               }
-
-               if ($("div[data-se='o-form-fieldset-userProfile.primaryPhone'] label").length > 0) {
-                  $("div[data-se='o-form-fieldset-userProfile.primaryPhone'] label").html(
-                     varLocaliztion["var.phone"]
-                  );
-               }
-
-               if ($("div[data-se='o-form-fieldset-userProfile.salesforcePartnerNum'] label").length > 0) {
-                  $("div[data-se='o-form-fieldset-userProfile.salesforcePartnerNum'] label").html(
-                     varLocaliztion["var.accountNumber"]
-                  );
-               }
-
-               $("input[name='userProfile.country']").replaceWith('<select name="userProfile.country" id="tmp2">' +
+               const countryInputEl = document.querySelector("input[name='userProfile.country']");
+               if (countryInputEl) countryInputEl.insertAdjacentHTML('afterend','<select name="userProfile.country" id="tmp2">' +
                   '<option value="Afghanistan">Afghanistan</option>' +
                   '<option value="Albania">Albania</option>' +
                   '<option value="Algeria">Algeria</option>' +
@@ -1576,8 +1541,10 @@
                   '<option value="Zambia">Zambia</option>' +
                   '<option value="Zimbabwe">Zimbabwe</option>' +
                   '</select>');
+               if (countryInputEl) countryInputEl.remove();
             
-               $("select[name='userProfile.country']")[0].selectedIndex = -1;
+                  const selCountryAgain2 = document.querySelector("select[name='userProfile.country']");
+                  if (selCountryAgain2) selCountryAgain2.selectedIndex = -1;
             }
 
             if (appId == salesforceService) {
