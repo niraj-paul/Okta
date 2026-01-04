@@ -774,7 +774,8 @@
 
       oktaSignIn.on("afterRender", function (context) {
          if (context.controller === "primary-auth") {
-            $(".signup-info span:first-child").text(varLocaliztion["var.signUp"]);
+            const signupFirst = document.querySelector('.signup-info span:first-child');
+            if (signupFirst) signupFirst.textContent = varLocaliztion["var.signUp"];
          }
          // Registration Page Customizations
          if (context.controller === "registration") {
@@ -783,32 +784,38 @@
             if (oktaSignIn.getUser() == undefined) {
                loadCAPTCHA();
             }
-            $('.auth-footer .js-back').text(varLocaliztion["var.alreadyHaveAccount"]);
+            const authBack = document.querySelector('.auth-footer .js-back');
+            if (authBack) authBack.textContent = varLocaliztion["var.alreadyHaveAccount"];
             const CloudMarketingOptin = document.querySelector('[data-se*="CloudMarketingOptin"]');
             if (CloudMarketingOptin) {
                CloudMarketingOptin.insertAdjacentHTML('afterend', varLocaliztion["var.policyText"]);
                CloudMarketingOptin.querySelector('label').innerHTML = varLocaliztion["var.marketingOptIn"];
             }
-            if ($('div[data-se="o-form-fieldset-userProfile.OIDCDisplayName"] label').length > 0) {
-               $('div[data-se="o-form-fieldset-userProfile.OIDCDisplayName"] label').html(varLocaliztion["var.displayName"])
-            }
-            if ($("div[data-se='o-form-fieldset-userProfile.marketingOptIn'] label").length > 0) {
-               $("div[data-se='o-form-fieldset-userProfile.marketingOptIn'] label").html(varLocaliztion["var.marketingOptIn"]);
-            }
-            if($("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label").length > 0) {
-               $("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label").html(varLocaliztion["var.cloudTerms"]);
-            }
-            $('.button-primary').after(varLocaliztion["var.personalData"]);
+            // OIDC display name label
+            const oidcLabel = document.querySelector('div[data-se="o-form-fieldset-userProfile.OIDCDisplayName"] label');
+            if (oidcLabel) oidcLabel.innerHTML = varLocaliztion["var.displayName"];
+            const marketingLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.marketingOptIn'] label");
+            if (marketingLabel) marketingLabel.innerHTML = varLocaliztion["var.marketingOptIn"];
+            const igniteLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.IgniteTnC'] label");
+            if (igniteLabel) igniteLabel.innerHTML = varLocaliztion["var.cloudTerms"];
+            const btn = document.querySelector('.button-primary');
+            if (btn) btn.insertAdjacentHTML('afterend', varLocaliztion["var.personalData"]);
             // Salesforce Service registration
-            $('.button-primary').prop("value", varLocaliztion["var.createAccount"]);
+            if (btn) btn.value = varLocaliztion["var.createAccount"];
 
-            if($("div[data-se='o-form-fieldset-userProfile.city'] label").length > 0) $("div[data-se='o-form-fieldset-userProfile.city'] label").html(varLocaliztion["var.city"]);      
-            if($("div[data-se='o-form-fieldset-userProfile.state'] label").length > 0) $("div[data-se='o-form-fieldset-userProfile.state'] label").html(varLocaliztion["var.state"]);      
-            if($("div[data-se='o-form-fieldset-userProfile.zipCode'] label").length > 0) $("div[data-se='o-form-fieldset-userProfile.zipCode'] label").html(varLocaliztion["var.zipCode"]);    
-            if($("div[data-se='o-form-fieldset-userProfile.companyType'] label").length > 0) $("div[data-se='o-form-fieldset-userProfile.companyType'] label").html(varLocaliztion["var.companyType"]);
-            if($("div[data-se='o-form-fieldset-userProfile.title'] span").length>0) {
-               $($("div[data-se='o-form-fieldset-userProfile.title'] span")[0]).hide();
-               $("input[name='userProfile.title']").replaceWith('<select name="userProfile.title" id="input52">' +
+            const cityLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.city'] label");
+            if (cityLabel) cityLabel.innerHTML = varLocaliztion["var.city"];
+            const stateLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.state'] label");
+            if (stateLabel) stateLabel.innerHTML = varLocaliztion["var.state"];
+            const zipLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.zipCode'] label");
+            if (zipLabel) zipLabel.innerHTML = varLocaliztion["var.zipCode"];
+            const companyTypeLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.companyType'] label");
+            if (companyTypeLabel) companyTypeLabel.innerHTML = varLocaliztion["var.companyType"];
+            const titleSpan = document.querySelector("div[data-se='o-form-fieldset-userProfile.title'] span");
+            if (titleSpan) titleSpan.style.display = 'none';
+            const titleInput = document.querySelector("input[name='userProfile.title']");
+            if (titleInput) {
+               titleInput.insertAdjacentHTML('afterend','<select name="userProfile.title" id="input52">' +
                   '<option value="Executive">Executive</option>' +
                   '<option value="Project Manager">Project Manager</option>' +
                   '<option value="Design Engineer">Design Engineer</option>' +
@@ -816,7 +823,9 @@
                   '<option value="Technician">Technician</option>' +
                   '<option value="Other">Other</option>' +
                '</select>');
-               $("select[name='userProfile.title']")[0].selectedIndex = -1;
+               titleInput.remove();
+               const selTitle = document.querySelector("select[name='userProfile.title']");
+               if (selTitle) selTitle.selectedIndex = -1;
             }
 
             if($("div[data-se='o-form-fieldset-userProfile.companyType'] span").length>0) {
@@ -858,8 +867,10 @@
                config.i18n["zh-TW"]["var.createAccount"] = "提交";    
             }
 
-            if($("input[name='userProfile.IgniteTnC']").length > 0) { 
-               $("label[data-se-for-name='userProfile.IgniteTnC']").html(varLocaliztion["var.cloudTerms"]);
+            const igniteInput = document.querySelector("input[name='userProfile.IgniteTnC']");
+            if (igniteInput) { 
+               const igniteLabel = document.querySelector("label[data-se-for-name='userProfile.IgniteTnC']");
+               if (igniteLabel) igniteLabel.innerHTML = varLocaliztion["var.cloudTerms"];
             }
 
             if($("div[data-se='o-form-fieldset-userProfile.country'] label").length>0) {
@@ -1001,7 +1012,8 @@
                   '<option value="Zimbabwe">Zimbabwe</option>' +
                   '</select>');
             
-               $("select[name='userProfile.country']")[0].selectedIndex = -1;
+                  const selCountryEl = document.querySelector("select[name='userProfile.country']");
+                  if (selCountryEl) selCountryEl.selectedIndex = -1;
             }
 
             // Allow Unicode letters, marks, and specified special characters in NAME fields
@@ -1056,10 +1068,11 @@
                   enableLoginBtn();
                   if (event.target && event.target.matches('select')) {  
                         const parentElement = event.target.parentElement.parentElement;
-                        $(parentElement).removeClass('o-form-has-errors'); 
-                        $("#country-error").remove();                              
+                        parentElement.classList.remove('o-form-has-errors'); 
+                        const countryErr = document.getElementById('country-error');
+                        if (countryErr) countryErr.remove();                              
                   }
-                  if( $("select[name='userProfile.locale'] option:selected").length > 0) {
+                  if( document.querySelector("select[name='userProfile.locale'] option:checked") ) {
                      enableLoginBtn();
                   }
                }); 
@@ -1083,10 +1096,12 @@
                $("select[name='userProfile.lmsDataPrivacy']")[0].selectedIndex = -1;
             }
 
-            if($("div[data-se='o-form-fieldset-userProfile.locale'] label").length>0) {
-               $($("div[data-se='o-form-fieldset-userProfile.locale'] label")[0]).html(varLocaliztion["var.language"]);
+            const localeLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.locale'] label");
+            if (localeLabel) {
+               localeLabel.innerHTML = varLocaliztion["var.language"];
                if(appId == tlmsSaiSsoId) {
-                  $($("div[data-se='o-form-fieldset-userProfile.locale'] span")[0]).hide();
+                  const locSpan = document.querySelector("div[data-se='o-form-fieldset-userProfile.locale'] span");
+                  if (locSpan) locSpan.style.display = 'none';
                }
                $("input[name='userProfile.locale']").replaceWith('<select name="userProfile.locale" id="tmpLocale">' +
                   '<option value="en_US">English</option>' +
@@ -1138,16 +1153,25 @@
             if($("div[data-se='o-form-fieldset-userProfile.lmsPartnerKey'] label").length>0) {
                $($("div[data-se='o-form-fieldset-userProfile.lmsPartnerKey'] label")[0]).html(varLocaliztion["var.lmsPartnerKey"]);
             }
+            const lmsPartnerKeyLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.lmsPartnerKey'] label");
+            if (lmsPartnerKeyLabel) lmsPartnerKeyLabel.innerHTML = varLocaliztion["var.lmsPartnerKey"];
 
             let localeSelect = document.getElementById('tmp2');
             if (localeSelect) {
                localeSelect.addEventListener('change', function() {
-                  if (this.value === "China") {
-                     $("label[data-se-for-name='userProfile.shurecloudTnC_China']").html(varLocaliztion["var.chinaConsent"]);
-                     $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').addClass("show").insertAfter('div[data-se*="CloudMarketingOptin"]');
-                  } else {
-                     $('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]').removeClass("show");
-                  }
+                     if (this.value === "China") {
+                        const chinaLabel = document.querySelector("label[data-se-for-name='userProfile.shurecloudTnC_China']");
+                        if (chinaLabel) chinaLabel.innerHTML = varLocaliztion["var.chinaConsent"];
+                        const chinaField = document.querySelector('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]');
+                        const afterEl = document.querySelector('div[data-se*="CloudMarketingOptin"]');
+                        if (chinaField) {
+                           chinaField.classList.add('show');
+                           if (afterEl && afterEl.parentNode) afterEl.parentNode.insertBefore(chinaField, afterEl.nextSibling);
+                        }
+                     } else {
+                        const chinaField = document.querySelector('[data-se="o-form-fieldset-userProfile.shurecloudTnC_China"]');
+                        if (chinaField) chinaField.classList.remove('show');
+                     }
                   enableLoginBtn();
                });
             }
@@ -1164,10 +1188,11 @@
                localeSelect.addEventListener('change', function(event) {
                   if (event.target && event.target.matches('select')) {                           
                         const parentElement = event.target.parentElement.parentElement;
-                        $(parentElement).removeClass('o-form-has-errors'); 
-                        $("#locale-error").remove();                              
+                        parentElement.classList.remove('o-form-has-errors'); 
+                        const localeErr = document.getElementById('locale-error');
+                        if (localeErr) localeErr.remove();                              
                   }
-                  if( $("select[name='userProfile.country'] option:selected").length > 0) {
+                  if( document.querySelector("select[name='userProfile.country'] option:checked") ) {
                      enableLoginBtn();  
                   }
                });
@@ -1191,10 +1216,11 @@
                   langSelect.addEventListener('change', function(event) {
                      if (event.target && event.target.matches('select')) {
                         const parentElement = event.target.parentElement.parentElement;
-                        $(parentElement).removeClass('o-form-has-errors'); 
-                        $("#language-error").remove();                              
+                        parentElement.classList.remove('o-form-has-errors'); 
+                        const langErr = document.getElementById('language-error');
+                        if (langErr) langErr.remove();                              
                      }
-                     if($(langSelect).val().length > 0) enableLoginBtn();
+                     if(langSelect.value && langSelect.value.length > 0) enableLoginBtn();
                   });
                }
 
@@ -1299,48 +1325,79 @@
                   '<option value="Pacific/Pago_Pago">(GMT-11:00) Samoa Standard Time (Pacific/Pago_Pago)</option>' +
                      '</select>');
 
-               $('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').change(function() {
-                  if(this.checked) {
-                     $("[data-se='o-form-fieldset-userProfile.salesforcePartnerNum']").addClass("show");
-                  }
+               document.querySelectorAll('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').forEach(function(el){
+                  el.addEventListener('change', function(){
+                     if (this.checked) {
+                        const sfNumField = document.querySelector("[data-se='o-form-fieldset-userProfile.salesforcePartnerNum']");
+                        if (sfNumField) sfNumField.classList.add('show');
+                     }
+                  });
                });
 
-               $('div[data-se="o-form-fieldset-userProfile.salesforcePartnerNum"] div[data-se="o-form-input-container"]').append("<span style='font-size: 12px'>For assistance with your account number please contact your Shure Rep.</span>")
+               const sfNumContainer = document.querySelector('div[data-se="o-form-fieldset-userProfile.salesforcePartnerNum"] div[data-se="o-form-input-container"]');
+               if (sfNumContainer) sfNumContainer.insertAdjacentHTML('beforeend',"<span style='font-size: 12px'>For assistance with your account number please contact your Shure Rep.</span>");
 
-
-               $('input[name="userProfile.salesforcePartnerNum"]').on("blur", function() {
-                  if (this.value.length > 0) {
-                     const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
+               const sfNumInput = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
+               if (sfNumInput) {
+                  sfNumInput.addEventListener('blur', function(){
+                     if (this.value.length > 0) {
+                        const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
                         const parentElement = element.parentElement.parentElement;
-                        if($(parentElement).find("#account-error").length>0){
-                           $(parentElement).removeClass('o-form-has-errors');
-                           $("#account-error").remove();   
+                        if (parentElement.querySelector('#account-error')){
+                           parentElement.classList.remove('o-form-has-errors');
+                           const acctErr = document.getElementById('account-error');
+                           if (acctErr) acctErr.remove();
                            enableLoginBtn();
                         }
-                  }
-               });
-
-               $('input[data-se-name="userProfile.sf_servicePartner"][value="false"]').change(function() {
-                  if(this.checked) {
-                     $("[data-se='o-form-fieldset-userProfile.salesforcePartnerNum']").removeClass("show");
-                     const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
-                     const parentElement = element.parentElement.parentElement;
-                     if($(parentElement).find("#account-error").length>0){
-                        $(parentElement).removeClass('o-form-has-errors');
-                        $("#account-error").remove();   
-                        enableLoginBtn();
                      }
-                  }
+                  });
+               }
+
+               document.querySelectorAll('input[data-se-name="userProfile.sf_servicePartner"][value="false"]').forEach(function(el){
+                  el.addEventListener('change', function(){
+                     if (this.checked) {
+                        const sfNumField = document.querySelector("[data-se='o-form-fieldset-userProfile.salesforcePartnerNum']");
+                        if (sfNumField) sfNumField.classList.remove('show');
+                        const element = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
+                        if (element) {
+                           const parentElement = element.parentElement.parentElement;
+                           if (parentElement.querySelector('#account-error')){
+                              parentElement.classList.remove('o-form-has-errors');
+                              const acctErr = document.getElementById('account-error');
+                              if (acctErr) acctErr.remove();
+                              enableLoginBtn();
+                           }
+                        }
+                     }
+                  });
                });
 
-               if ($("div[data-se='o-form-fieldset-userProfile.firstName'] label").length > 0) {
-                  $("div[data-se='o-form-fieldset-userProfile.firstName'] label").html(varLocaliztion["var.firstName"]);
-               }
+               const fnLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.firstName'] label");
+               if (fnLabel) fnLabel.innerHTML = varLocaliztion["var.firstName"];
 
-               if ($("div[data-se='o-form-fieldset-userProfile.lastName'] label").length > 0) {
-                  $("div[data-se='o-form-fieldset-userProfile.lastName'] label").html(varLocaliztion["var.lastName"]);
-               }
+               const lnLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.lastName'] label");
+               if (lnLabel) lnLabel.innerHTML = varLocaliztion["var.lastName"];
 
+               const emailLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.email'] label");
+               if (emailLabel) emailLabel.innerHTML = varLocaliztion["var.email"];
+
+               const countryLabel2 = document.querySelector("div[data-se='o-form-fieldset-userProfile.country'] label");
+               if (countryLabel2) countryLabel2.innerHTML = varLocaliztion["var.country"];
+
+               const sfServiceLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.sf_servicePartner'] .o-form-label");
+               if (sfServiceLabel) sfServiceLabel.innerHTML = varLocaliztion["var.shureDealer"];
+
+               const sfservLangLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.sfserv_language'] label");
+               if (sfservLangLabel) sfservLangLabel.innerHTML = varLocaliztion["var.sfservLanguage"];
+
+               const sfTzLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.sf_timezone'] label");
+               if (sfTzLabel) sfTzLabel.innerHTML = varLocaliztion["var.timezone"];
+
+               const phoneLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.primaryPhone'] label");
+               if (phoneLabel) phoneLabel.innerHTML = varLocaliztion["var.phone"];
+
+               const salesPartnerLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.salesforcePartnerNum'] label");
+               if (salesPartnerLabel) salesPartnerLabel.innerHTML = varLocaliztion["var.accountNumber"];
                if ($("div[data-se='o-form-fieldset-userProfile.email'] label").length > 0) {
                   $("div[data-se='o-form-fieldset-userProfile.email'] label").html(
                      varLocaliztion["var.email"]
@@ -1556,50 +1613,51 @@
             }
          }
 
-         const jobSelect = document.querySelector('select[name="userProfile.title"]');
-         const dataPrivacySelect = document.querySelector('select[name="userProfile.lmsDataPrivacy"]');
-         if (jobSelect) {
-            jobSelect.addEventListener("focusin", (event) => {
-               if (event.target && event.target.matches("select")) {
-                  if (!$("select[name='userProfile.title'] option:selected").length > 0) {
-                     validateCustomDropdown(jobSelect, varLocaliztion);
-                     disableLoginBtn();
+            const jobSelect = document.querySelector('select[name="userProfile.title"]');
+            const dataPrivacySelect = document.querySelector('select[name="userProfile.lmsDataPrivacy"]');
+            if (jobSelect) {
+               jobSelect.addEventListener("focusin", (event) => {
+                  if (event.target && event.target.matches("select")) {
+                     if (!document.querySelector("select[name='userProfile.title'] option:checked")) {
+                        validateCustomDropdown(jobSelect, varLocaliztion);
+                        disableLoginBtn();
+                     }
                   }
-               }
-            });
+               });
 
-            jobSelect.addEventListener("change", function (event) {
-               if (event.target && event.target.matches("select")) {
-                  const parentElement = event.target.parentElement.parentElement;
-                  $(parentElement).removeClass("o-form-has-errors");
-                  $("#dropdown-error").remove();
-               }
-               if ($("select[name='userProfile.title'] option:selected").length > 0) {
-                  enableLoginBtn();
-               }
-            });
-         }
-
-         if (dataPrivacySelect) {
-            dataPrivacySelect.addEventListener("focusin", (event) => {
-               if (event.target && event.target.matches("select")) {
-                  if (!$("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0) {
-                     validateCustomDropdown(dataPrivacySelect, varLocaliztion);
-                     disableLoginBtn();
+               jobSelect.addEventListener("change", function (event) {
+                  if (event.target && event.target.matches("select")) {
+                     const parentElement = event.target.parentElement.parentElement;
+                     parentElement.classList.remove("o-form-has-errors");
+                     const ddErrA = document.getElementById('dropdown-error'); if (ddErrA) ddErrA.remove();
                   }
-               }
-            });
+                  if (document.querySelector("select[name='userProfile.title'] option:checked")) {
+                     enableLoginBtn();
+                  }
+               });
+            }
 
-            dataPrivacySelect.addEventListener("change", function (event) {
-               if (event.target && event.target.matches("select")) {
-                  const parentElement = event.target.parentElement.parentElement;
-                  $(parentElement).removeClass("o-form-has-errors");
-                  $("#dropdown-error").remove();
-               }
-               if ($("select[name='userProfile.lmsDataPrivacy'] option:selected").length > 0) {
-                  enableLoginBtn();
-               }
-            });
+            if (dataPrivacySelect) {
+               dataPrivacySelect.addEventListener("focusin", (event) => {
+                  if (event.target && event.target.matches("select")) {
+                     if (!document.querySelector("select[name='userProfile.lmsDataPrivacy'] option:checked")) {
+                        validateCustomDropdown(dataPrivacySelect, varLocaliztion);
+                        disableLoginBtn();
+                     }
+                  }
+               });
+
+               dataPrivacySelect.addEventListener("change", function (event) {
+                  if (event.target && event.target.matches("select")) {
+                     const parentElement = event.target.parentElement.parentElement;
+                     parentElement.classList.remove("o-form-has-errors");
+                     const ddErr2 = document.getElementById('dropdown-error');
+                     if (ddErr2) ddErr2.remove();
+                  }
+                  if (document.querySelector("select[name='userProfile.lmsDataPrivacy'] option:checked")) {
+                     enableLoginBtn();
+                  }
+               });
          }
       });
 
@@ -1611,8 +1669,8 @@
             if (!canSubmit) event.preventDefault();
             return;
          });
-         const oktaLoginBtn = $(".button.button-primary");
-         const oktaLoginBtnDiv = $(".o-form-button-bar");
+         const oktaLoginBtn = document.querySelector(".button.button-primary");
+         const oktaLoginBtnDiv = document.querySelector(".o-form-button-bar");
          const captchaDiv = document.createElement('div');
          captchaDiv.setAttribute('id','captchaDiv');
          captchaDiv.className = 'h-captcha';
@@ -1621,7 +1679,7 @@
          captchaDiv.style.paddingBottom = '10px';
          captchaDiv.setAttribute('data-sitekey','3b9c1f8a-dd7c-4846-9ac6-a4aaac747df0');
          captchaDiv.setAttribute('data-callback', 'captchaDone');
-         $(oktaLoginBtnDiv).before(captchaDiv);
+         if (oktaLoginBtnDiv && oktaLoginBtnDiv.parentNode) oktaLoginBtnDiv.parentNode.insertBefore(captchaDiv, oktaLoginBtnDiv);
          const htmlBody = document.getElementsByTagName('body')[0];
          const captchaScript = document.createElement('script');
          captchaScript.src = 'https://js.hcaptcha.com/1/api.js';
@@ -1633,7 +1691,7 @@
       window.captchaDone = (value) => {
          if (value && value.length > 1) {
             enableLoginBtn();
-            $("#showError").hide();
+            const showErr = document.getElementById('showError'); if (showErr) showErr.style.display = 'none';
          }
       }
 
