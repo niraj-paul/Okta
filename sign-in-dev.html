@@ -828,29 +828,42 @@
                if (selTitle) selTitle.selectedIndex = -1;
             }
 
-            if($("div[data-se='o-form-fieldset-userProfile.companyType'] span").length>0) {
-               $("input[name='userProfile.companyType']").replaceWith('<select name="userProfile.companyType" id="companyType">' +
-                  '<option value="Consultant">Consultant</option>' +
-                  '<option value="Dealer">Dealer</option>' +
-                  '<option value="Distributor">Distributor</option>' +
-                  '<option value="End-User">End-User</option>' +
-                  '<option value="Freelancer">Freelancer</option>' +
-                  '<option value="Other">Other</option>' +
-                  '<option value="Rental Company">Rental Company</option>' +
-                  '<option value="Sales Rep">Sales Rep</option>' +
-                  '<option value="System Integrator">System Integrator</option>' +
-               '</select>');
-               $("select[name='userProfile.companyType']")[0].selectedIndex = -1;
+            const companyTypeSpan = document.querySelector("div[data-se='o-form-fieldset-userProfile.companyType'] span");
+            if (companyTypeSpan) {
+               const companyInput = document.querySelector("input[name='userProfile.companyType']");
+               if (companyInput) {
+                  companyInput.insertAdjacentHTML('afterend','<select name="userProfile.companyType" id="companyType">' +
+                     '<option value="Consultant">Consultant</option>' +
+                     '<option value="Dealer">Dealer</option>' +
+                     '<option value="Distributor">Distributor</option>' +
+                     '<option value="End-User">End-User</option>' +
+                     '<option value="Freelancer">Freelancer</option>' +
+                     '<option value="Other">Other</option>' +
+                     '<option value="Rental Company">Rental Company</option>' +
+                     '<option value="Sales Rep">Sales Rep</option>' +
+                     '<option value="System Integrator">System Integrator</option>' +
+                  '</select>');
+                  companyInput.remove();
+                  const selComp = document.querySelector("select[name='userProfile.companyType']");
+                  if (selComp) selComp.selectedIndex = -1;
+               }
             }
-            if($("div[data-se='o-form-fieldset-userProfile.marketingOptIn']").length>0) {
-               $("input[name='userProfile.marketingOptIn']").replaceWith('<select name="userProfile.marketingOptIn" id="marketingOptIn">' +
-                     '<option value="Yes">Yes</option>' +
-                     '<option value="No">No</option>' +
-               '</select>');
-               $("label[data-se-for-name='userProfile.marketingOptIn']").after($("select[name='userProfile.marketingOptIn']"));
-               $("span[data-se='o-form-input-userProfile.marketingOptIn'] .custom-checkbox").removeClass("custom-checkbox");
-               $("select[name='userProfile.marketingOptIn']")[0].selectedIndex = -1;
-               $("div[data-se='o-form-fieldset-userProfile.marketingOptIn']").after("<div style='margin-top:10px !important; font-size: 10px;'>By selecting yes, you consent to receive emails from Shure Incorporated based in the USA and its affiliates (“Shure”), including new products, company updates, events, training, case studies, research, and promotions. You consent to the processing, tracking and analyzing of personal data, such as your: registration detail, website activity across devices, and other personal data provided on legal grounds, by Shure, Google LLC and salesforce.com Inc for tailoring emails to your interests. We always ensure adequate protection when transferring data. You can unsubscribe at any time via the link in each email or withdraw consent via <a href = \"mailto:privacy@shure.com\">privacy@shure.com</a>. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit our <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>privacy policy</strong></a> and <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>cookie policy</strong></a>.</div>"); 
+            const marketingField = document.querySelector("div[data-se='o-form-fieldset-userProfile.marketingOptIn']");
+            if (marketingField) {
+               const marketingInput = document.querySelector("input[name='userProfile.marketingOptIn']");
+               if (marketingInput) {
+                  marketingInput.insertAdjacentHTML('afterend','<select name="userProfile.marketingOptIn" id="marketingOptIn">' +
+                        '<option value="Yes">Yes</option>' +
+                        '<option value="No">No</option>' +
+                  '</select>');
+                  const newSel = document.querySelector("select[name='userProfile.marketingOptIn']");
+                  const marketingLabelEl = document.querySelector("label[data-se-for-name='userProfile.marketingOptIn']");
+                  if (marketingLabelEl && newSel) marketingLabelEl.parentNode.insertBefore(newSel, marketingLabelEl.nextSibling);
+                  const cb = document.querySelectorAll("span[data-se='o-form-input-userProfile.marketingOptIn'] .custom-checkbox");
+                  cb.forEach(el => el.classList.remove('custom-checkbox'));
+                  if (newSel) newSel.selectedIndex = -1;
+                  marketingField.insertAdjacentHTML('afterend',"<div style='margin-top:10px !important; font-size: 10px;'>By selecting yes, you consent to receive emails from Shure Incorporated based in the USA and its affiliates (\\u201cShure\\u201d), including new products, company updates, events, training, case studies, research, and promotions. You consent to the processing, tracking and analyzing of personal data, such as your: registration detail, website activity across devices, and other personal data provided on legal grounds, by Shure, Google LLC and salesforce.com Inc for tailoring emails to your interests. We always ensure adequate protection when transferring data. You can unsubscribe at any time via the link in each email or withdraw consent via <a href = \"mailto:privacy@shure.com\">privacy@shure.com</a>. To learn more about our privacy practices and your rights, including your right to access, rectify, delete and withdraw your consent, please visit our <a href = \"https://www.shure.com/en-US/meta/privacy\" target=\"_blank\"><strong>privacy policy</strong></a> and <a href = \"https://www.shure.com/en-US/meta/cookies\" target=\"_blank\"><strong>cookie policy</strong></a>.</div>");
+               }
             }
 
             if (appId === tlmsSaiProvisioningId || appId === tlmsSaiSsoId || appId === techPortalDevId || appId === techPortalId || appId === tlmsAdminSsoId || appId === techPortalNewStageId) {
