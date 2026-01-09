@@ -1548,15 +1548,13 @@
             }
 
             if (appId == salesforceService) {
-               document.querySelectorAll("[data-se='o-form-fieldset-userProfile.language_sf']")[0].style.display = "none";
-               document.querySelectorAll("[data-se='o-form-fieldset-userProfile.sfserv_region']")[0].style.display = "none";
-               let registerBtn = document.getElementsByClassName("button button-primary")[0];
-               let partnerNumberBox = document.querySelector('[data-se="o-form-fieldset-userProfile.salesforcePartnerNum"]');
-               let partnerNumText = document.getElementsByName('userProfile.salesforcePartnerNum')[0];
-               partnerNumberBox.style.display = "none";
-               let contentBox = document.querySelector('[data-se="o-form-content"]');
+               const language_sf = document.querySelectorAll("[data-se='o-form-fieldset-userProfile.language_sf']");
+               if(language_sf[0]) language_sf[0].style.display = "none";
+               const sfserv_region = document.querySelectorAll("[data-se='o-form-fieldset-userProfile.sfserv_region']");
+               if(sfserv_region[0]) sfserv_region[0].style.display = "none";
+               const partnerNumberBox = document.querySelector('[data-se="o-form-fieldset-userProfile.salesforcePartnerNum"]');
+               if(partnerNumberBox) partnerNumberBox.style.display = "none";
                let isPartner = document.createElement("INPUT");
-
                isPartner.setAttribute("type", "checkbox");
                isPartner.setAttribute("value", "Are you a Shure Partner?");
                isPartner.setAttribute("id", "shure-partner-checkbox")
@@ -1564,7 +1562,7 @@
                partnerLabel.setAttribute("for", 'shure-partner-checkbox');
                partnerLabel.innerHTML = " Are you a Shure Partner?";
 
-               partnerNumberBox.parentNode.insertBefore(isPartner, partnerNumberBox);
+               if(partnerNumberBox) partnerNumberBox.parentNode.insertBefore(isPartner, partnerNumberBox);
                isPartner.parentNode.insertBefore(partnerLabel, isPartner.nextSibling)
 
                isPartner.addEventListener('change', function() {
