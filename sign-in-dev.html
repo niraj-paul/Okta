@@ -10,7 +10,6 @@
     <link rel="shortcut icon" href="{{faviconUrl}}" type="image/x-icon" />
     <title>{{pageTitle}}</title>
     {{{SignInWidgetResources}}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- Shure Styles -->
    <link rel="stylesheet" type="text/css" href="https://content-files.shure.com/okta/styles.css">
    <link rel="preload" href="https://use.typekit.net/kge7zav.css" as="style"
@@ -1102,17 +1101,24 @@
                   }
                });
             }
-            if($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label").length>0) {
-               $($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label")[0]).html(varLocaliztion["var.lmsDataPrivacy"]);
+            const lmsLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label");
+            if (lmsLabel) {
+               lmsLabel.innerHTML = varLocaliztion["var.lmsDataPrivacy"];
                let lmsdatapriv = varLocaliztion["var.lmsDataPrivacy"].split(" ");
                lmsdatapriv = lmsdatapriv.slice(0,lmsdatapriv.length - 1).join(" ") + " <a href = \"https://sai.training.shure.com/data-privacy-terms\">" + lmsdatapriv[lmsdatapriv.length -1].slice(0,-1) + "</a>)";
-               $($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] label")[0]).html(lmsdatapriv);
-               $($("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] span")[0]).hide();
-               $("input[name='userProfile.lmsDataPrivacy']").replaceWith('<select name="userProfile.lmsDataPrivacy" id="tmp3">' +
-                  '<option value="I Agree">I Agree</option>' +
-                  '<option value="I Disagree">I Disagree</option>' +
-                  '</select>');
-               $("select[name='userProfile.lmsDataPrivacy']")[0].selectedIndex = -1;
+               lmsLabel.innerHTML = lmsdatapriv;
+               const lmsSpan = document.querySelector("div[data-se='o-form-fieldset-userProfile.lmsDataPrivacy'] span");
+               if (lmsSpan) lmsSpan.style.display = 'none';
+               const lmsInput = document.querySelector("input[name='userProfile.lmsDataPrivacy']");
+               if (lmsInput) {
+                  lmsInput.insertAdjacentHTML('afterend','<select name="userProfile.lmsDataPrivacy" id="tmp3">' +
+                     '<option value="I Agree">I Agree</option>' +
+                     '<option value="I Disagree">I Disagree</option>' +
+                     '</select>');
+                  lmsInput.remove();
+                  const selLms3 = document.querySelector("select[name='userProfile.lmsDataPrivacy']");
+                  if (selLms3) selLms3.selectedIndex = -1;
+               }
             }
 
             const localeLabel = document.querySelector("div[data-se='o-form-fieldset-userProfile.locale'] label");
@@ -1221,17 +1227,8 @@
 
             // Salesforce Service Community
             if (appId === salesforceServiceDev || appId === salesforceService) {
-               $("label[data-se-for-name='userProfile.salesforceTnC']").html("<div>I agree that I have read and accept the Service <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>");
-               $("input[name='userProfile.locale']").replaceWith('<select name="userProfile.locale" id="tmpLocale">' +
-                     '<option disabled selected value style="display:none"></option>' +
-                     '<option value="en_US">English</option>' +
-                     '<option value="es_ES">Spanish</option>' +
-                     '<option value="fr_FR">French</option>' +
-                     '<option value="nl_NL">Dutch</option>' +
-                     '<option value="de_DE">German</option>' +
-                     '<option value="ja_JP">Japanese</option>' +
-                     '<option value="zh_TW">Traditional Chinese/Mandarin</option>' +
-                     '</select>');
+               const salesTnCLabel = document.querySelector("label[data-se-for-name='userProfile.salesforceTnC']");
+               if (salesTnCLabel) salesTnCLabel.innerHTML = "<div>I agree that I have read and accept the Service <a href='https://www.shure.com/en-US/legal' target='_blank'>Terms and Conditions</a>.</div>";
                const langSelect = document.querySelector("select[name='userProfile.locale']");
                if (langSelect) {
                   langSelect.addEventListener('change', function(event) {
