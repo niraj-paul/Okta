@@ -1232,7 +1232,8 @@
                   });
                }
 
-               $("input[name='userProfile.sf_timezone']").replaceWith('<select name="userProfile.sf_timezone">' +
+               const tzInput = document.querySelector("input[name='userProfile.sf_timezone']");
+               if (tzInput) tzInput.insertAdjacentHTML('afterend','<select name="userProfile.sf_timezone">' +
                   '<option value="America/Chicago">(GMT-05:00) Central Daylight Time (America/Chicago)</option>' +
                   '<option value="Pacific/Kiritimati">(GMT+14:00) Line Islands Time (Pacific/Kiritimati)</option>' +
                   '<option value="Pacific/Chatham">(GMT+13:45) Chatham Daylight Time (Pacific/Chatham)</option>' +
@@ -1332,6 +1333,7 @@
                   '<option value="Pacific/Niue">(GMT-11:00) Niue Time (Pacific/Niue)</option>' +
                   '<option value="Pacific/Pago_Pago">(GMT-11:00) Samoa Standard Time (Pacific/Pago_Pago)</option>' +
                      '</select>');
+                  if (tzInput) tzInput.remove();
 
                document.querySelectorAll('input[data-se-name="userProfile.sf_servicePartner"][value="true"]').forEach(function(el){
                   el.addEventListener('change', function(){
@@ -1580,51 +1582,51 @@
             }
          }
 
-            const jobSelect = document.querySelector('select[name="userProfile.title"]');
-            const dataPrivacySelect = document.querySelector('select[name="userProfile.lmsDataPrivacy"]');
-            if (jobSelect) {
-               jobSelect.addEventListener("focusin", (event) => {
-                  if (event.target && event.target.matches("select")) {
-                     if (!document.querySelector("select[name='userProfile.title'] option:checked")) {
-                        validateCustomDropdown(jobSelect, varLocaliztion);
-                        disableLoginBtn();
-                     }
+         const jobSelect = document.querySelector('select[name="userProfile.title"]');
+         const dataPrivacySelect = document.querySelector('select[name="userProfile.lmsDataPrivacy"]');
+         if (jobSelect) {
+            jobSelect.addEventListener("focusin", (event) => {
+               if (event.target && event.target.matches("select")) {
+                  if (!document.querySelector("select[name='userProfile.title'] option:checked")) {
+                     validateCustomDropdown(jobSelect, varLocaliztion);
+                     disableLoginBtn();
                   }
-               });
+               }
+            });
 
-               jobSelect.addEventListener("change", function (event) {
-                  if (event.target && event.target.matches("select")) {
-                     const parentElement = event.target.parentElement.parentElement;
-                     parentElement.classList.remove("o-form-has-errors");
-                     const ddErrA = document.getElementById('dropdown-error'); if (ddErrA) ddErrA.remove();
-                  }
-                  if (document.querySelector("select[name='userProfile.title'] option:checked")) {
-                     enableLoginBtn();
-                  }
-               });
-            }
+            jobSelect.addEventListener("change", function (event) {
+               if (event.target && event.target.matches("select")) {
+                  const parentElement = event.target.parentElement.parentElement;
+                  parentElement.classList.remove("o-form-has-errors");
+                  const ddErrA = document.getElementById('dropdown-error'); if (ddErrA) ddErrA.remove();
+               }
+               if (document.querySelector("select[name='userProfile.title'] option:checked")) {
+                  enableLoginBtn();
+               }
+            });
+         }
 
-            if (dataPrivacySelect) {
-               dataPrivacySelect.addEventListener("focusin", (event) => {
-                  if (event.target && event.target.matches("select")) {
-                     if (!document.querySelector("select[name='userProfile.lmsDataPrivacy'] option:checked")) {
-                        validateCustomDropdown(dataPrivacySelect, varLocaliztion);
-                        disableLoginBtn();
-                     }
+         if (dataPrivacySelect) {
+            dataPrivacySelect.addEventListener("focusin", (event) => {
+               if (event.target && event.target.matches("select")) {
+                  if (!document.querySelector("select[name='userProfile.lmsDataPrivacy'] option:checked")) {
+                     validateCustomDropdown(dataPrivacySelect, varLocaliztion);
+                     disableLoginBtn();
                   }
-               });
+               }
+            });
 
-               dataPrivacySelect.addEventListener("change", function (event) {
-                  if (event.target && event.target.matches("select")) {
-                     const parentElement = event.target.parentElement.parentElement;
-                     parentElement.classList.remove("o-form-has-errors");
-                     const ddErr2 = document.getElementById('dropdown-error');
-                     if (ddErr2) ddErr2.remove();
-                  }
-                  if (document.querySelector("select[name='userProfile.lmsDataPrivacy'] option:checked")) {
-                     enableLoginBtn();
-                  }
-               });
+            dataPrivacySelect.addEventListener("change", function (event) {
+               if (event.target && event.target.matches("select")) {
+                  const parentElement = event.target.parentElement.parentElement;
+                  parentElement.classList.remove("o-form-has-errors");
+                  const ddErr2 = document.getElementById('dropdown-error');
+                  if (ddErr2) ddErr2.remove();
+               }
+               if (document.querySelector("select[name='userProfile.lmsDataPrivacy'] option:checked")) {
+                  enableLoginBtn();
+               }
+            });
          }
       });
 
