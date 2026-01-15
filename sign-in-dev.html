@@ -38,7 +38,8 @@
    ></div>
    <!-- "OktaUtil" defines a global OktaUtil object that contains methods used to complete the Okta login flow. -->
    {{{OktaUtil}}}
-   <script type="text/javascript">
+   <script type="text/javascript" src="https://content-files.shure.com/okta/main.js?v1"></script>
+   <!-- <script type="text/javascript">
       // "config" object contains default widget configuration
       // with any custom overrides defined in your admin settings.
       const config = OktaUtil.getSignInWidgetConfig();
@@ -855,6 +856,7 @@
                         '<option value="Yes">Yes</option>' +
                         '<option value="No">No</option>' +
                   '</select>');
+                  marketingInput.remove();
                   const newSel = document.querySelector("select[name='userProfile.marketingOptIn']");
                   const marketingLabelEl = document.querySelector("label[data-se-for-name='userProfile.marketingOptIn']");
                   if (marketingLabelEl && newSel) marketingLabelEl.parentNode.insertBefore(newSel, marketingLabelEl.nextSibling);
@@ -1369,6 +1371,8 @@
                            if (acctErr) acctErr.remove();
                            enableLoginBtn();
                         }
+                     } else {
+                        validateAccountNumber(varLocaliztion);
                      }
                   });
                }
@@ -1560,35 +1564,10 @@
             }
 
             if (appId == salesforceService) {
-               const language_sf = document.querySelectorAll("[data-se='o-form-fieldset-userProfile.language_sf']");
-               if(language_sf[0]) language_sf[0].style.display = "none";
-               const sfserv_region = document.querySelectorAll("[data-se='o-form-fieldset-userProfile.sfserv_region']");
-               if(sfserv_region[0]) sfserv_region[0].style.display = "none";
-               const partnerNumberBox = document.querySelector('[data-se="o-form-fieldset-userProfile.salesforcePartnerNum"]');
-               if(partnerNumberBox) partnerNumberBox.style.display = "none";
-               let isPartner = document.createElement("INPUT");
-               isPartner.setAttribute("type", "checkbox");
-               isPartner.setAttribute("value", "Are you a Shure Partner?");
-               isPartner.setAttribute("id", "shure-partner-checkbox")
-               let partnerLabel = document.createElement("label");
-               partnerLabel.setAttribute("for", 'shure-partner-checkbox');
-               partnerLabel.innerHTML = " Are you a Shure Partner?";
-
-               if(partnerNumberBox) partnerNumberBox.parentNode.insertBefore(isPartner, partnerNumberBox);
-               isPartner.parentNode.insertBefore(partnerLabel, isPartner.nextSibling)
-
-               isPartner.addEventListener('change', function() {
-                  if (this.checked) {
-                     partnerNumberBox.style.display = "block";
-                     
-                     let optionalboxes = document.getElementsByClassName("o-form-explain")
-                     optionalboxes.forEach( (el) => {
-                        el.style.display = "none";
-                     });
-                  } else {
-                     partnerNumberBox.style.display = "none";
-                  }
-               });
+               const language_sf = document.querySelector("[data-se='o-form-fieldset-userProfile.language_sf']");
+               if(language_sf) language_sf.style.display = "none";
+               const sfserv_region = document.querySelector("[data-se='o-form-fieldset-userProfile.sfserv_region']");
+               if(sfserv_region) sfserv_region.style.display = "none";
             }
          }
 
@@ -1641,14 +1620,34 @@
       });
 
       const loadCAPTCHA = () => {
+         // Submit Form
          const oktaId = document.getElementsByTagName('form')[0];
-         oktaId.addEventListener('submit', (event) => {checkCaptcha(event)});
-         document.querySelector('form input[type="submit"]').addEventListener("click", (event) => {
-            const canSubmit = checkCaptcha(event);
-            if (!canSubmit) event.preventDefault();
-            return;
+         oktaId.addEventListener('submit', function (event) {
+            const countrySel = document.getElementById('tmp2') || document.querySelector('select[name="userProfile.country"]');
+            const localeSel = document.getElementById('tmpLocale') || document.querySelector('select[name="userProfile.locale"]');
+
+            if (countrySel && (countrySel.selectedIndex < 0 || !countrySel.value || countrySel.value.trim().length === 0)) {
+               event.preventDefault();
+               validateCountryDropdown(varLocaliztion);
+            }
+            if (localeSel && (localeSel.selectedIndex < 0 || !localeSel.value || localeSel.value.trim().length === 0)) {
+               event.preventDefault();
+               validateLocaleDropdown(varLocaliztion);
+            }
+
+            // Salesforce partner checkbox (accounts for injected #shure-partner-checkbox)
+            const sfPartnerChecked = document.querySelector('input[data-se-name="userProfile.sf_servicePartner"][value="true"]')?.checked;
+            const sfInput = document.querySelector('input[name="userProfile.salesforcePartnerNum"]');
+
+            if (sfPartnerChecked && (!sfInput || sfInput.value.trim().length === 0)) {
+               event.preventDefault();
+               validateAccountNumber(varLocaliztion);
+            }
+            
+            const ok = checkCaptcha(event);
+            if (!ok) event.preventDefault();
          });
-         const oktaLoginBtn = document.querySelector(".button.button-primary");
+
          const oktaLoginBtnDiv = document.querySelector(".o-form-button-bar");
          const captchaDiv = document.createElement('div');
          captchaDiv.setAttribute('id','captchaDiv');
@@ -1676,8 +1675,6 @@
 
       const checkCaptcha = (event) => {
          if (window.hcaptcha.getResponse() && window.hcaptcha.getResponse().length > 1) {
-            validateCountryDropdown(varLocaliztion);
-            validateLocaleDropdown(varLocaliztion);
             return true;           
          } else {
             event.preventDefault();
@@ -1690,7 +1687,6 @@
                window.captchaValidate = true;
             }
          }
-      
       };
       
       const disableLoginBtn = () => {
@@ -1704,6 +1700,6 @@
          oktaLoginBtn.disabled = false;
          oktaLoginBtn.classList.add('button-primary');
       };
-   </script>
+   </script> -->
    </body>
 </html>
